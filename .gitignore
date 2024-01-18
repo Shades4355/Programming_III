@@ -57,3 +57,7 @@ replay_pid*
 *.exe
 *.out
 *.app
+
+
+# Misc
+.vs
