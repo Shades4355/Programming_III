@@ -1,17 +1,27 @@
+// File name:   MyBoundedShape
+// Written by:  Shades Meyers
+// Description: 
+// Challenges:  
+// Time Spent:  see TestMyBoundedShapes.java
+//
+// Revision history:
+// Date:        By:     Action:
+// -------------------------------
+// 2024-Jan-23  SM      Files created
+
 import java.util.Date;
 
 
 public class MyBoundedShape {
     // protected variables - using protected instead of private so they can be accessed by their inheritors
-    protected String color;       // color string (ex: red)
-    protected boolean filled;     // whether it's filled or not
-    protected Date dateCreated;   // date it was created
+    protected String color = "white";   // color string (ex: red)
+    protected boolean filled = false;   // whether it's filled or not
+    protected Date dateCreated;         // date it was created
 
     // Constructors
     public MyBoundedShape() {
         dateCreated = new Date();
     }
-
     public MyBoundedShape(String c, boolean f) {
         dateCreated = new Date();
         color = c;

@@ -1,3 +1,15 @@
+// File name:   MyRectangle
+// Written by:  Shades Meyers
+// Description: 
+// Challenges:  
+// Time Spent:  see TestMyBoundedShapes.java
+//
+// Revision history:
+// Date:        By:     Action:
+// -------------------------------
+// 2024-Jan-23  SM      Files created
+
+
 public class MyRectangle extends MyBoundedShape {
     // private variables
     private double width;

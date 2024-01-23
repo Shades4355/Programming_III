@@ -17,9 +17,9 @@ public class TestMyBoundedShapes {
     public static void main(String[] args) {
         
         // create subclass MyCircle objects
-        MyCircle oval1 = new MyCircle();
-        MyCircle oval2 = new MyCircle(5);
-        MyCircle oval3 = new MyCircle(8.1, "red", false);
+        MyCircle oval1 = new MyCircle();    // default constructor
+        MyCircle oval2 = new MyCircle(5); // constructor with 1 argument
+        MyCircle oval3 = new MyCircle(8.1, "red", false); // constructor with 3 arguments
 
         // create subclass MyRectangle objects
         MyRectangle rectangle1 = new MyRectangle();

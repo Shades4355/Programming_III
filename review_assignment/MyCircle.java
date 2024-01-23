@@ -1,3 +1,15 @@
+// File name:   MyCircle
+// Written by:  Shades Meyers
+// Description: 
+// Challenges:  
+// Time Spent:  see TestMyBoundedShapes.java
+//
+// Revision history:
+// Date:        By:     Action:
+// -------------------------------
+// 2024-Jan-23  SM      Files created
+
+
 public class MyCircle extends MyBoundedShape {
     // private variables
     private double radius;
