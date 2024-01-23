@@ -1,8 +1,9 @@
-// File name:   MyBoundedShape
+// File name:   TestMyBoundedShapes
 // Written by:  Shades Meyers
-// Description: 
+// Description: main file for executing assignment. Used to create various
+//          shapes and determine if their methods are functioning correctly
 // Challenges:  
-// Time Spent:  
+// Time Spent:  52 minutes + 
 //
 // Revision history:
 // Date:        By:     Action:
