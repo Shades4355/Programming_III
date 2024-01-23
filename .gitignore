@@ -62,6 +62,7 @@ replay_pid*
 *.sln
 *.vcxproj
 *.vcxproj.*
+x64
 
 
 # Misc
