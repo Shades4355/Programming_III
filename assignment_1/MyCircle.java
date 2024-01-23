@@ -35,6 +35,6 @@ public class MyCircle extends MyBoundedShape {
 
     // print method
     public void printCircle() {
-        System.out.println("The circle is created " + this.getDateCreated() + ", and the radius is " + String.format("%.1f", radius));
+        System.out.println("The circle is created " + dateCreated + ", and the radius is " + String.format("%.1f", radius));
     }
 }
