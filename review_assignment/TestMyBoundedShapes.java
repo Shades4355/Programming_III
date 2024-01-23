@@ -40,21 +40,22 @@ public class TestMyBoundedShapes {
         myBoundedShapes.add(rectangle3);
         
         // iterate through the ArrayList and print out relevant information
-        MyCircle circleTester = new MyCircle();     // create a dummy circle object for comparing getClass()
-        MyRectangle rectTester = new MyRectangle(); // create a dummy rectangle object for comparing getClass()
         for (int i = 0; i < myBoundedShapes.size(); i++) {
-            if (myBoundedShapes.get(i).getClass().equals(rectTester.getClass())) {
+            if (myBoundedShapes.get(i) instanceof MyRectangle) {
+                MyRectangle rectangle = (MyRectangle) myBoundedShapes.get(i);
                 System.out.printf(
-                    "This is a %s\n%s\n\nwidth: %d.1f\nheight: %d.1f\narea: %d.2f\nperimeter: %d.2f", myBoundedShapes.get(i).getClass(),  myBoundedShapes.get(i).toString(), myBoundedShapes.get(i).getWidth(), myBoundedShapes.get(i).getHeight(), myBoundedShapes.get(i).getArea(), myBoundedShapes.get(i).getPerimeter()
+                    "This is a %s\n%s\n\nwidth: %d.1f\nheight: %d.1f\narea: %d.2f\nperimeter: %d.2f", rectangle.getClass(),  rectangle.toString(), rectangle.getWidth(), rectangle.getHeight(), rectangle.getArea(), rectangle.getPerimeter()
                 );
-            } else if (myBoundedShapes.get(i).getClass().equals(circleTester.getClass())) {
-                myBoundedShapes.get(i).printCircle();
+            } else if (myBoundedShapes.get(i) instanceof MyCircle) {
+                MyCircle circle = (MyCircle) myBoundedShapes.get(i);
+                circle.printCircle();
+                System.out.println();
             } else { // if class is not MyCircle or MyRectangle, then an error has ocurred
                 System.out.println("ERROR: unrecognized class: " + myBoundedShapes.get(i).getClass());
                 System.exit(1); // exit program with error code 1
             } // end If
         } // end For loop
-        
+
         // for (MyBoundedShape i : myBoundedShapes) {
             // if (i.getClass().equal(rectTester.getClass())) { // if object type is NOT MyCircle, print object (toString)
             //     System.out.println(
