@@ -7,6 +7,7 @@
 //          so I had to do extensive Googling to find the getClass() syntax
 //          An additional challenge was figuring out how to call subclass methods when the program thought
 //          they were the parent class, which lacks said methods
+// Challenge solution:  Down casting
 // Time Spent:  52 minutes + 29 minutes + 2h 25m + 
 //
 // Revision history:
@@ -44,38 +45,29 @@ public class TestMyBoundedShapes {
             if (myBoundedShapes.get(i) instanceof MyRectangle) {
                 MyRectangle rectangle = (MyRectangle) myBoundedShapes.get(i);
                 System.out.printf(
-                    "This is a %s\n%s\n\nwidth: %d.1f\nheight: %d.1f\narea: %d.2f\nperimeter: %d.2f", rectangle.getClass(),  rectangle.toString(), rectangle.getWidth(), rectangle.getHeight(), rectangle.getArea(), rectangle.getPerimeter()
+                    "This is a %s%n%s%n%n width: %.1f%n height: %.1f%n area: %.2f%n perimeter: %.2f%n", rectangle.getClass(),  rectangle.toString(), rectangle.getWidth(), rectangle.getHeight(), rectangle.getArea(), rectangle.getPerimeter()
                 );
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
             } else if (myBoundedShapes.get(i) instanceof MyCircle) {
                 MyCircle circle = (MyCircle) myBoundedShapes.get(i);
+                System.out.println(circle);
+                System.out.println();
+
                 circle.printCircle();
                 System.out.println();
+
+                System.out.println("This is a Circle object:");
+                System.out.println();
+
+                System.out.printf("The radius is: %.1f\nThe diameter is: %.1f\nThe area is: %.2f\nThe perimeter is: %.2f\n", circle.getRadius(), circle.getDiameter(), circle.getArea(), circle.getPerimeter());
+
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             } else { // if class is not MyCircle or MyRectangle, then an error has ocurred
                 System.out.println("ERROR: unrecognized class: " + myBoundedShapes.get(i).getClass());
                 System.exit(1); // exit program with error code 1
             } // end If
         } // end For loop
-
-        // for (MyBoundedShape i : myBoundedShapes) {
-            // if (i.getClass().equal(rectTester.getClass())) { // if object type is NOT MyCircle, print object (toString)
-            //     System.out.println(
-            //         "This is a " + i.getClass() +
-            //         "\n" + i.toString() +
-            //         "\narea: " + i.getArea() +
-            //         "\nperimeter: " + getPerimeter()
-            //     );
-            // } else if (i.getClass().equals(circleTester.getClass())) { // if object type IS MyCircle, call printCircle() method
-            //     i.printCircle();
-            //     System.out.println(
-            //         "\nradius: " + i.getRadius() +
-            //         "\ndiameter: " + i.getDiameter() +
-            //         "\narea: " + i.getArea() +
-            //         "\nperimeter: " + i.getPerimeter()
-            //         );
-            // } else {
-            //     System.out.println("ERROR: incorrect class type detected:" + i.getClass());
-            // }
-        // } // end For loop
 
         System.exit(0); // exit program successfully
     } // end Main method
