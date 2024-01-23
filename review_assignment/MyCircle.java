@@ -37,7 +37,7 @@ public class MyCircle extends MyBoundedShape {
             );
     }
 
-    // accessor and mutator for Radius
+    // Accessor and Mutator for Radius
     public double getRadius() {
         return radius;
     }

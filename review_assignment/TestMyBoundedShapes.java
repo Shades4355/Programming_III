@@ -2,13 +2,12 @@
 // Written by:  Shades Meyers
 // Description: main file for executing assignment. Used to create various
 //          shapes and determine if their methods are functioning correctly
-// Challenges:  My biggest challenge in this file was getting the if/else comparison to work.
+// Challenges:  One of my biggest challenge in this file was getting the if/else comparison to work.
 //          I did not remember covering this type of object comparison in Programming II,
-//          so I had to do extensive Googling to find the getClass() syntax
-//          An additional challenge was figuring out how to call subclass methods when the program thought
-//          they were the parent class, which lacks said methods
-// Challenge solution:  Down casting
-// Time Spent:  52 minutes + 29 minutes + 2h 25m + 
+//          so I had to do extensive Googling to find the instanceof syntax
+//          An additional big challenge was figuring out how to call subclass methods when the program thought
+//          they were the parent class, which lacks said methods (solution: down casting)
+// Time Spent:  4h 43m
 //
 // Revision history:
 // Date:        By:     Action:

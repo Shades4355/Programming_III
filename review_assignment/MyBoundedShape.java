@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class MyBoundedShape {
     // protected variables - using protected instead of private so they can be accessed by their inheritors more easily
-    protected String color = "white";   // color string (ex: red)
+    protected String color = "white";   // color string
     protected boolean filled = false;   // whether it's filled or not
     protected Date dateCreated;         // date it was created
 
