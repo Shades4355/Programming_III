@@ -44,8 +44,12 @@ public class TestMyBoundedShapes {
         for (int i = 0; i < myBoundedShapes.size(); i++) {
             if (myBoundedShapes.get(i) instanceof MyRectangle) {
                 MyRectangle rectangle = (MyRectangle) myBoundedShapes.get(i);
+                System.out.println(rectangle);
+                System.out.println();
+
+                System.out.println("This is a Rectangle object:");
                 System.out.printf(
-                    "This is a %s%n%s%n%n width: %.1f%n height: %.1f%n area: %.2f%n perimeter: %.2f%n", rectangle.getClass(),  rectangle.toString(), rectangle.getWidth(), rectangle.getHeight(), rectangle.getArea(), rectangle.getPerimeter()
+                    "The width is: %.1f%nThe height is: %.1f%nThe area is: %.2f%nThe perimeter is: %.2f%n", rectangle.getWidth(), rectangle.getHeight(), rectangle.getArea(), rectangle.getPerimeter()
                 );
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
@@ -60,7 +64,7 @@ public class TestMyBoundedShapes {
                 System.out.println("This is a Circle object:");
                 System.out.println();
 
-                System.out.printf("The radius is: %.1f\nThe diameter is: %.1f\nThe area is: %.2f\nThe perimeter is: %.2f\n", circle.getRadius(), circle.getDiameter(), circle.getArea(), circle.getPerimeter());
+                System.out.printf("The radius is: %.1f%nThe diameter is: %.1f%nThe area is: %.2f%nThe perimeter is: %.2f%n", circle.getRadius(), circle.getDiameter(), circle.getArea(), circle.getPerimeter());
 
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             } else { // if class is not MyCircle or MyRectangle, then an error has ocurred
@@ -68,6 +72,10 @@ public class TestMyBoundedShapes {
                 System.exit(1); // exit program with error code 1
             } // end If
         } // end For loop
+
+        for (int i = 0; i < myBoundedShapes.size(); i++) {
+            System.out.printf("BoundedShape object %d is a %s%n", i + 1, myBoundedShapes.get(i).getClass().getName());
+        }
 
         System.exit(0); // exit program successfully
     } // end Main method

@@ -33,11 +33,6 @@ public class MyRectangle extends MyBoundedShape {
         this.height = height;
     }
 
-    // toString method override
-    public String toString() {
-        return super.toString() + "\nwidth: " + getWidth() + "\nheight: " + getHeight();
-    }
-
     // Accessors and Mutators, grouped by variable
     // Width
     public double getWidth() {
