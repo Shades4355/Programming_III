@@ -1,7 +1,7 @@
 // File name:   MyBoundedShape
 // Written by:  Shades Meyers
-// Description: 
-// Challenges:  
+// Description: Parent class to MyCircle and MyRectangle; contains color, filled, and dateCreated variables
+// Challenges:  None
 // Time Spent:  see TestMyBoundedShapes.java
 //
 // Revision history:
@@ -13,7 +13,7 @@ import java.util.Date;
 
 
 public class MyBoundedShape {
-    // protected variables - using protected instead of private so they can be accessed by their inheritors
+    // protected variables - using protected instead of private so they can be accessed by their inheritors more easily
     protected String color = "white";   // color string (ex: red)
     protected boolean filled = false;   // whether it's filled or not
     protected Date dateCreated;         // date it was created
@@ -22,35 +22,35 @@ public class MyBoundedShape {
     public MyBoundedShape() {
         dateCreated = new Date();
     }
-    public MyBoundedShape(String c, boolean f) {
+    public MyBoundedShape(String color, boolean filled) {
         dateCreated = new Date();
-        color = c;
-        filled = f;
+        this.color = color;
+        this.filled = filled;
     }
 
     // toString()
     public String toString() {
-        return "created on " + dateCreated + "\ncolor: " + color + " and filled: " + filled;
+        return "created on " + getDateCreated() + "\ncolor: " + getColor() + " \nfilled: " + isFilled();
         }
 
-    // Accessors and mutators, grouped variable
+    // Accessors and Mutators, grouped variable
     // Color
     public String getColor(){
         return color;
     }
-    public void setColor(String c) {
-        color = c;
+    public void setColor(String color) {
+        this.color = color;
     }
 
     // Filled
     public boolean isFilled() {
         return filled;
     }
-    public void setFilled(boolean f) {
-        filled = f;
+    public void setFilled(boolean filled) {
+        this.filled = filled;
     }
 
-    // Date Created; no setter
+    // Date Accessor; no Mutator
     public Date getDateCreated() {
         return dateCreated;
     }

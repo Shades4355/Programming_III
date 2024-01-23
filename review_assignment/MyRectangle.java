@@ -1,7 +1,8 @@
 // File name:   MyRectangle
 // Written by:  Shades Meyers
-// Description: 
-// Challenges:  
+// Description: a rectangle subclass of MyBoundedShape;
+//              has additional width and height variables
+// Challenges:  None
 // Time Spent:  see TestMyBoundedShapes.java
 //
 // Revision history:
@@ -17,17 +18,24 @@ public class MyRectangle extends MyBoundedShape {
 
     // constructors
     public MyRectangle() {
+        super();
         width = 1.0;
         height = 2.0;
     }
-    public MyRectangle(double w, double h) {
-        width = w;
-        height = h;
+    public MyRectangle(double width, double height) {
+        super();
+        this.width = width;
+        this.height = height;
     }
-    public MyRectangle(double w, double h, String c, boolean f) {
-        super(c, f);
-        width = w;
-        height = h;
+    public MyRectangle(double width, double height, String color, boolean filled) {
+        super(color, filled);
+        this.width = width;
+        this.height = height;
+    }
+
+    // toString method override
+    public String toString() {
+        return super.toString() + "\nwidth: " + getWidth() + "\nheight: " + getHeight();
     }
 
     // Accessors and Mutators, grouped by variable
@@ -35,15 +43,15 @@ public class MyRectangle extends MyBoundedShape {
     public double getWidth() {
         return width;
     }
-    public void setWidth(double w) {
-        width = w;
+    public void setWidth(double width) {
+        this.width = width;
     }
     // Height
     public double getHeight() {
         return height;
     }
-    public void setHeight(double h) {
-        height = h;
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     // Rectangle specific methods
