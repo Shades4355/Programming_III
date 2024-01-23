@@ -58,6 +58,11 @@ replay_pid*
 *.out
 *.app
 
+# C++ Misc
+*.sln
+*.vcxproj
+*.vcxproj.*
+
 
 # Misc
 .vs
