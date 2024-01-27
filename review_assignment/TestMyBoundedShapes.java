@@ -7,15 +7,16 @@
 //          so I had to do extensive Googling to find the instanceof syntax
 //          An additional big challenge was figuring out how to call subclass methods when the program thought
 //          they were the parent class, which lacks said methods (solution: downcasting)
-// Time Spent:  5h 4m
-// code repository: https://github.com/Shades4355/Programming_III/tree/main/review_assignment
+// Time Spent:  5h 11m
+//
+// Code Repository: https://github.com/Shades4355/Programming_III/tree/main/review_assignment
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Jan-23  SM      Files created
 // 2024-Jan-27  SM      Minor Formatting changes to print out
-//                      Minor change to line 45 (from "for i..." to "for shape in myBoundedShapes")
+//                      Minor change to line 60 (from "for i..." to "for shape in myBoundedShapes")
 //                      Added additional comments and added clarification to some comments
 
 import java.util.ArrayList;
