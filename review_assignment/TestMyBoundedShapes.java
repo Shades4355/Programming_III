@@ -7,7 +7,7 @@
 //          so I had to do extensive Googling to find the instanceof syntax
 //          An additional big challenge was figuring out how to call subclass methods when the program thought
 //          they were the parent class, which lacks said methods (solution: downcasting)
-// Time Spent:  4h 43m
+// Time Spent:  4h 58m
 //
 // Revision history:
 // Date:        By:     Action:
