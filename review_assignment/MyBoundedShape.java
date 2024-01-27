@@ -8,6 +8,7 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Jan-23  SM      Files created
+// 2024-Jan-27  SM      Minor refinement to toString()
 
 import java.util.Date;
 
@@ -30,7 +31,7 @@ public class MyBoundedShape {
 
     // toString()
     public String toString() {
-        return "created on " + getDateCreated() + "\ncolor: " + getColor() + " \nfilled: " + isFilled();
+        return "created on " + this.dateCreated + "\ncolor: " + this.color + " and filled: " + this.filled;
         }
 
     // Accessors and Mutators, grouped variable
