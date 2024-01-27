@@ -13,6 +13,7 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Jan-23  SM      Files created
+// 2024-Jan-27  SM      Minor Formatting changes to print out
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class TestMyBoundedShapes {
                 System.out.println(rectangle);
                 System.out.println();
 
-                System.out.println("This is a Rectangle object:");
+                System.out.println("This is a rectangle object:");
                 System.out.printf(
                     "The width is: %.1f%nThe height is: %.1f%nThe area is: %.2f%nThe perimeter is: %.2f%n", rectangle.getWidth(), rectangle.getHeight(), rectangle.getArea(), rectangle.getPerimeter()
                 );
@@ -60,7 +61,7 @@ public class TestMyBoundedShapes {
                 circle.printCircle();
                 System.out.println();
 
-                System.out.println("This is a Circle object:");
+                System.out.println("This is a circle object:");
                 System.out.println();
 
                 System.out.printf("The radius is: %.1f%nThe diameter is: %.1f%nThe area is: %.2f%nThe perimeter is: %.2f%n", circle.getRadius(), circle.getDiameter(), circle.getArea(), circle.getPerimeter());
