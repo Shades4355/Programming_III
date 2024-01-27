@@ -6,7 +6,7 @@
 //          I did not remember covering this type of object comparison in Programming II,
 //          so I had to do extensive Googling to find the instanceof syntax
 //          An additional big challenge was figuring out how to call subclass methods when the program thought
-//          they were the parent class, which lacks said methods (solution: down casting)
+//          they were the parent class, which lacks said methods (solution: downcasting)
 // Time Spent:  4h 43m
 //
 // Revision history:
@@ -14,6 +14,7 @@
 // -------------------------------
 // 2024-Jan-23  SM      Files created
 // 2024-Jan-27  SM      Minor Formatting changes to print out
+//                      Minor change to line 45 (from "for i..." to "for shape in myBoundedShapes")
 
 import java.util.ArrayList;
 
@@ -41,9 +42,9 @@ public class TestMyBoundedShapes {
         myBoundedShapes.add(rectangle3);
         
         // iterate through the ArrayList and print out relevant information
-        for (int i = 0; i < myBoundedShapes.size(); i++) {
-            if (myBoundedShapes.get(i) instanceof MyRectangle) {
-                MyRectangle rectangle = (MyRectangle) myBoundedShapes.get(i);
+        for (MyBoundedShape shape : myBoundedShapes) {
+            if (shape instanceof MyRectangle) {
+                MyRectangle rectangle = (MyRectangle) shape;
                 System.out.println(rectangle);
                 System.out.println();
 
@@ -53,8 +54,8 @@ public class TestMyBoundedShapes {
                 );
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
-            } else if (myBoundedShapes.get(i) instanceof MyCircle) {
-                MyCircle circle = (MyCircle) myBoundedShapes.get(i);
+            } else if (shape instanceof MyCircle) {
+                MyCircle circle = (MyCircle) shape;
                 System.out.println(circle);
                 System.out.println();
 
@@ -68,7 +69,7 @@ public class TestMyBoundedShapes {
 
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             } else { // if class is not MyCircle or MyRectangle, then an error has ocurred
-                System.out.println("ERROR: unrecognized class: " + myBoundedShapes.get(i).getClass());
+                System.out.println("ERROR: unrecognized class: " + shape.getClass());
                 System.exit(1); // exit program with error code 1
             } // end If
         } // end For loop
