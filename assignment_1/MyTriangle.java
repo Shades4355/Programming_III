@@ -1,8 +1,8 @@
 // File name:   MyTriangle
 // Written by:  Shades Meyers
 // Description: Creates a child of MyBoundedShape, a Triangle.
-// Challenges:  
-// Time Spent:  
+// Challenges:  None
+// Time Spent:  12 minutes
 //
 // Revision history:
 // Date:        By:     Action:
