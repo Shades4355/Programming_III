@@ -52,7 +52,7 @@ public abstract class MyBoundedShape extends Object implements Colorable, Compar
 
     @Override
     public String toString() {
-        return "created on " + this.dateCreated + "%ncolor: %s and filled %b".formatted(this.color, this.filled);
+        return "created on " + dateCreated + "%ncolor: %s and filled %b".formatted(color, filled);
     }
 
     // new methods
