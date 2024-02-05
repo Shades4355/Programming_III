@@ -61,7 +61,7 @@ public class MyCircle extends MyBoundedShape {
     // Overrides
     @Override
     public String toString() {
-        return super.toString() + "%n%d.1f".formatted(radius);
+        return super.toString() + "%nradius: %d.1f".formatted(radius);
     }
 
 } // end of program
