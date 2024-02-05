@@ -1,22 +1,22 @@
-/**
- * File name: MyShapesTest
- * Written by: outline by Prof. Yeung & details by Shades Meyers
- * 
- * Description: a program that creates, compares, and describes various shapes.
- * Challenges:
- *
- * Time Spent:
- * 
- * Revision History:
- * Date:            By:     Action:
- * ---------------------------------------------------
- * 2024-Feb-05      SM      Downloaded MyShapesTest.java from Blackboard
- *                          Altered class names to be inline with the assignment instructions (ex: Circle -> MyCircle)
- * 
- */      
+/*
+* File name: MyShapesTest
+* Written by: outline by Prof. Yeung & details by Shades Meyers
+* 
+* Description: A program that creates, compares, and describes various shapes.
+* Challenges:  Minor formatting issues (kept mentally slipping into other languages)
+*
+* Time Spent: 1 hour 1 minute
+* 
+* Revision History:
+* Date:            By:     Action:
+* ---------------------------------------------------
+* 2024-Feb-05      SM      Downloaded MyShapesTest.java from Blackboard
+*                          Altered class names to be inline with the assignment instructions (ex: Circle -> MyCircle)
+*                          Started (and completed) assignment
+*/
 
- 
- import java.util.ArrayList;
+
+import java.util.ArrayList;
 
 
 public class MyShapesTest  {
