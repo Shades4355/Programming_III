@@ -69,13 +69,13 @@ public class MyRectangle extends MyBoundedShape {
     }
 
     public String howToDraw() {
-        return color + " with " + Double.toString(width) + " width and " + Double.toString(height) + " height";
+        return "Color with width and height";
     }
 
     // Overrides
     @Override
     public String toString() {
-        return super.toString() + "\nwidth: %d.1f and height: %d.1f".formatted(width, height);
+        return super.toString() + "%nwidth: %d.1f and height: %d.1f".formatted(width, height);
     }
 
 } // end of program
