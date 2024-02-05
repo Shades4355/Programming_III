@@ -50,6 +50,11 @@ public abstract class MyBoundedShape extends Object implements Colorable, Compar
         return getArea() == m.getArea();
     }
 
+    @Override
+    public String toString() {
+        return "created on " + this.dateCreated + "\ncolor: %s and filled %b".formatted(this.color, this.filled);
+    }
+
     // new methods
     public int compareTo(MyBoundedShape o) {
         if (getArea() > o.getArea()) {
