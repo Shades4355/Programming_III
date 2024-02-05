@@ -62,8 +62,8 @@ public class MyShapesTest  {
 
         System.out.println(""); // print a blank line
 
-        System.out.println("Area is %d.2f".formatted(shape.getArea()));
-        System.out.println("Perimeter %d.2f".formatted(shape.getPerimeter()));
+        System.out.println("Area is %.2f".formatted(shape.getArea()));
+        System.out.println("Perimeter is %.2f".formatted(shape.getPerimeter()));
         System.out.println("How to draw this object: %s".formatted(shape.howToDraw()));
 
         /*
@@ -77,6 +77,7 @@ public class MyShapesTest  {
         * Perimeter is 21.99
         * How to draw this object: Color with the radius
         * ------------------------------------
+        *
         * The object2 is: Circle
         * created on Sat Feb 03 00:32:44 EST 2024
         * color: BLUE and filled: true
@@ -86,6 +87,7 @@ public class MyShapesTest  {
         * Perimeter is 62.83
         * How to draw this object: Color with the radius
         * ------------------------------------
+        *
         * The object3 ....
         */
 
@@ -163,6 +165,10 @@ public class MyShapesTest  {
     side3 = 30.2
     */
     //writing codes here
+    System.out.println("object8 equals to object8: %b".formatted(tr2.equals(tr2)));
+    System.out.println("object8 compares to object7: %d".formatted(tr2.compareTo(tr1)));
+    System.out.println("The max geometric square object is $s".formatted(MyBoundedShape.max(tr1, tr2)));
+
     System.out.println("------------------------------------\n");//Use it to divide each object
         
     }//end main method
