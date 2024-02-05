@@ -1,6 +1,6 @@
 /**
  * File name: MyShapesTest
- * Written by: outline by Prof. Yeung & final details by Shades Meyers
+ * Written by: outline by Prof. Yeung & details by Shades Meyers
  * 
  * Description: a program that creates, compares, and describes various shapes.
  * Challenges:
@@ -130,7 +130,7 @@ public class MyShapesTest  {
     //writing codes here
     System.out.println("object3 equals object4: %b".formatted(r1.equals(r2)));
     System.out.println("object3 compares to object4: %d".formatted(r1.compareTo(r2)));
-    System.out.println("The max geometric circle object is %s".formatted(MyBoundedShape.max(r1, r2)));
+    System.out.println("The max geometric rectangle object is %s".formatted(MyBoundedShape.max(r1, r2)));
 
     System.out.println("------------------------------------\n"); //Use it to divide each object
 
@@ -167,7 +167,7 @@ public class MyShapesTest  {
     //writing codes here
     System.out.println("object8 equals to object8: %b".formatted(tr2.equals(tr2)));
     System.out.println("object8 compares to object7: %d".formatted(tr2.compareTo(tr1)));
-    System.out.println("The max geometric square object is %s".formatted(MyBoundedShape.max(tr1, tr2)));
+    System.out.println("The max geometric triangle object is %s".formatted(MyBoundedShape.max(tr1, tr2)));
 
     System.out.println("------------------------------------\n");//Use it to divide each object
         

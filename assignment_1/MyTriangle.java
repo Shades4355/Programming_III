@@ -58,7 +58,7 @@ public class MyTriangle extends MyBoundedShape {
     // Overrides
     @Override
     public String toString() {
-        return super.toString() + "%nside1: %.1f%nside2: %.1f%nside3: %.1f".formatted(side1, side2, side3);
+        return super.toString() + "%nside1 = %.1f%nside2 = %.1f%nside3 = %.1f".formatted(side1, side2, side3);
     }
 
 } // end of program
