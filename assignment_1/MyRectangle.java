@@ -75,7 +75,7 @@ public class MyRectangle extends MyBoundedShape {
     // Overrides
     @Override
     public String toString() {
-        return super.toString() + "%nwidth: %f.1f and height: %f.1f".formatted(width, height);
+        return super.toString() + "%nwidth: %.1f and height: %.1f".formatted(width, height);
     }
 
 } // end of program

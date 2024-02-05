@@ -60,7 +60,7 @@ public class MySquare extends MyBoundedShape {
     // Overrides
     @Override
     public String toString() {
-        return super.toString() + "%nside: %f.1f".formatted(side);
+        return super.toString() + "%nside: %.1f".formatted(side);
     }
 
 } // end of program
