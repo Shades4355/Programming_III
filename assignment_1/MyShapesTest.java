@@ -167,7 +167,7 @@ public class MyShapesTest  {
     //writing codes here
     System.out.println("object8 equals to object8: %b".formatted(tr2.equals(tr2)));
     System.out.println("object8 compares to object7: %d".formatted(tr2.compareTo(tr1)));
-    System.out.println("The max geometric square object is $s".formatted(MyBoundedShape.max(tr1, tr2)));
+    System.out.println("The max geometric square object is %s".formatted(MyBoundedShape.max(tr1, tr2)));
 
     System.out.println("------------------------------------\n");//Use it to divide each object
         
