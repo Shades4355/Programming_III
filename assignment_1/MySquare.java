@@ -2,12 +2,13 @@
 // Written by:  Shades Meyers
 // Description: Creates a child of MyBoundedShape, a Square.
 // Challenges:  None
-// Time Spent:  12 minutes
+// Time Spent:  13 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-05  SM      File created
+// 2024-Feb-6   SM      Added '@Override' to implementations. IDE shows errors from this, but the files compile and run correctly
 
 
 public class MySquare extends MyBoundedShape {
@@ -40,19 +41,23 @@ public class MySquare extends MyBoundedShape {
     }
 
     // Implemented methods from MyBoundedShape
+    @Override
     public double getArea() {
         return side * side;
     }
 
+    @Override
     public double getPerimeter() {
         return 4 * side;
     }
 
     // Implemented methods from Colorable
+    @Override
     public String getName() {
         return "Square";
     }
 
+    @Override
     public String howToDraw() {
         return "Color with four sides";
     }

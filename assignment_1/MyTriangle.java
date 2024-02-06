@@ -2,12 +2,13 @@
 // Written by:  Shades Meyers
 // Description: Creates a child of MyBoundedShape, a Triangle.
 // Challenges:  None
-// Time Spent:  12 minutes
+// Time Spent:  13 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-05  SM      File created
+// 2024-Feb-6   SM      Added '@Override' to implementations. IDE shows errors from this, but the files compile and run correctly
 
 
 public class MyTriangle extends MyBoundedShape {
@@ -36,21 +37,25 @@ public class MyTriangle extends MyBoundedShape {
     }
 
     // Implemented methods from MyBoundedShape
+    @Override
     public double getArea() {
         double s = (side1 + side2 + side3) / 2;
 
         return Math.sqrt(s * (s-side1)*(s-side2)*(s-side3));
     }
 
+    @Override
     public double getPerimeter() {
         return side1 + side2 + side3;
     }
 
     // Implemented methods from Colorable
+    @Override
     public String getName() {
         return "Triangle";
     }
 
+    @Override
     public String howToDraw() {
         return "Color with three sides";
     }
