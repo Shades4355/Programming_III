@@ -2,13 +2,14 @@
 // Written by:  Shades Meyers
 // Description: Creates a child of MyBoundedShape, a Rectangle.
 // Challenges:  Mentally slipped into GDScript; had trouble remembering the syntax for converting a double to a string.
-// Time Spent:  24 minutes
+// Time Spent:  25 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-05  SM      File created
 //                      Copied and modified contents of MyRectangle.java from Review Assignment
+// 2024-Feb-6   SM      Added '@Override' to implementations. IDE shows errors from this, but the files compile and run correctly
 
 
 public class MyRectangle extends MyBoundedShape {
@@ -55,19 +56,23 @@ public class MyRectangle extends MyBoundedShape {
     }
 
     // Implemented methods from MyBoundedShape
+    @Override
     public double getArea() {
         return width * height;
     }
 
+    @Override
     public double getPerimeter() {
         return 2 * (width + height);
     }
 
     // Implemented methods from Colorable
+    @Override
     public String getName() {
         return "Rectangle";
     }
 
+    @Override
     public String howToDraw() {
         return "Color with width and height";
     }
