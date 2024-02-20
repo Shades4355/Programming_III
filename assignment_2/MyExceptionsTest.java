@@ -4,7 +4,7 @@
 // Challenges:  Java wouldn't compile because it (incorrectly) thought there was
 //              a state where a returned variable wasn't instantiated; solved this
 //              with an extra return statement (that will never be reached)
-// Time Spent:  75 min + 15 min (SI)
+// Time Spent:  75 min + 15 min (SI) + 10 minutes (class)
 //
 // Revision history:
 // Date:        By:     Action:
@@ -39,11 +39,11 @@ public class MyExceptionsTest {
                 }
             } catch (IllegalArgumentException e) {
                 answer = 0;
-                System.out.println("Input out of range (1 - 5).");
+                System.err.println(e + ": Input out of range (1 - 5).");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             } catch (InputMismatchException e) {
                 input.nextLine(); // purge input
-                System.out.println("Invalid input: please enter a number 1 - 5.");
+                System.err.println(e + ": Invalid input: please enter a number 1 - 5.");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             }// end try/catch
         } // end While loop
@@ -98,11 +98,11 @@ public class MyExceptionsTest {
 
                 return circle;
             } catch (InputMismatchException e) {
-                System.out.println("Please enter a decimal number.");
+                System.err.println(e + ": Please enter a decimal number.");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                 input.nextLine();
             } catch (InvalidRadiusException e) {
-                System.out.println("Please enter a number 0.00 or greater.");
+                System.err.println(e);
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             }
         } // end While loop
@@ -129,10 +129,10 @@ public class MyExceptionsTest {
                 return rectangle;
             } catch (InputMismatchException e) {
                 input.nextLine(); // purge junk input
-                System.out.println(e + ": enter a decimal number");
+                System.err.println(e + ": enter a decimal number");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             } catch (IllegalArgumentException e) {
-                System.out.println(e + ": height and width must be > 0.");
+                System.err.println(e + ": height and width must be > 0.");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             }
         }
@@ -154,11 +154,11 @@ public class MyExceptionsTest {
 
                 return square;
             } catch (InputMismatchException e) {
-                System.out.println("Please enter a decimal number.");
+                System.err.println(e + ": Please enter a decimal number.");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                 input.nextLine();
             } catch (IllegalArgumentException e) {
-                System.out.println("Please enter a number 0.00 or greater.");
+                System.err.println(e + ": Please enter a number 0.00 or greater.");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             }
         } // end While loop
@@ -189,10 +189,10 @@ public class MyExceptionsTest {
                 return rectangle;
             } catch (InputMismatchException e) {
                 input.nextLine(); // purge junk input
-                System.out.println("Please enter a decimal number");
+                System.err.println(e + ": Please enter a decimal number");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             } catch (IllegalTriangleException e) {
-                System.out.println("Please enter a number greater than 0.");
+                System.err.println(e);
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             }
         }
