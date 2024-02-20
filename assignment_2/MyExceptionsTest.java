@@ -4,7 +4,8 @@
 // Challenges:  Java wouldn't compile because it (incorrectly) thought there was
 //              a state where a returned variable wasn't instantiated; solved this
 //              with an extra return statement (that will never be reached)
-// Time Spent:  75 min + 15 min (SI) + 10 minutes (class)
+// Challenge 2: Scanner always gives me trouble when put in a loop
+// Time Spent:  75 min + 15 min (SI) + 10 minutes (class) + 7 minutes
 //
 // Revision history:
 // Date:        By:     Action:
@@ -20,11 +21,13 @@ import java.util.Scanner;
 public class MyExceptionsTest {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int answer = 0;
+        int answer;
 
         while (true) {
+            answer = 0;
+
             while (answer < 1) {
-                System.out.println("1. Circle");
+                System.out.println("\n1. Circle");
                 System.out.println("2. Rectangle");
                 System.out.println("3. Square");
                 System.out.println("4. Triangle");
@@ -36,11 +39,11 @@ public class MyExceptionsTest {
                     answer = input.nextInt();
 
                     if (answer < 1 || answer > 5) {
-                        throw new IllegalArgumentException("Input out of range.");
+                        throw new IllegalArgumentException("Input out of range (1 - 5).");
                     }
                 } catch (IllegalArgumentException e) {
                     answer = 0;
-                    System.err.println(e + ": Input out of range (1 - 5).");
+                    System.err.println(e);
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                 } catch (InputMismatchException e) {
                     input.nextLine(); // purge input
@@ -49,55 +52,49 @@ public class MyExceptionsTest {
                 }// end try/catch
             } // end While loop
 
-            // now that 'answer' is a valid choice, select function to execute
+            // now that 'answer' is a valid choice, select which function to execute
             switch (answer) {
                 case 1:
-                    MyCircle circle = buildCircle();
+                    MyCircle circle = buildCircle(input);
                     System.out.println(circle);
                     System.out.printf("Perimeter: %.2f%n", circle.getPerimeter());
                     System.out.printf("Area: %.2f%n", circle.getArea());
                     break;
                 case 2:
-                    MyRectangle rectangle = buildRectangle();
+                    MyRectangle rectangle = buildRectangle(input);
                     System.out.println(rectangle);
                     System.out.printf("Perimeter: %.2f%n", rectangle.getPerimeter());
                     System.out.printf("Area: %.2f%n", rectangle.getArea());
                     break;
                 case 3:
-                    MySquare square = buildSquare();
+                    MySquare square = buildSquare(input);
                     System.out.println(square);
                     System.out.printf("Perimeter: %.2f%n", square.getPerimeter());
                     System.out.printf("Area: %.2f%n", square.getArea());
                     break;
                 case 4:
-                    MyTriangle triangle = buildTriangle();
+                    MyTriangle triangle = buildTriangle(input);
                     System.out.println(triangle);
                     System.out.printf("Perimeter: %.2f%n", triangle.getPerimeter());
                     System.out.printf("Area: %.2f%n", triangle.getArea());
                     break;
                 case 5:
-                    input.close();
                     System.out.println(); // blank line
                     System.out.println("Goodbye");
+                    input.close(); // close input
+                    System.exit(0); // exit program with a 'successful' status
             } // end Switch statements
-
         } // end while loop
-
     } // end Main
 
     
     // shape functions
-    public static MyCircle buildCircle() {
-        // variable declarations
-        Scanner input = new Scanner (System.in);
-        boolean looping = true;
-
-        while (looping) {
-            System.out.println("please enter a radius of 0 or greater.");
+    public static MyCircle buildCircle(Scanner input) {
+        while (true) {
+            System.out.print("please enter a radius of 0 or greater:\n>> ");
             try {
-                double radius = input.nextDouble();
+                Double radius = input.nextDouble();
                 MyCircle circle = new MyCircle(radius);
-                input.close();
 
                 return circle;
             } catch (InputMismatchException e) {
@@ -107,18 +104,12 @@ public class MyExceptionsTest {
             } catch (InvalidRadiusException e) {
                 System.err.println(e);
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-            }
+            } // end Try/Catch blocks
         } // end While loop
-
-        return new MyCircle(); // this return will never be hit; exists to appease Java errors
     } // end buildCircle method
 
-    public static MyRectangle buildRectangle() {
-        // variable declarations
-        Scanner input = new Scanner (System.in);
-        boolean looping = true;
-        
-        while (looping) {
+    public static MyRectangle buildRectangle(Scanner input) {       
+        while (true) {
             try {
                 System.out.print("Please enter a width:\n>> ");
                 double width = input.nextDouble();
@@ -128,7 +119,6 @@ public class MyExceptionsTest {
 
                 MyRectangle rectangle = new MyRectangle(width, height);
 
-                input.close();
                 return rectangle;
             } catch (InputMismatchException e) {
                 input.nextLine(); // purge junk input
@@ -138,22 +128,15 @@ public class MyExceptionsTest {
                 System.err.println(e + ": height and width must be > 0.");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             }
-        }
-
-        return new MyRectangle(); // this return will never be hit; exists to appease Java errors
+        } // end While loop
     } // end buildRectangle method
 
-    public static MySquare buildSquare() {
-        // variable declarations
-        Scanner input = new Scanner(System.in);
-        boolean looping = true;
-
-        while (looping) {
-            System.out.println("please enter a side of 0.00 or greater.");
+    public static MySquare buildSquare(Scanner input) {
+        while (true) {
+            System.out.print("please enter a side of 0.00 or greater:\n>> ");
             try {
                 double side = input.nextDouble();
                 MySquare square = new MySquare(side);
-                input.close();
 
                 return square;
             } catch (InputMismatchException e) {
@@ -165,17 +148,10 @@ public class MyExceptionsTest {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             }
         } // end While loop
-
-        return new MySquare(); // this return will never be hit; exists to appease Java errors
-
     } // end buildSquare() method
 
-    public static MyTriangle buildTriangle() {
-        // variable declarations
-        Scanner input = new Scanner(System.in);
-        boolean looping = true;
-
-        while (looping) {
+    public static MyTriangle buildTriangle(Scanner input) {
+        while (true) {
             try {
                 System.out.print("Please enter a side:\n>> ");
                 double side1 = input.nextDouble();
@@ -188,7 +164,6 @@ public class MyExceptionsTest {
 
                 MyTriangle rectangle = new MyTriangle(side1, side2, side3);
 
-                input.close();
                 return rectangle;
             } catch (InputMismatchException e) {
                 input.nextLine(); // purge junk input
@@ -198,9 +173,7 @@ public class MyExceptionsTest {
                 System.err.println(e);
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             }
-        }
-
-        return new MyTriangle(); // this return will never be hit; exists to appease Java errors
+        } // end While loop
     }// end buildTriangle() method
 
 } // end program
