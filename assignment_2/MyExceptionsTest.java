@@ -3,15 +3,19 @@
 // Description: a program to test exception handling knowledge
 // Challenges:  Java wouldn't compile because it (incorrectly) thought there was
 //              a state where a returned variable wasn't instantiated; solved this
-//              with an extra return statement (that will never be reached)
-// Challenge 2: Scanner always gives me trouble when put in a loop
-// Time Spent:  75 min + 15 min (SI) + 10 minutes (class) + 7 minutes
+//              by replacing "looping" (which was set to true) with "true" in while loops.
+// Challenge 2: Scanner always gives me trouble when put in a loop;
+//              solution was to pass "input" to methods instead of trying to manage 
+//              Scanner's state.
+// Time Spent:  2 hours, 52 min
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-20  SM      File created
 //                      Attended SI meeting for help with buildCircle() method (see "challenges" above)
+//                      Finished after class
+//                      Refactored so whole program runs until 'quit' option is selected (see Challenge 2)
 
 
 import java.util.InputMismatchException;
