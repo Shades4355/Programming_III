@@ -22,67 +22,70 @@ public class MyExceptionsTest {
         Scanner input = new Scanner(System.in);
         int answer = 0;
 
-        while (answer < 1) {
-            System.out.println("1. Circle");
-            System.out.println("2. Rectangle");
-            System.out.println("3. Square");
-            System.out.println("4. Triangle");
-            System.out.println("5. Quit");
-            System.out.println();
+        while (true) {
+            while (answer < 1) {
+                System.out.println("1. Circle");
+                System.out.println("2. Rectangle");
+                System.out.println("3. Square");
+                System.out.println("4. Triangle");
+                System.out.println("5. Quit");
+                System.out.println();
 
-            System.out.print("Enter your choice (as a number):\n>> ");
-            try {
-                answer = input.nextInt();
+                System.out.print("Enter your choice (as a number):\n>> ");
+                try {
+                    answer = input.nextInt();
 
-                if (answer < 1 || answer > 5) {
-                    throw new IllegalArgumentException("Input out of range.");
-                }
-            } catch (IllegalArgumentException e) {
-                answer = 0;
-                System.err.println(e + ": Input out of range (1 - 5).");
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-            } catch (InputMismatchException e) {
-                input.nextLine(); // purge input
-                System.err.println(e + ": Invalid input: please enter a number 1 - 5.");
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-            }// end try/catch
-        } // end While loop
+                    if (answer < 1 || answer > 5) {
+                        throw new IllegalArgumentException("Input out of range.");
+                    }
+                } catch (IllegalArgumentException e) {
+                    answer = 0;
+                    System.err.println(e + ": Input out of range (1 - 5).");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+                } catch (InputMismatchException e) {
+                    input.nextLine(); // purge input
+                    System.err.println(e + ": Invalid input: please enter a number 1 - 5.");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+                }// end try/catch
+            } // end While loop
 
-        // now that 'answer' is a valid choice, select function to execute
-        switch (answer) {
-            case 1:
-                MyCircle circle = buildCircle();
-                System.out.println(circle);
-                System.out.printf("Perimeter: %.2f%n", circle.getPerimeter());
-                System.out.printf("Area: %.2f%n", circle.getArea());
-                break;
-            case 2:
-                MyRectangle rectangle = buildRectangle();
-                System.out.println(rectangle);
-                System.out.printf("Perimeter: %.2f%n", rectangle.getPerimeter());
-                System.out.printf("Area: %.2f%n", rectangle.getArea());
-                break;
-            case 3:
-                MySquare square = buildSquare();
-                System.out.println(square);
-                System.out.printf("Perimeter: %.2f%n", square.getPerimeter());
-                System.out.printf("Area: %.2f%n", square.getArea());
-                break;
-            case 4:
-                MyTriangle triangle = buildTriangle();
-                System.out.println(triangle);
-                System.out.printf("Perimeter: %.2f%n", triangle.getPerimeter());
-                System.out.printf("Area: %.2f%n", triangle.getArea());
-                break;
-        } // end Switch statements
+            // now that 'answer' is a valid choice, select function to execute
+            switch (answer) {
+                case 1:
+                    MyCircle circle = buildCircle();
+                    System.out.println(circle);
+                    System.out.printf("Perimeter: %.2f%n", circle.getPerimeter());
+                    System.out.printf("Area: %.2f%n", circle.getArea());
+                    break;
+                case 2:
+                    MyRectangle rectangle = buildRectangle();
+                    System.out.println(rectangle);
+                    System.out.printf("Perimeter: %.2f%n", rectangle.getPerimeter());
+                    System.out.printf("Area: %.2f%n", rectangle.getArea());
+                    break;
+                case 3:
+                    MySquare square = buildSquare();
+                    System.out.println(square);
+                    System.out.printf("Perimeter: %.2f%n", square.getPerimeter());
+                    System.out.printf("Area: %.2f%n", square.getArea());
+                    break;
+                case 4:
+                    MyTriangle triangle = buildTriangle();
+                    System.out.println(triangle);
+                    System.out.printf("Perimeter: %.2f%n", triangle.getPerimeter());
+                    System.out.printf("Area: %.2f%n", triangle.getArea());
+                    break;
+                case 5:
+                    input.close();
+                    System.out.println(); // blank line
+                    System.out.println("Goodbye");
+            } // end Switch statements
 
-        System.out.println(); // blank line
-        System.out.println("Goodbye");
+        } // end while loop
 
-        input.close();
-        System.exit(0); // close successfully (status: 0)
     } // end Main
 
+    
     // shape functions
     public static MyCircle buildCircle() {
         // variable declarations
