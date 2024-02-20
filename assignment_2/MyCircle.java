@@ -38,7 +38,7 @@ public class MyCircle extends MyBoundedShape {
 
     public void setRadius(double radius) throws InvalidRadiusException {
         if (radius < 0) { // if radius is less than 0, throw exception
-            throw new InvalidRadiusException();
+            throw new InvalidRadiusException(radius);
         } else {
             this.radius = radius;
         }
