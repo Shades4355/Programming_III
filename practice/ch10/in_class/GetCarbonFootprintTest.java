@@ -16,7 +16,7 @@ public class GetCarbonFootprintTest {
     public static void main(String[] args) {
         // Instantiate our 3 classes
         Building building = new Building(200);
-        Car car = new Car();
+        Car car = new Car(50);
         Bicycle bike = new Bicycle();
 
         // Create an ArrayList and add above classes to said list

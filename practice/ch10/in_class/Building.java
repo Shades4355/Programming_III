@@ -17,9 +17,14 @@ public class Building implements CarbonFootprint {
         squareFeet = sf;
     }
 
+    // Simplified formula: Multiply the square footage by 50
+    // for the wood frame, by 20 for the basement,
+    // by 47 for the concrete, and 17 for the steel
+    // Note: The website where we got this information no longer exists.
     @Override
     public void getCarbonFootprint() {
-        System.out.println("Building: Y per square foot\nSquare Feet: %d".formatted(squareFeet));
+        System.out.printf("Building with %d square feet: %d\n",
+                squareFeet, squareFeet * (50 + 20 + 47 + 17));
     }
 
 }

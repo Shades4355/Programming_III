@@ -11,9 +11,18 @@
 
 
 public class Car implements CarbonFootprint {
+    private double gallons;
+
+    public Car(double gallons) {
+        this.gallons = gallons;
+    }
+    
+    // one gallon of gas yields 20 pounds of CO2
+    // http://www.enviroduck.com/carbon_footprint_calculations.php
     @Override
     public void getCarbonFootprint() {
-        System.out.println("Car: X");
+        System.out.printf("Car that has used %.2f gallons of gas: %.2f\n",
+                gallons, gallons * 20);
     }
 
 }
