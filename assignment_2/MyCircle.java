@@ -23,12 +23,12 @@ public class MyCircle extends MyBoundedShape {
 
     public MyCircle(double radius) throws InvalidRadiusException {
         super();
-        setRadius(radius);;
+        setRadius(radius);
     }
 
-    public MyCircle(double radius, String color, boolean filled) {
+    public MyCircle(double radius, String color, boolean filled) throws InvalidRadiusException {
         super(color, filled); // Call the MyBoundedShape constructor
-        this.radius = radius;
+        setRadius(radius);
     }
 
     // Accessor and Mutator for Radius
