@@ -8,8 +8,8 @@
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
-// 2024-Feb-20  SM      copied and updated MyTriangle from Assignment 1
-//                      added a Mutator for sides, so as to DRY up code
+// 2024-Feb-20  SM      Copied and updated MyTriangle from Assignment 1
+//                      Added a Mutator for sides, so as to DRY up code
 
 
 public class MyTriangle extends MyBoundedShape {
@@ -19,8 +19,10 @@ public class MyTriangle extends MyBoundedShape {
     private double side3;
 
     // Constructors
-    public MyTriangle() throws IllegalTriangleException {
-        new MyTriangle(1.0, 1.0, 1.0);
+    public MyTriangle() {
+        this.side1 = 1;
+        this.side2 = 1;
+        this.side3 = 1;
     }
 
     public MyTriangle(double side1, double side2, double side3) throws IllegalTriangleException {
