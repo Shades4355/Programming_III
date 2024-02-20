@@ -100,7 +100,7 @@ public class MyExceptionsTest {
             } catch (InputMismatchException e) {
                 System.err.println(e + ": Please enter a decimal number.");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-                input.nextLine();
+                input.nextLine(); // purge junk input
             } catch (InvalidRadiusException e) {
                 System.err.println(e);
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
