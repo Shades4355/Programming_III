@@ -3,13 +3,14 @@
 // Description: Creates a child of MyBoundedShape, a Triangle,
 //              which throws an exception if it has an invalid side
 // Challenges:  None
-// Time Spent:  10 minutes
+// Time Spent:  11 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-20  SM      Copied and updated MyTriangle from Assignment 1
 //                      Added a Mutator for sides, so as to DRY up code
+// 2024-Feb-26  SM      Fixed MyTriangle() constructor based on feedback from Assignment 1
 
 
 public class MyTriangle extends MyBoundedShape {
@@ -19,10 +20,8 @@ public class MyTriangle extends MyBoundedShape {
     private double side3;
 
     // Constructors
-    public MyTriangle() {
-        this.side1 = 1;
-        this.side2 = 1;
-        this.side3 = 1;
+    public MyTriangle() throws IllegalTriangleException {
+        this(1.0, 1.0, 1.0);
     }
 
     public MyTriangle(double side1, double side2, double side3) throws IllegalTriangleException {
