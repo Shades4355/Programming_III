@@ -16,6 +16,7 @@
 //                      Attended SI meeting for help with buildCircle() method (see "challenges" above)
 //                      Finished after class
 //                      Refactored so whole program runs until 'quit' option is selected (see Challenge 2)
+// 2024-Feb-26  SM      Fixed typo
 
 
 import java.util.InputMismatchException;
@@ -166,9 +167,9 @@ public class MyExceptionsTest {
                 System.out.print("\nPlease enter a third side:\n>> ");
                 double side3 = input.nextDouble();
 
-                MyTriangle rectangle = new MyTriangle(side1, side2, side3);
+                MyTriangle triangle = new MyTriangle(side1, side2, side3);
 
-                return rectangle;
+                return triangle;
             } catch (InputMismatchException e) {
                 input.nextLine(); // purge junk input
                 System.err.println(e + ": Please enter a decimal number");
