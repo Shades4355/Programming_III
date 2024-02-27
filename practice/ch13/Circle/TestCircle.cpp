@@ -12,6 +12,7 @@
 
 #include "Circle.h";
 #include <iostream>
+
 using namespace std;
 
 int main() {
@@ -31,5 +32,18 @@ int main() {
     Circle circle1 = new Circle(radius);
     Circle circle2 = new Circle();
 
+    cout << "Your circle has a radius of " << circle1.getRadius() << endl;
+    cout << "Mine has a radius of " << circle2.getRadius() << endl;
 
+    cout << "Your circle has an area of " << circle1.getArea() << endl;
+    cout << "Mine has an area of " << circle2.getArea() << endl;
+
+    cout << "Your circle has a perimeter of " << circle1.getPerimeter() << endl;
+    cout << "Mine has a perimeter of " << circle2.getPerimeter() << endl;
+
+    cout << "Your circle has a circumference of " << circle1.getCircumference() << endl;
+    cout << "Mine has a circumference of " << circle2.getCircumference() << endl;
+
+    cout << "Your circle has a diameter of " << circle1.getDiameter() << endl;
+    cout << "Mine has a diameter of " << circle2.getDiameter() << endl;
 }
