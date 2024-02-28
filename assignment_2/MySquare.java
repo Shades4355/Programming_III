@@ -3,12 +3,13 @@
 // Description: Creates a child of MyBoundedShape, a Square,
 //              which throws an exception if its side is less than or equal to 0
 // Challenges:  None
-// Time Spent:  4 minutes
+// Time Spent:  5 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-20  SM      Copied and modified contents of MySquare.java from Assignment 1
+// 2024-Feb-28  SM      Moved Exception message from MyExceptionsTest to MySquare
 
 
 public class MySquare extends MyBoundedShape {
@@ -38,7 +39,7 @@ public class MySquare extends MyBoundedShape {
 
     public void setSide(double side) throws IllegalArgumentException {
        if (side <= 0) {
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Radius must be greater than 0.00.");
        } else {
            this.side = side;
        }
