@@ -2,15 +2,18 @@
 // Written by:  Shades Meyers
 // Description: A Circle class
 // Challenges:  
-// Time Spent:  
+// Time Spent:  7 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-27  SM      File created
+// 2024-Feb-28  SM      Build failed - troubleshooting
+//                      Started new project; copied previous files
 
 
-#include "Circle.h";
+#include "Circle.h"
+
 using namespace std;
 
 

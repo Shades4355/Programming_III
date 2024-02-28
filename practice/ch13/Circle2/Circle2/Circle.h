@@ -2,12 +2,13 @@
 // Written by:  Shades Meyers
 // Description: A Circle class header
 // Challenges:  
-// Time Spent:  
+// Time Spent:  5 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-27  SM      File created
+// 2024-Feb-28  SM      Started new project; copied previous files
 
 
 #ifndef CIRCLE_H
@@ -27,5 +28,5 @@ public:
     double getDiameter() const;
     double getCircumference() const;
 };
-#endif // !CIRCLE_H
+#endif
 
