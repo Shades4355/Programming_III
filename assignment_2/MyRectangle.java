@@ -3,12 +3,13 @@
 // Description: Creates a child of MyBoundedShape, a Rectangle,
 //              which throws an error if its height and/or width is invalid
 // Challenges:  None
-// Time Spent:  6 minutes
+// Time Spent:  7 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Feb-20  SM      Copied and modified contents of MyRectangle.java from Assignment 1
+// 2024-Feb-28  SM      Added message to IllegalArgumentException call
 
 
 public class MyRectangle extends MyBoundedShape {
@@ -42,7 +43,7 @@ public class MyRectangle extends MyBoundedShape {
     }
     public void setWidth(double width) throws IllegalArgumentException {
         if (width <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Width must be greater than 0.");
         } else {
             this.width = width;
         }
@@ -54,7 +55,7 @@ public class MyRectangle extends MyBoundedShape {
     }
     public void setHeight(double height) throws IllegalArgumentException {
         if (height <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Height must be greater than 0.");
         } else {
             this.height = height;
         }
