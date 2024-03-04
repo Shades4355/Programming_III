@@ -2,7 +2,7 @@
 // Written by:  Shades Meyers
 // Description: A class for managing Bin objects
 // Challenges:  Formatting Report display to meet expectations
-// Time Spent:  32 minutes
+// Time Spent:  23 minutes
 //
 // Revision history:
 // Date:        By:     Action:
@@ -17,13 +17,16 @@ using namespace std;
 
 // Constructor
 BinManager::BinManager() {
-    InvBin bins[6] = {
+    InvBin bins[9] = {
         InvBin("regular pliers", 25),
         InvBin("n. nose pliers", 5),
         InvBin("screwdriver", 25),
         InvBin("p. head screw driver", 6),
         InvBin("wrench-large", 7),
-        InvBin("wrench-small", 18)
+        InvBin("wrench-small", 18),
+        InvBin("drill", 51),
+        InvBin("cordless drill", 16),
+        InvBin("hand saw", 12)
     };
 } // end Constructor
 
@@ -34,6 +37,9 @@ BinManager::~BinManager() {
 
 // Class functions
 void BinManager::displayReport() const {
+    // prints out a report showing bin number, description of bin, and 
+    // quantity in bin
+
     cout << "Bin Report:" << endl;
     cout << "____________________________________________" << endl;
     cout << "Bin\t\tPart\t\t\t\tQty" << endl;

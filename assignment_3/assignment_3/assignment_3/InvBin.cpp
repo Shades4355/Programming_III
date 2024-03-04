@@ -2,7 +2,7 @@
 // Written by:  Shades Meyers
 // Description: An Inventory Bin class file
 // Challenges:  Forgot "endl" with my cout strings
-// Time Spent:  24 minutes
+// Time Spent:  32 minutes
 //
 // Revision history:
 // Date:        By:     Action:
