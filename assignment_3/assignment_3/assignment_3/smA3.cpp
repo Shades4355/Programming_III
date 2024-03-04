@@ -52,8 +52,6 @@ int main() {
             displayBins(inventory);
 
             cout << "Goodbye" << endl;
-            cout << "Press [enter] to exit";
-            cin;
 
             return 0; // exits program
         } // end Switch statement
