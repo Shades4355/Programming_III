@@ -1,8 +1,10 @@
 // File name:   InvBin.h
 // Written by:  Shades Meyers
 // Description: An Inventory Bin header file
-// Challenges:  Innitially used <String> instead of <string>
-// Time Spent:  10 minutes
+// Challenges:  Initially used <String> instead of <string>
+// Challenge 2: Type specifier "string" not recognized;
+//                  Needed "using namespace std;"
+// Time Spent:  14 minutes
 //
 // Revision history:
 // Date:        By:     Action:
@@ -14,6 +16,7 @@
 #define INVBIN_H
 
 #include <string>
+using namespace std;
 
 
 class InvBin {
