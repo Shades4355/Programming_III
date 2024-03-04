@@ -47,7 +47,7 @@ void BinManager::displayReport() const {
     for (int i = 0; i < sizeof(bins); i++) {
         cout << i << "\t\t" << bins[i].getDescription() << "\t\t\t\t" << bins[i].getQuantity() << endl;
     } // end For loop
-    cout << "____________________________________________" << endl;
+    cout << "____________________________________________" << endl << endl;
 } // end Function
 
 void BinManager::addItemsToBin(int bin, int amount) {
