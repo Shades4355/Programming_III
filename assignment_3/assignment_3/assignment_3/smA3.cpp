@@ -1,8 +1,8 @@
 // File name:   InvBin.cpp
 // Written by:  Shades Meyers
 // Description: An Inventory Bin class file
-// Challenges:  
-// Time Spent:  1 hour 1 minute
+// Challenges:  Build failed; forgot to declare functions before main()
+// Time Spent:  1 hour 13 minutes
 //
 // Revision history:
 // Date:        By:     Action:
@@ -13,6 +13,15 @@
 #include "BinManager.h"
 #include <iostream>
 using namespace std;
+
+
+void displayMenu();
+int getChoice(int);
+void addParts(BinManager&);
+void removeParts(BinManager&);
+void displayBins(const BinManager&);
+int getBinIndex();
+int getQuantity();
 
 
 int main() {
