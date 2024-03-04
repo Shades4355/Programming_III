@@ -12,7 +12,6 @@
 
 #include "InvBin.h"
 #include <iostream>
-using namespace std;
 
 
 // Constructors
@@ -51,7 +50,7 @@ void InvBin::addItem(int amount) {
     if (amount < 1) {
         cout << "Invalid quantity. Please enter a positive number." << endl;
     } else { // if valid, apply
-        quantity -= amount;
+        quantity += amount;
 
         // print number of items added to the bin
         cout << amount << " " << description << "(s) were added to the bin." << endl;
@@ -68,7 +67,7 @@ void InvBin::removeItem(int amount) {
     } else {
         quantity -= amount;
 
-        cout << amount << " " << description << "(s) removed from bin." << endl;
+        cout << amount << " " << description << "(s) were removed from the bin." << endl;
     } // end If/Else
 } // end function
 

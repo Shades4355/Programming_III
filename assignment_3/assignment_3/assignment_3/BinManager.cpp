@@ -2,6 +2,8 @@
 // Written by:  Shades Meyers
 // Description: A class for managing Bin objects
 // Challenges:  Formatting Report display to meet expectations
+//              InvBin returning default constructor instead of
+//                  Constructor with arguements
 // Time Spent:  23 minutes
 //
 // Revision history:
@@ -42,10 +44,10 @@ void BinManager::displayReport() const {
 
     cout << "Bin Report:" << endl;
     cout << "____________________________________________" << endl;
-    cout << "Bin\t\tPart\t\t\t\tQty" << endl;
+    cout << "Bin\t\tPart\t\t\tQty" << endl;
     cout << "____________________________________________" << endl;
     for (int i = 0; i < 9; i++) {
-        cout << i << "\t\t" << bins[i].getDescription() << "\t\t\t\t" << bins[i].getQuantity() << endl;
+        cout << i + 1 << "\t\t" << bins[i].getDescription() << "\t\t\t" << bins[i].getQuantity() << endl;
     } // end For loop
     cout << "____________________________________________" << endl << endl;
 } // end Function

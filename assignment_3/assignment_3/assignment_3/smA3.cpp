@@ -2,7 +2,8 @@
 // Written by:  Shades Meyers
 // Description: An Inventory Bin class file
 // Challenges:  Build failed; forgot to declare functions before main()
-// Time Spent:  1 hour 13 minutes
+//              "inventory" initializing with 9 empty InvBins
+// Time Spent:  1 hour 14 minutes
 //
 // Revision history:
 // Date:        By:     Action:
@@ -144,7 +145,7 @@ int getBinIndex() {
         cin >> input;
     } // end While loop
 
-    return input;
+    return input - 1;
 } // end getBinIndex()
 
 
