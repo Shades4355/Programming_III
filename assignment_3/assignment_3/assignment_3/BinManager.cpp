@@ -41,10 +41,8 @@ BinManager::~BinManager() {
     // deletes each bin
     for (int i = 0; i < 9; i++) {
         delete bins[i];
+        bins[i] = nullptr;
     }
-
-    // deletes array
-    delete *bins;
 } // end Destructor
 
 // Class functions
