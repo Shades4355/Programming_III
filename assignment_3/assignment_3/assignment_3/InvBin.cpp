@@ -21,7 +21,6 @@ InvBin::InvBin() {
 } // end Constructor
 
 InvBin::InvBin(string desc, int quant) {
-    // not working
     description = desc;
     quantity = quant;
 } // end Constructor

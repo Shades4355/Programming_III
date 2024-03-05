@@ -2,14 +2,16 @@
 // Written by:  Shades Meyers
 // Description: A class for managing Bin objects
 // Challenges:  Formatting Report display to meet expectations
-//              InvBin returning default constructor instead of
-//                  Constructor with arguements
-// Time Spent:  39 minutes
+//              InvBin was returning default Constructor instead
+//                  of Constructor with arguements
+//              When using pointers; program terminates on launch
+// Time Spent:  41 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-04  SM      File created
+// 2024-Mar-05  SM      Added For loop to Destructor
 
 
 #include "BinManager.h"
@@ -33,6 +35,13 @@ BinManager::BinManager() {
 
 // Destructor
 BinManager::~BinManager() {
+    
+    // deletes each bin
+    for (int i = 0; i < 9; i++) {
+        delete bins[i];
+    }
+
+    // deletes array
     delete *bins;
 } // end Destructor
 

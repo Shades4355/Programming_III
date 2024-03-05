@@ -2,7 +2,7 @@
 // Written by:  Shades Meyers
 // Description: An Inventory Bin class file
 // Challenges:  Build failed; forgot to declare functions before main()
-// Time Spent:  1 hour 15 minutes
+// Time Spent:  1 hour 16 minutes
 //
 // Revision history:
 // Date:        By:     Action:
@@ -16,6 +16,7 @@
 using namespace std;
 
 
+// Function prototypes
 void displayMenu();
 int getChoice(int);
 void addParts(BinManager&);
@@ -51,6 +52,10 @@ int main() {
             displayBins(inventory);
             break;
         case 4:
+            cout << "\t**********************" << endl;
+            cout << "\t End of Day Inventory" << endl;
+            cout << "\t**********************" << endl;
+
             displayBins(inventory);
 
             cout << "Goodbye" << endl;
@@ -92,7 +97,7 @@ void addParts(BinManager& manager) {
     // Select a bin and select an amount to add to that bin
     // Prints out how many items were added to the bin
 
-    // initialize our variables
+    // initialize variables
     int bin;
     int quant;
     
@@ -102,6 +107,7 @@ void addParts(BinManager& manager) {
     // Prompt for quantity
     quant = getQuantity();
 
+    // add [quantity] to [bin]
     manager.addItemsToBin(bin, quant);
 } // end addParts()
 
@@ -110,7 +116,7 @@ void removeParts(BinManager& manager) {
     // Select a bin and select an amount to remove from that bin
     // Prints out how many items were removed from the bin
 
-    // initialize our variables
+    // initialize variables
     int bin;
     int quant;
 
@@ -120,6 +126,7 @@ void removeParts(BinManager& manager) {
     // Prompt for quantity
     quant = getQuantity();
 
+    // remove [quantity] from [bin]
     manager.removeItemFromBin(bin, quant);
 } // end removeParts()
 

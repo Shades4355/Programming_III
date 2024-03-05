@@ -1,7 +1,7 @@
 // File name:   BinManager.h
 // Written by:  Shades Meyers
 // Description: A class for managing Bin objects (header)
-// Challenges:  None
+// Challenges:  When using pointers; program terminates on launch
 // Time Spent:  9 minutes
 //
 // Revision history:

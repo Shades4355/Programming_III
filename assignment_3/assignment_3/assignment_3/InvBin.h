@@ -3,7 +3,7 @@
 // Description: An Inventory Bin header file
 // Challenges:  Initially used <String> instead of <string>
 // Challenge 2: Type specifier "string" not recognized;
-//                  Needed "using namespace std;"
+//                  needed "using namespace std;"
 // Time Spent:  14 minutes
 //
 // Revision history:
