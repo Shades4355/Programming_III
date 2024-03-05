@@ -2,12 +2,13 @@
 // Written by:  Shades Meyers
 // Description: An Inventory Bin class file
 // Challenges:  Build failed; forgot to declare functions before main()
-// Time Spent:  1 hour 14 minutes
+// Time Spent:  1 hour 15 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-04  SM      File created
+// 2024-Mar-05  SM      Added more comments
 
 
 #include "BinManager.h"
@@ -38,6 +39,7 @@ int main() {
         cin >> input;
         input = getChoice(input);
 
+        // act based on validated input
         switch (input) {
         case 1:
             addParts(inventory);
@@ -60,6 +62,8 @@ int main() {
 
 
 void displayMenu() {
+    // Displays a menu of options
+
     cout << "\tInventory Control Menu" << endl << endl;
     cout << "1 - Add parts to a bin" << endl;
     cout << "2 - Remove parts from a bin" << endl;
