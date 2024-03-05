@@ -9,6 +9,7 @@
 // -------------------------------
 // 2024-Mar-04  SM      File created
 // 2024-Mar-05  SM      Added "nullptr" to bins[9] variable
+//                      DRYed up code by adding the const ARRLEN
 
 
 #ifndef BINMANAGER_H
@@ -19,6 +20,7 @@
 class BinManager {
 private:
     InvBin* bins[9] = {nullptr, nullptr , nullptr , nullptr , nullptr , nullptr , nullptr , nullptr , nullptr};
+    const int ARRLEN = 9;
 
 public:
     // Constructor
