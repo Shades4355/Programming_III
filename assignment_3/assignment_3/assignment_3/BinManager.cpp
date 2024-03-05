@@ -5,13 +5,15 @@
 //              InvBin was returning default Constructor instead
 //                  of Constructor with arguements
 //              When using pointers; program terminates on launch
-// Time Spent:  41 minutes
+//                  
+// Time Spent:  42 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-04  SM      File created
 // 2024-Mar-05  SM      Added For loop to Destructor
+//                      Fixed Constructor (with Orobosa's help)
 
 
 #include "BinManager.h"
@@ -22,15 +24,15 @@ using namespace std;
 
 // Constructor
 BinManager::BinManager() {
-    *bins[0] = InvBin("regular pliers", 25);
-    *bins[1] = InvBin("n. nose pliers", 5);
-    *bins[2] = InvBin("screwdriver", 25);
-    *bins[3] = InvBin("p. head screw driver", 6);
-    *bins[4] = InvBin("wrench-large", 7);
-    *bins[5] = InvBin("wrench-small", 18);
-    *bins[6] = InvBin("drill", 51);
-    *bins[7] = InvBin("cordless drill", 16);
-    *bins[8] = InvBin("hand saw", 12);
+    bins[0] = new InvBin("regular pliers", 25);
+    bins[1] = new InvBin("n. nose pliers", 5);
+    bins[2] = new InvBin("screwdriver", 25);
+    bins[3] = new InvBin("p. head screw driver", 6);
+    bins[4] = new InvBin("wrench-large", 7);
+    bins[5] = new InvBin("wrench-small", 18);
+    bins[6] = new InvBin("drill", 51);
+    bins[7] = new InvBin("cordless drill", 16);
+    bins[8] = new InvBin("hand saw", 12);
 } // end Constructor
 
 // Destructor
