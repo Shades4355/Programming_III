@@ -33,7 +33,7 @@ BinManager::BinManager() {
 
 // Destructor
 BinManager::~BinManager() {
-    delete [] bins;
+    delete *bins;
 } // end Destructor
 
 // Class functions
