@@ -49,5 +49,7 @@ int main() {
     cout << "Mine has a diameter of " << circle2.getDiameter() << endl;
 
     cout << "\nGoodbye!" << endl;
-    cout << "Press [enter] to exit program: "
+    cout << "Press [enter] to exit program: ";
+
+    return 0;
 }
