@@ -8,6 +8,7 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-04  SM      File created
+// 2024-Mar-05  SM      Added "nullptr" to bins[9] variable
 
 
 #ifndef BINMANAGER_H
@@ -17,7 +18,7 @@
 
 class BinManager {
 private:
-    InvBin *bins[9];
+    InvBin* bins[9] = {nullptr, nullptr , nullptr , nullptr , nullptr , nullptr , nullptr , nullptr , nullptr};
 
 public:
     // Constructor
