@@ -18,15 +18,17 @@
 InvBin::InvBin() {
     description = "empty";
     quantity = 0;
-} // end function
+} // end Constructor
 
 InvBin::InvBin(string desc, int quant) {
+    // not working
     description = desc;
     quantity = quant;
-} // end function
+} // end Constructor
 
 
 // Accessors and Mutators
+// Description
 void InvBin::setDescription(string desc) {
     description = desc;
 } // end function
@@ -35,6 +37,7 @@ string InvBin::getDescription() const {
     return description;
 } // end function
 
+// Quantity
 void InvBin::setQuantity(int quant) {
     quantity = quant;
 } // end function
@@ -42,6 +45,7 @@ void InvBin::setQuantity(int quant) {
 int InvBin::getQuantity() const {
     return quantity;
 } // end function
+
 
 // Additional functions
 void InvBin::addItem(int amount) {

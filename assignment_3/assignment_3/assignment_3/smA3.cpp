@@ -2,7 +2,6 @@
 // Written by:  Shades Meyers
 // Description: An Inventory Bin class file
 // Challenges:  Build failed; forgot to declare functions before main()
-//              "inventory" initializing with 9 empty InvBins
 // Time Spent:  1 hour 14 minutes
 //
 // Revision history:
@@ -26,7 +25,7 @@ int getQuantity();
 
 
 int main() {
-    BinManager inventory = BinManager(); // initiallize warehouse
+    BinManager inventory = BinManager(); // initiallize inventory
     int input;
 
     inventory.displayReport();
@@ -82,7 +81,6 @@ int getChoice(int choice) {
             cin >> val;
         } // end If/Else
     } // end While loop
-
 } // end getChoice()
 
 
@@ -166,3 +164,4 @@ int getQuantity() {
 
     return input;
 } // end getQuantity()
+

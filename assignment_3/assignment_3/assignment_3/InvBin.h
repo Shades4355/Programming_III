@@ -36,6 +36,7 @@ public:
     // Quantity
     void setQuantity(int);
     int getQuantity() const;
+
     // Additional functions
     void addItem(int);
     void removeItem(int);

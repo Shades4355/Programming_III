@@ -2,12 +2,13 @@
 // Written by:  Shades Meyers
 // Description: A class for managing Bin objects (header)
 // Challenges:  None
-// Time Spent:  7 minutes
+// Time Spent:  9 minutes
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-04  SM      File created
+
 
 #ifndef BINMANAGER_H
 #define BINMANAGER_H
@@ -16,7 +17,7 @@
 
 class BinManager {
 private:
-    InvBin bins[9];
+    InvBin *bins[9];
 
 public:
     // Constructor
