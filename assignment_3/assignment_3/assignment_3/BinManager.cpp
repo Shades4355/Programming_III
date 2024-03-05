@@ -6,7 +6,7 @@
 //                  of Constructor with arguements
 //              When using pointers; program terminates on launch
 //                  
-// Time Spent:  42 minutes
+// Time Spent:  43 minutes
 //
 // Revision history:
 // Date:        By:     Action:
@@ -14,6 +14,7 @@
 // 2024-Mar-04  SM      File created
 // 2024-Mar-05  SM      Added For loop to Destructor
 //                      Fixed Constructor (with Orobosa's help)
+//                      Added ARRLEN to DRY up code
 
 
 #include "BinManager.h"
@@ -39,7 +40,7 @@ BinManager::BinManager() {
 BinManager::~BinManager() {
     
     // deletes each bin
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < ARRLEN; i++) {
         delete bins[i];
         bins[i] = nullptr;
     }
@@ -54,7 +55,7 @@ void BinManager::displayReport() const {
     cout << "____________________________________________" << endl;
     cout << "Bin\t\tPart\t\t\tQty" << endl;
     cout << "____________________________________________" << endl;
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < ARRLEN; i++) {
         cout << i + 1 << "\t\t" << left << setw(20) << bins[i]->getDescription() << "\t" << right << setw(3) << bins[i]->getQuantity() << endl;
     } // end For loop
     cout << "____________________________________________" << endl << endl;
