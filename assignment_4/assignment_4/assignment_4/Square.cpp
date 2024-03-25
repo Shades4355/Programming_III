@@ -25,7 +25,7 @@ Square::Square(double side) {
     setSide(side);
 }
 
-Square::Square(double side, string color, bool filled) : Rectangle(color, filled) {
+Square::Square(double side, string color, bool filled) : Rectangle(side, side, color, filled) {
     setSide(side);
 }
 
