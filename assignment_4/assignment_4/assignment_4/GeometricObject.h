@@ -2,9 +2,9 @@
 // Written by:  Shades Meyers
 // Description: The header for an abstract parent class
 //                  for various shapes
-// Challenges:  
+// Challenges:  None
 //                  
-// Time Spent:  
+// Time Spent:   5 min
 //
 // Revision history:
 // Date:        By:     Action:
@@ -15,6 +15,7 @@
 #ifndef GEOMETRICOBJECT_H
 
 #define GEOMETRICOBJECT_H
+
 
 #include <string>
 using namespace std;
@@ -43,8 +44,8 @@ public:
     string toString();
 
     // Abstract functions
-    double getArea() const;
-    double getPermiter() const;
+    virtual double getArea() const = 0;
+    virtual double getPermiter() const = 0;
 };
 
 #endif // end definition

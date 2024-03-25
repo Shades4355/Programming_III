@@ -1,9 +1,9 @@
 // File name:   GeometricObject.cpp
 // Written by:  Shades Meyers
 // Description: An abstract parent class for various shapes
-// Challenges:  
+// Challenges:  None
 //                  
-// Time Spent:  
+// Time Spent:   5 min
 //
 // Revision history:
 // Date:        By:     Action:
@@ -20,28 +20,27 @@ GeometricObject::GeometricObject() {
 }
 
 GeometricObject::GeometricObject(string color, bool filled) {
-    color = color;
-    filled = filled;
+    this->color = color;
+    this->filled = filled;
 }
 
 string GeometricObject::getColor() const {
-    return string();
+    return color;
 }
 
 void GeometricObject::setColor(string color) {
-
+    this->color = color;
 }
 
 bool GeometricObject::isFilled() const {
-    return false;
+    return filled;
 }
 
 void GeometricObject::setFilled(bool filled) {
-
+    this->filled = filled;
 }
 
-string GeometricObject::toString()
-{
-    return string();
+string GeometricObject::toString() {
+    return "GeometricObject";
 }
 
