@@ -45,7 +45,7 @@ public:
 
     // Abstract functions
     virtual double getArea() const = 0;
-    virtual double getPermiter() const = 0;
+    virtual double getPerimeter() const = 0;
 };
 
 #endif // end definition
