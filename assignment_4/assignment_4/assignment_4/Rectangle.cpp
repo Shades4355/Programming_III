@@ -69,11 +69,11 @@ void Rectangle::setHeight(double height) {
     }
 }
 
-virtual double Rectangle::getArea() const override {
+double Rectangle::getArea() const {
     return width * height;
 }
 
-virtual double Rectangle::getPerimeter() const override {
+double Rectangle::getPerimeter() const {
     return 2 * (width + height);
 }
 
