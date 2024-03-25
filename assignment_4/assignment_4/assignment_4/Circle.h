@@ -3,7 +3,7 @@
 // Description: The header for a Circle class
 // Challenges:  None
 //                  
-// Time Spent:   
+// Time Spent:   4 min
 //
 // Revision history:
 // Date:        By:     Action:
@@ -42,8 +42,10 @@ public:
     // Area
     virtual double getArea() const override;
 
+    // Perimeter
+    virtual double getPerimeter() const override;
 
-};
+}; // end Circle
 
 #endif
 
