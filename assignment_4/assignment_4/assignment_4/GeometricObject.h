@@ -1,6 +1,6 @@
-// File name:   GeometricObject.cpp
+// File name:   GeometricObject.h
 // Written by:  Shades Meyers
-// Description: The header for an abstract parent class
+// Description: The Header for an abstract parent class
 //                  for various shapes
 // Challenges:  None
 //                  
@@ -46,7 +46,7 @@ public:
     // Abstract functions
     virtual double getArea() const = 0;
     virtual double getPerimeter() const = 0;
-};
+}; // end GeometricObject class
 
 #endif // end definition
 

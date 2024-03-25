@@ -1,6 +1,6 @@
-// File name:   GeometricObject.cpp
+// File name:   Rectangle.h
 // Written by:  Shades Meyers
-// Description: the Header for a Rectangle class
+// Description: The Header for a Rectangle class
 // Challenges:  None
 //                  
 // Time Spent:   5 min
@@ -47,7 +47,7 @@ public:
     // Perimeter
     virtual double getPerimeter() const override;
 
-}; // end Class
+}; // end Rectangle class
 
 #endif
 

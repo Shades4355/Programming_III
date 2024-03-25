@@ -1,4 +1,4 @@
-// File name:   GeometricObject.cpp
+// File name:   Rectangle.cpp
 // Written by:  Shades Meyers
 // Description: A Rectangle class
 // Challenges:  None

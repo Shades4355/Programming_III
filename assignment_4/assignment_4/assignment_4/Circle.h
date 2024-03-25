@@ -1,6 +1,6 @@
-// File name:   GeometricObject.cpp
+// File name:   Circle.h
 // Written by:  Shades Meyers
-// Description: The header for a Circle class
+// Description: The Header for a Circle class
 // Challenges:  None
 //                  
 // Time Spent:   4 min
@@ -45,7 +45,7 @@ public:
     // Perimeter
     virtual double getPerimeter() const override;
 
-}; // end Circle
+}; // end Circle class
 
 #endif
 
