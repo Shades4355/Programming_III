@@ -42,10 +42,10 @@ public:
     void setHeight(double height);
 
     // Area
-    double getArea() const;
+    virtual double getArea() const override;
 
     // Perimeter
-    double getPerimeter() const;
+    virtual double getPerimeter() const override;
 
 }; // end Class
 
