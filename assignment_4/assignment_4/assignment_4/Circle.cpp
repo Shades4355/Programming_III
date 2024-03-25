@@ -30,7 +30,7 @@ Circle::Circle(double radius, string color, bool filled) : GeometricObject(color
 }
 
 Circle::~Circle() {
-    cout << "The circle object is destroyed.";
+    cout << "The circle object is destroyed." << endl;
 }
 
 double Circle::getRadius() const {
