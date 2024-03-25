@@ -17,8 +17,7 @@
 #include "Rectangle.h"
 
 
-class Square :
-    public Rectangle {
+class Square : public Rectangle {
 private:
     double side;
 
@@ -45,3 +44,4 @@ public:
 }; // end Square class
 
 #endif
+
