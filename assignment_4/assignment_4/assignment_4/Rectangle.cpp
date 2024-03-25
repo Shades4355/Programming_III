@@ -22,7 +22,7 @@ Rectangle::Rectangle() {
     height = 1.0;
 }
 
-Rectangle::Rectangle(double width, double height) : GeometricObject() {
+Rectangle::Rectangle(double width, double height) {
     setWidth(width);
     setHeight(height);
 }
