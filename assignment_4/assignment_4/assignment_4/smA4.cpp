@@ -7,13 +7,14 @@
 //                  name without the word "class" preceeding it;
 //                  had to do a work around using a For loop
 //
-// Time Spent:   2 h 30 min + 4 min + 
+// Time Spent:   2 h 30 min + 7 min + 
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
 // 2024-Mar-26  SM      Added exception handling
+//                      Added input validation to prompts
 //                      SI help with dynamic_cast
 
 
@@ -34,9 +35,9 @@ void displayGeometricObject(const GeometricObject& g);
 int main() {
     // variable declaration
     int choice;
-    double radius, width, height, side, side1, side2, side3;
+    double radius, width, height, side, side1, side2, side3 = NULL;
     string color;
-    bool filled;
+    bool filled = NULL;
     GeometricObject* objectPntr = nullptr;
 
     while (true) {
@@ -55,6 +56,12 @@ int main() {
             // Circle
             cout << "What's the circle's radius?" << endl << ">> ";
             cin >> radius;
+
+            while (typeid(radius).name() != typeid(double()).name()) {
+                cin.clear(); // not working?
+                cout << "What's the circle's radius?" << endl << ">> ";
+                cin >> radius;
+            }
 
             cout << "What's the cirlce's color?" << endl << ">> ";
             cin >> color;
