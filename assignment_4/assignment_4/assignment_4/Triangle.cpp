@@ -3,7 +3,7 @@
 // Description: A Triangle class
 // Challenges:  None
 //                  
-// Time Spent:   11 min
+// Time Spent:   12 min
 //
 // Revision history:
 // Date:        By:     Action:
@@ -63,11 +63,7 @@ void Triangle::setSide2(double side2) {
         this->side2 = side2;
     }
     else {
-        cout << setprecision(2) << fixed;
-        cout << "You entered a side for side2 of: " << side2 << endl;
-        cout << "Side2 will be set to 1.0" << endl;
-
-        this->side2 = 1.0;
+        throw InvalidSide();
     }
 }
 
@@ -80,18 +76,24 @@ void Triangle::setSide3(double side3) {
         this->side3 = side3;
     }
     else {
-        cout << setprecision(2) << fixed;
-        cout << "You entered a side for side3 of: " << side3 << endl;
-        cout << "Side3 will be set to 1.0" << endl;
+        throw InvalidSide();
+    }
 
-        this->side3 = 1.0;
+    testArea();
+}
+
+void Triangle::testArea() {
+    double s = (side1 + side2 + side3) / 2;
+    double a = sqrt(s * (s - side1) * (s - side2) * (s - side3));
+
+    if (isnan(a) || a <= 0) {
+        throw InvalidTriangle();
     }
 }
 
 double Triangle::getArea() const {
     double s = (side1 + side2 + side3) / 2;
-
-    return sqrt(s * (s- side1) * (s - side2) * (s - side3));
+    return sqrt(s * (s - side1) * (s - side2) * (s - side3));
 }
 
 double Triangle::getPerimeter() const

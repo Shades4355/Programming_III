@@ -9,7 +9,7 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
-// 2024-Mar-26  SM      Added exception class
+// 2024-Mar-26  SM      Added exception classes
 
 
 #ifndef TRIANGLE_H
@@ -26,6 +26,7 @@ private:
 public:
     // Exception class
     class InvalidSide {};
+    class InvalidTriangle {};
 
     // Constructors
     Triangle();
@@ -48,6 +49,7 @@ public:
     void setSide3(double side3);
 
     // Area
+    void testArea();
     virtual double getArea() const override;
 
     // Perimeter
