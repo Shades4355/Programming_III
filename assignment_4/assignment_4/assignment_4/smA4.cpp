@@ -14,7 +14,6 @@
 // -------------------------------
 // 2024-Mar-25  SM      File created
 // 2024-Mar-26  SM      Added exception handling
-//                      Added input validation to prompts
 //                      SI help with dynamic_cast
 
 
@@ -56,12 +55,6 @@ int main() {
             // Circle
             cout << "What's the circle's radius?" << endl << ">> ";
             cin >> radius;
-
-            while (typeid(radius).name() != typeid(double()).name()) {
-                cin.clear(); // not working?
-                cout << "What's the circle's radius?" << endl << ">> ";
-                cin >> radius;
-            }
 
             cout << "What's the cirlce's color?" << endl << ">> ";
             cin >> color;
@@ -186,16 +179,14 @@ void displayGeometricObject(const GeometricObject& g) {
             << setw(15) << right << "not filled" << endl;
     }
 
-    /*
     // print Circle specific information
-    GeometricObject* p = &g; // not working...
+    GeometricObject* p = const_cast<GeometricObject*>(&g); // not working...
     Circle* c = dynamic_cast<Circle*>(p);
     if (c != nullptr) {
-        cout << setw(15) << left << name << "'s radius is:"
+        cout << name << setw(15) << left << "'s radius is:"
              << setw(15) << right << c->getRadius() << endl;
     }
-    delete c;
-    */
+    // delete c;
 
     // print object's Area and Perimeter to command line
     cout << name << setw(15) << left << "'s area: "
