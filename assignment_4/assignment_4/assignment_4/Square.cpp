@@ -9,6 +9,8 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
+// 2024-Mar-26  SM      Removed Else portion of 
+//                      input validation
 
 
 #include "Square.h"
@@ -40,12 +42,6 @@ double Square::getSide() const {
 void Square::setSide(double side) {
     if (side > 0) {
         this->side = side;
-    } else {
-        cout << setprecision(2) << fixed;
-        cout << "You entered a side of: " << side << endl;
-        cout << "Side will be set to 1.0" << endl;
-
-        this->side = 1.0;
     }
 }
 

@@ -9,6 +9,8 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
+// 2024-Mar-26  SM      Replaced input validation with 
+//                      exception handling
 
 
 #include "Triangle.h"
@@ -48,11 +50,7 @@ void Triangle::setSide1(double side1) {
     if (side1 > 0) {
         this->side1 = side1;
     } else {
-        cout << setprecision(2) << fixed;
-        cout << "You entered a side for side1 of: " << side1 << endl;
-        cout << "Side1 will be set to 1.0" << endl;
-
-        this->side1 = 1.0;
+        throw InvalidSide();
     }
 }
 

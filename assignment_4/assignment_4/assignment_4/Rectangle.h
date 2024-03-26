@@ -9,6 +9,7 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
+// 2024-Mar-26  SM      Added exception class
 
 
 #ifndef RECTANGLE_H
@@ -24,6 +25,9 @@ private:
     double height;
 
 public:
+    // Exception class
+    class InvalidSide {};
+
     // Constructors
     Rectangle();
     Rectangle(double width, double height);

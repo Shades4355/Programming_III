@@ -3,12 +3,14 @@
 // Description: A Circle class
 // Challenges:  None
 //                  
-// Time Spent:  8 min 
+// Time Spent:  9 min 
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
+// 2024-Mar-26  SM      Replaced input validation with 
+//                      exception handling
 
 
 #include "Circle.h"
@@ -41,11 +43,7 @@ void Circle::setRadius(double radius) {
     if (radius > 0) {
         this->radius = radius;
     } else {
-        cout << setprecision(2) << fixed;
-        cout << "You entered a radius of: " << radius << endl;
-        cout << "Radius will be set to 1.0" << endl;
-
-        this->radius = 1.0;
+        throw InvalidRadius();
     }
 }
 

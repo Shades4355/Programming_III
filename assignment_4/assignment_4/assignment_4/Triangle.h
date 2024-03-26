@@ -9,6 +9,7 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
+// 2024-Mar-26  SM      Added exception class
 
 
 #ifndef TRIANGLE_H
@@ -23,6 +24,9 @@ private:
     double side1, side2, side3;
 
 public:
+    // Exception class
+    class InvalidSide {};
+
     // Constructors
     Triangle();
     Triangle(double side1, double side2, double side3);

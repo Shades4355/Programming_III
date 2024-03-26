@@ -9,6 +9,8 @@
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
+// 2024-Mar-26  SM      Replaced input validation with 
+//                      exception handling
 
 
 #include "Rectangle.h"
@@ -45,11 +47,7 @@ void Rectangle::setWidth(double width) {
         this->width = width;
     }
     else {
-        cout << setprecision(2) << fixed;
-        cout << "You entered a width of: " << width << endl;
-        cout << "Width will be set to 1.0" << endl;
-        
-        this->width = 1.0;
+        throw InvalidSide();
     }
 }
 

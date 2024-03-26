@@ -5,15 +5,16 @@
 //                  "dynamic_cast<T>(v)"
 //              Had trouble getting 'g' to print it's class
 //                  name without the word "class" preceeding it;
-//                  had to do a work around using a for loop
+//                  had to do a work around using a For loop
 //
-// Time Spent:   2 h 30 min + 
+// Time Spent:   2 h 30 min + 4 min + 
 //
 // Revision history:
 // Date:        By:     Action:
 // -------------------------------
 // 2024-Mar-25  SM      File created
-// 2024-Mar-26  SM      SI help with dynamic_cast
+// 2024-Mar-26  SM      Added exception handling
+//                      SI help with dynamic_cast
 
 
 #include "Circle.h"
@@ -61,7 +62,12 @@ int main() {
             cout << "Is the circle filled or empty? (1 = filled; 0 = empty)" << endl << ">> ";
             cin >> filled;
 
-            objectPntr = new Circle(radius, color, filled);
+            try {
+                objectPntr = new Circle(radius, color, filled);
+            } catch (Circle::InvalidRadius) {
+                cout << "Invalid radius: radius must be greater than 0.0" << endl << endl;
+                continue;
+            }
 
         } else if (choice == 2) {
             // Rectangle
@@ -77,7 +83,12 @@ int main() {
             cout << "Is the rectangle filled or empty? (1 = filled; 0 = empty)" << endl << ">> ";
             cin >> filled;
 
-            objectPntr = new Rectangle(width, height, color, filled);
+            try {
+                objectPntr = new Rectangle(width, height, color, filled);
+            } catch (Rectangle::InvalidSide) {
+                cout << "Invalid side: sides must be greater than 0.0" << endl << endl;
+                continue;
+            }
 
         } else if (choice == 3) {
             // Square
@@ -89,8 +100,12 @@ int main() {
 
             cout << "Is the square filled or empty? (1 = filled; 0 = empty)" << endl << ">> ";
             cin >> filled;
-
-            objectPntr = new Square(side, color, filled);
+            try {
+                objectPntr = new Square(side, color, filled);
+            } catch (Rectangle::InvalidSide) {
+                cout << "Invalid side: side must be greater than 0.0" << endl << endl;
+                continue;
+            }
 
         } else if (choice == 4) {
             // Triangle
@@ -109,7 +124,12 @@ int main() {
             cout << "Is the triangle filled or empty? (1 = filled; 0 = empty)" << endl << ">> ";
             cin >> filled;
 
-            objectPntr = new Triangle(side1, side2, side3, color, filled);
+            try {
+                objectPntr = new Triangle(side1, side2, side3, color, filled);
+            } catch (Triangle::InvalidSide) {
+                cout << "Invalid side: sides must be greater than 0.0" << endl << endl;
+                continue;
+            }
 
         } else {
             // quit program
@@ -159,6 +179,7 @@ void displayGeometricObject(const GeometricObject& g) {
             << setw(15) << right << "not filled" << endl;
     }
 
+    /*
     // print Circle specific information
     GeometricObject* p = &g; // not working...
     Circle* c = dynamic_cast<Circle*>(p);
@@ -167,11 +188,14 @@ void displayGeometricObject(const GeometricObject& g) {
              << setw(15) << right << c->getRadius() << endl;
     }
     delete c;
+    */
 
     // print object's Area and Perimeter to command line
     cout << name << setw(15) << left << "'s area: "
         << setw(15) << right << g.getArea() << endl;
     cout << name << setw(15) << left << "'s perimeter: "
         << setw(15) << right << g.getPerimeter() << endl;
+
+    cout << endl; // add a blank line
 
 } // end displayGeometricObject
