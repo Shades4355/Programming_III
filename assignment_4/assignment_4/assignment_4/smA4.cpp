@@ -300,9 +300,9 @@ void displayGeometricObject(const GeometricObject& g) {
     Circle* c = dynamic_cast<Circle*>(p);
     if (c != nullptr) {
         cout << name << setw(15) << left << "'s radius is:"
-             << setw(15) << right << c->getRadius() << endl;
+             << setw(15) << right << setprecision(2) << fixed << c->getRadius() << endl;
         cout << name << setw(15) << left << "'s diameter is:"
-             << setw(15) << right << c->getDiameter() << endl;
+             << setw(15) << right << setprecision(2) << fixed << c->getDiameter() << endl;
         // c = nullptr;
     }
 
@@ -310,9 +310,9 @@ void displayGeometricObject(const GeometricObject& g) {
     Rectangle* r = dynamic_cast<Rectangle*>(p);
     if (r != nullptr && name == "Rectangle") {
         cout << name << setw(15) << left << "'s width is:"
-             << setw(15) << right << r->getWidth() << endl;
+             << setw(15) << right << setprecision(2) << fixed << r->getWidth() << endl;
         cout << name << setw(15) << left << "'s height is:"
-             << setw(15) << right << r->getHeight() << endl;
+             << setw(15) << right << setprecision(2) << fixed << r->getHeight() << endl;
         // r = nullptr;
     }
 
@@ -320,7 +320,7 @@ void displayGeometricObject(const GeometricObject& g) {
     Square* s = dynamic_cast<Square*>(p);
     if (s != nullptr) {
         cout << name << setw(15) << left << "'s side is:"
-             << setw(15) << right << s->getSide() << endl;
+             << setw(15) << right << setprecision(2) << fixed << s->getSide() << endl;
 
         // s = nullptr;
     }
@@ -329,20 +329,20 @@ void displayGeometricObject(const GeometricObject& g) {
     Triangle* t = dynamic_cast<Triangle*>(p);
     if (t != nullptr) {
         cout << name << setw(15) << left << "'s side1 is:"
-             << setw(15) << right << t->getSide1() << endl;
+             << setw(15) << right << setprecision(2) << fixed << t->getSide1() << endl;
         cout << name << setw(15) << left << "'s side2 is:"
-             << setw(15) << right << t->getSide2() << endl;
+             << setw(15) << right << setprecision(2) << fixed << t->getSide2() << endl;
         cout << name << setw(15) << left << "'s side3 is:"
-             << setw(15) << right << t->getSide3() << endl;
+             << setw(15) << right << setprecision(2) << fixed << t->getSide3() << endl;
 
         // t = nullptr;
     }
 
     // print object's Area and Perimeter to command line
     cout << name << setw(15) << left << "'s area: "
-         << setw(15) << right << g.getArea() << endl;
+         << setw(15) << right << setprecision(2) << fixed << g.getArea() << endl;
     cout << name << setw(15) << left << "'s perimeter: "
-         << setw(15) << right << g.getPerimeter() << endl;
+         << setw(15) << right << setprecision(2) << fixed << g.getPerimeter() << endl;
 
     cout << endl; // add a blank line
 

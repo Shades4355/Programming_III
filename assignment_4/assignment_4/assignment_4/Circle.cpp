@@ -48,7 +48,7 @@ void Circle::setRadius(double radius) {
 }
 
 double Circle::getDiameter() const {
-    return radius * 2;
+    return radius * 2.0;
 }
 
 double Circle::getArea() const {
