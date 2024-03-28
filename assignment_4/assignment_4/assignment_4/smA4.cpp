@@ -281,7 +281,7 @@ void showMenu() {
     cout << "2. Rectangle" << endl;
     cout << "3. Square" << endl;
     cout << "4. Triangle" << endl;
-    cout << "5. Quit the program" << endl;
+    cout << "5. Quit the program" << endl << endl;
 } // end showMenu()
 
 void displayGeometricObject(const GeometricObject& g) {
