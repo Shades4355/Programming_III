@@ -24,7 +24,7 @@ private:
     double side1, side2, side3;
 
 public:
-    // Exception class
+    // Exception classes
     class InvalidSide {};
     class InvalidTriangle {};
 
@@ -32,6 +32,7 @@ public:
     Triangle();
     Triangle(double side1, double side2, double side3);
     Triangle(double side1, double side2, double side3, string color, bool filled);
+
     // Destructor
     ~Triangle();
 

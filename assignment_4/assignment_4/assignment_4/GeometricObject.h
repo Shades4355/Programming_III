@@ -27,6 +27,7 @@ private:
     bool filled;
 
 protected:
+    // Constructors
     GeometricObject();
     GeometricObject(string color, bool filled);
 

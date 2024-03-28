@@ -40,8 +40,7 @@ Triangle::~Triangle() {
     cout << "The triangle object is destroyed." << endl;
 }
 
-double Triangle::getSide1() const
-{
+double Triangle::getSide1() const {
     return side1;
 }
 
@@ -95,7 +94,6 @@ double Triangle::getArea() const {
     return sqrt(s * (s - side1) * (s - side2) * (s - side3));
 }
 
-double Triangle::getPerimeter() const
-{
+double Triangle::getPerimeter() const {
     return side1 + side2 + side3;
 }
