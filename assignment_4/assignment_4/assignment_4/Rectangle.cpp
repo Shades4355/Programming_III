@@ -15,7 +15,6 @@
 
 #include "Rectangle.h"
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
 
@@ -59,11 +58,7 @@ void Rectangle::setHeight(double height) {
     if (height > 0) {
         this->height = height;
     } else {
-        cout << setprecision(2) << fixed;
-        cout << "You entered a height of: " << height << endl;
-        cout << "Height will be set to 1.0" << endl;
-
-        this->height = 1.0;
+        throw InvalidSide();
     }
 }
 
