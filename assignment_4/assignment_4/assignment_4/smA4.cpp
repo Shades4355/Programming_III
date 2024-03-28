@@ -250,8 +250,6 @@ int main() {
         } else {
             // quit program
             cout << "Goodbye" << endl;
-            delete objectPntr;
-            objectPntr = nullptr;
 
             return 0; // end program successfully
         } // end If/Else block
