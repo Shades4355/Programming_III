@@ -34,7 +34,7 @@ public:
     Rectangle(double width, double height, string color, bool filled);
 
     // Destructor
-    ~Rectangle();
+    virtual ~Rectangle();
 
     // Accessors and Mutators
     // Width
