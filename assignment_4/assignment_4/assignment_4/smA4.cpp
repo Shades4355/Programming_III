@@ -8,8 +8,11 @@
 //                  had to do a work around using a For loop
 //              Had trouble validating input type for cin
 //              Had trouble getting created shapes to delete
+//                  'delete objectPntr' doesn't seem to be working
+//                  as expected, nor is the 'return 0' triggering
+//                  any deletions
 //
-// Time Spent:   2 h 30 min + 1 h 20 min + 
+// Time Spent:   2 h 30 min + 1 h 20 min + 10 min
 //
 // Revision history:
 // Date:        By:     Action:
@@ -18,7 +21,9 @@
 // 2024-Mar-26  SM      Added exception handling
 //                      SI help with dynamic_cast
 //                      SI help with validating cin input Type
-// 2024-Mar-28  SM      SI help - objects aren't deleting correctly
+// 2024-Mar-28  SM      Fixed number output formatting (added
+//                          setprecision and fixed)
+//                      SI help - objects aren't deleting correctly
 
 
 #include "Circle.h"
