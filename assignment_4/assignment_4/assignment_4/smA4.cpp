@@ -7,6 +7,7 @@
 //                  name without the word "class" preceeding it;
 //                  had to do a work around using a For loop
 //              Had trouble validating input type for cin
+//              Had trouble getting created shapes to delete
 //
 // Time Spent:   2 h 30 min + 1 h 20 min + 
 //
@@ -17,6 +18,7 @@
 // 2024-Mar-26  SM      Added exception handling
 //                      SI help with dynamic_cast
 //                      SI help with validating cin input Type
+// 2024-Mar-28  SM      SI help - objects aren't deleting correctly
 
 
 #include "Circle.h"
@@ -266,7 +268,7 @@ int main() {
 
 // function initializations
 void showMenu() {
-    cout << "Choose one of the shapes to build:";
+    cout << "Choose one of the shapes to build:" << endl;
     cout << "1. Circle" << endl;
     cout << "2. Rectangle" << endl;
     cout << "3. Square" << endl;
@@ -278,7 +280,7 @@ void displayGeometricObject(const GeometricObject& g) {
     cout << endl; // blank line for spacing
 
     string name = "";
-    for (int i = 5; i < strlen(typeid(g).name()); i++) {
+    for (int i = 6; i < strlen(typeid(g).name()); i++) {
         name += typeid(g).name()[i];
     }
 
@@ -308,7 +310,7 @@ void displayGeometricObject(const GeometricObject& g) {
 
     // print Rectangle specific information
     Rectangle* r = dynamic_cast<Rectangle*>(p);
-    if (r != nullptr) {
+    if (r != nullptr && name == "Rectangle") {
         cout << name << setw(15) << left << "'s width is:"
              << setw(15) << right << r->getWidth() << endl;
         cout << name << setw(15) << left << "'s height is:"
@@ -316,9 +318,6 @@ void displayGeometricObject(const GeometricObject& g) {
         // r = nullptr;
     }
 
-    /* 
-    // commented out as unnecessary - Rectangle prints Height and Width
-    // but left in to show I know how to call 's->getSide()'
     // print Square specific information
     Square* s = dynamic_cast<Square*>(p);
     if (s != nullptr) {
@@ -327,7 +326,6 @@ void displayGeometricObject(const GeometricObject& g) {
 
         // s = nullptr;
     }
-    */
 
     // print Triangle specific information
     Triangle* t = dynamic_cast<Triangle*>(p);
