@@ -263,7 +263,7 @@ int main() {
         displayGeometricObject(*objectPntr);
 
         // clear objectPntr for next loop
-        delete objectPntr; // deleting objectPntr, but not calling Destructor 
+        delete objectPntr; // deleting objectPntr, but not calling Destructor function
         objectPntr = nullptr;
     } // end while
 } // end main
@@ -308,7 +308,7 @@ void displayGeometricObject(const GeometricObject& g) {
              << setw(15) << right << setprecision(2) << fixed << c->getRadius() << endl;
         cout << name << setw(15) << left << "'s diameter is:"
              << setw(15) << right << setprecision(2) << fixed << c->getDiameter() << endl;
-        // c = nullptr;
+        c = nullptr;
     }
 
     // print Rectangle specific information
@@ -318,7 +318,7 @@ void displayGeometricObject(const GeometricObject& g) {
              << setw(15) << right << setprecision(2) << fixed << r->getWidth() << endl;
         cout << name << setw(15) << left << "'s height is:"
              << setw(15) << right << setprecision(2) << fixed << r->getHeight() << endl;
-        // r = nullptr;
+        r = nullptr;
     }
 
     // print Square specific information
@@ -327,7 +327,7 @@ void displayGeometricObject(const GeometricObject& g) {
         cout << name << setw(15) << left << "'s side is:"
              << setw(15) << right << setprecision(2) << fixed << s->getSide() << endl;
 
-        // s = nullptr;
+        s = nullptr;
     }
 
     // print Triangle specific information
@@ -340,7 +340,7 @@ void displayGeometricObject(const GeometricObject& g) {
         cout << name << setw(15) << left << "'s side3 is:"
              << setw(15) << right << setprecision(2) << fixed << t->getSide3() << endl;
 
-        // t = nullptr;
+        t = nullptr;
     }
 
     // print object's Area and Perimeter to command line
