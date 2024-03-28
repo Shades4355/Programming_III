@@ -12,7 +12,7 @@
 //                  as expected, nor is the 'return 0' triggering
 //                  any deletions
 //
-// Time Spent:   2 h 30 min + 1 h 20 min + 1 h 10 min + 
+// Time Spent:   5 h 5 min
 //
 // Revision history:
 // Date:        By:     Action:
@@ -23,7 +23,9 @@
 //                      SI help with validating cin input Type
 // 2024-Mar-28  SM      Fixed number output formatting (added
 //                          missing setprecision and fixed)
-//                      SI help - objects aren't deleting correctly
+//                      SI help - objects aren't deleting correctly;
+//                          needed to add a Virtual Destructor to 
+//                          GeometricObject
 
 
 #include "Circle.h"
@@ -263,8 +265,11 @@ int main() {
         displayGeometricObject(*objectPntr);
 
         // clear objectPntr for next loop
-        delete objectPntr; // deleting objectPntr, but not calling Destructor function
+        delete objectPntr;
         objectPntr = nullptr;
+
+        cout << endl; // blank line for spacing
+
     } // end while
 } // end main
 
