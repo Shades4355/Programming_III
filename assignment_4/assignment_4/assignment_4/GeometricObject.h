@@ -31,6 +31,9 @@ protected:
     GeometricObject(string color, bool filled);
 
 public:
+    // Destructor
+    virtual ~GeometricObject() {};
+
     // Accessors and Mutators
     // Color
     string getColor() const;
