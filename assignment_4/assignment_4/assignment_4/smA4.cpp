@@ -12,7 +12,7 @@
 //                  as expected, nor is the 'return 0' triggering
 //                  any deletions
 //
-// Time Spent:   2 h 30 min + 1 h 20 min + 10 min
+// Time Spent:   2 h 30 min + 1 h 20 min + 1 h 10 min + 
 //
 // Revision history:
 // Date:        By:     Action:
@@ -22,7 +22,7 @@
 //                      SI help with dynamic_cast
 //                      SI help with validating cin input Type
 // 2024-Mar-28  SM      Fixed number output formatting (added
-//                          setprecision and fixed)
+//                          missing setprecision and fixed)
 //                      SI help - objects aren't deleting correctly
 
 
@@ -263,7 +263,7 @@ int main() {
         displayGeometricObject(*objectPntr);
 
         // clear objectPntr for next loop
-        delete objectPntr;
+        delete objectPntr; // deleting objectPntr, but not calling Destructor 
         objectPntr = nullptr;
     } // end while
 } // end main
