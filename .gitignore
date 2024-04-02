@@ -58,13 +58,48 @@ replay_pid*
 *.out
 *.app
 
+
+# JavaFX
+.idea
+.mvn
+
+
 # C++ Misc
 *.sln
 *.vcxproj
 *.vcxproj.*
 x64
 
+# IntelliJ IDEA
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+
+# Mac OS
+.DS_Store
+
 
 # Misc
 .vs
 *.pdf
+.vscode
+mvnw
+mvnw.cmd
+pom.xml
+target/
