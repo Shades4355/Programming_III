@@ -3,12 +3,13 @@
 // Description: Driver Application
 // Challenges:
 //
-// Time Spent:  23 min +
+// Time Spent:  23 min + 1 h 43 min +
 //
 // Revision history:
 // Date:           By:     Action:
 // -------------------------------
 // 2024-April-11    SM      File created
+// 2024-April-12    SM      Con't first pass work
 
 
 package assignment_5.assignment_5;
@@ -16,16 +17,11 @@ package assignment_5.assignment_5;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,34 +37,92 @@ public class ShapeChooser extends Application {
         ObservableList<String> shapes = FXCollections.observableArrayList("Circle", "Rectangle", "Square", "Triangle");
         ComboBox<String> shapeChooser = new ComboBox<String>();
         shapeChooser.setItems(shapes);
+        shapeChooser.setValue("Circle");
 
         // add HBox for label and combo box
-        HBox shapeChooserBox = new HBox(10);
+        BorderPane shapeChooserBox = new BorderPane();
         Label shapeLabel = new Label("Select a Geometric Object");
-        shapeLabel.setAlignment(Pos.CENTER_LEFT);
-        shapeChooserBox.getChildren().addAll(shapeLabel, shapeChooser);
+        shapeChooserBox.setLeft(shapeLabel);
+        shapeChooserBox.setRight(shapeChooser);
 
         // create buttons for bottom of main scene
         Button calcBtn = new Button("Calculate");
         Button clearBtn = new Button("Clear");
         Button exitBtn = new Button("Exit");
+        exitBtn.setOnAction((ActionEvent e) -> {System.exit(0);});
 
         // add buttons to a Horizontal Box
-        HBox bottomBtns = new HBox();
+        HBox bottomBtns = new HBox(10);
         bottomBtns.getChildren().addAll(calcBtn, clearBtn, exitBtn);
         bottomBtns.setAlignment(Pos.CENTER);
-        // TODO: needs more positional tweaking
 
         // Input box
-        GridPane inputOrg = new GridPane();
-        //inputOrg.setAlignment(Pos.CENTER);
-        TitledPane inputScene = new TitledPane("Input Data", inputOrg);
+        BorderPane inputPane = new BorderPane();
+        TitledPane inputScene = new TitledPane("Input Data", inputPane);
         inputScene.setCollapsible(true);
         inputScene.setAnimated(true);
+        // input labels
+        VBox inputLabels = new VBox();
+        inputLabels.getChildren().addAll(new Label("Radius: "), new Label("Width: "),
+                new Label("Height: "), new Label("Side1: "), new Label("Side2: "),
+                new Label("Side3: "));
+        // radius slider
+        Slider radiusSlider = new Slider(0.0, 30.0, 15.0);
+        // input fields
+        TextField widthField = new TextField();
+        TextField heightField = new TextField();
+        TextField side1Field = new TextField();
+        TextField side2Field = new TextField();
+        TextField side3Field = new TextField();
+        // combine left side
+        VBox inputMiddleSide = new VBox();
+        inputMiddleSide.getChildren().addAll(radiusSlider, widthField, heightField, side1Field,
+                side2Field, side3Field);
+        // right side of input box
+        VBox inputRightSide = new VBox(10);
+        CheckBox filledCheckbox = new CheckBox("Filled");
+        // radio group
+        VBox radioBox = new VBox(15);
+        ToggleGroup radioGroup = new ToggleGroup();
+        RadioButton radioBlack = new RadioButton("Black");
+        radioBlack.setToggleGroup(radioGroup);
+        RadioButton radioRed = new RadioButton("Red");
+        radioRed.setToggleGroup(radioGroup);
+        RadioButton radioGreen = new RadioButton("Green");
+        radioGreen.setToggleGroup(radioGroup);
+        RadioButton radioBlue = new RadioButton("Blue");
+        radioBlue.setToggleGroup(radioGroup);
+        radioBox.getChildren().addAll(radioBlack, radioRed, radioGreen, radioBlue);
+        // combine checkbox with radio buttons
+        inputRightSide.getChildren().addAll(filledCheckbox, radioBox);
+        // add input labels, fields, and right side together
+        HBox inputLeftSide = new HBox();
+        inputLeftSide.getChildren().addAll(inputLabels, inputMiddleSide);
+        inputPane.setLeft(inputLeftSide);
+        inputPane.setRight(inputRightSide);
 
-        // add result box
-        GridPane outputOrg = new GridPane();
-        TitledPane output = new TitledPane("Result:", outputOrg);
+        // add result boxes
+        VBox outputOrg = new VBox();
+        VBox textPane = new VBox();
+        BorderPane resultPane = new BorderPane();
+        // add Labels
+        outputOrg.getChildren().addAll(new Label("Shape: "), new Label("Information: "),
+                new Label("Area: "), new Label("Perimeter: "));
+        // add fields
+        TextField shapeField = new TextField();
+        shapeField.setEditable(false);
+        TextField infoField = new TextField();
+        infoField.setEditable(false);
+        TextField areaField = new TextField();
+        areaField.setEditable(false);
+        TextField perimeterField = new TextField();
+        perimeterField.setEditable(false);
+        // add text and label fields to boxes
+        textPane.getChildren().addAll(shapeField, infoField, areaField, perimeterField);
+        resultPane.setLeft(outputOrg);
+        resultPane.setCenter(textPane);
+        // create Results box; add resultPane to Results box
+        TitledPane output = new TitledPane("Result:", resultPane);
         output.setCollapsible(false);
         output.setAnimated(false);
 
@@ -79,7 +133,7 @@ public class ShapeChooser extends Application {
         stage.setTitle("The Shape Chooser");
 
         // add root to mainScene
-        Scene mainScene = new Scene(root, 320, 240);
+        Scene mainScene = new Scene(root, 350, 385);
 
         // add mainScene to stage and display
         stage.setScene(mainScene);
