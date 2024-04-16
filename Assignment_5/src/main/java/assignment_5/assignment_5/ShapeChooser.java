@@ -3,7 +3,7 @@
 // Description: Driver Application
 // Challenges:
 //
-// Time Spent:  23 min + 1 h 43 min + 1 h 16 min +
+// Time Spent:  23 min + 1 h 43 min + 1 h 16 min + 2 min
 //
 // Revision history:
 // Date:           By:     Action:
@@ -11,6 +11,8 @@
 // 2024-April-11    SM      File created
 // 2024-April-12    SM      Con't first pass work
 // 2024-April-15    SM      Con't first pass work
+// 2024-April-16    SM      SI help for removing 'package' statement
+//                          Con't first pass work
 
 
 package assignment_5.assignment_5;
@@ -43,6 +45,7 @@ public class ShapeChooser extends Application {
         ComboBox<String> shapeChooser = new ComboBox<String>();
         shapeChooser.setItems(shapes);
         shapeChooser.setValue("Circle");
+        // TODO: add event listener for shape selection
 
         // add HBox for label and combo box
         BorderPane shapeChooserBox = new BorderPane();
@@ -69,13 +72,14 @@ public class ShapeChooser extends Application {
         // radius slider
         BorderPane radiusBox = new BorderPane();
         Slider radiusSlider = new Slider(0.0, 30.0, 15.0);
-        Label radiusReadout = new Label(Double.toString(radiusSlider.getValue()));
+        Label radiusReadout = new Label(String.format("%.1f", radiusSlider.valueProperty().doubleValue()));
         radiusSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldNum, Number newNum) {
                 radiusReadout.setText(String.format("%.1f", newNum.doubleValue()));
             }
         });
+        radiusBox.setLeft(new Label("Radius: "));
         radiusBox.setCenter(radiusReadout);
         radiusBox.setRight(radiusSlider);
         // input fields and labels
