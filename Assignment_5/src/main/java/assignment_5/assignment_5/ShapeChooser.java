@@ -3,18 +3,21 @@
 // Description: Driver Application
 // Challenges:
 //
-// Time Spent:  23 min + 1 h 43 min +
+// Time Spent:  23 min + 1 h 43 min + 1 h 16 min +
 //
 // Revision history:
 // Date:           By:     Action:
 // -------------------------------
 // 2024-April-11    SM      File created
 // 2024-April-12    SM      Con't first pass work
+// 2024-April-15    SM      Con't first pass work
 
 
 package assignment_5.assignment_5;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +31,8 @@ import java.io.IOException;
 
 
 public class ShapeChooser extends Application {
+    String color, strWidth, strHeight, strSide1, strSide2, strSide3;
+
     @Override
     public void start(Stage stage) throws IOException {
         // main box
@@ -61,23 +66,49 @@ public class ShapeChooser extends Application {
         TitledPane inputScene = new TitledPane("Input Data", inputPane);
         inputScene.setCollapsible(true);
         inputScene.setAnimated(true);
-        // input labels
-        VBox inputLabels = new VBox();
-        inputLabels.getChildren().addAll(new Label("Radius: "), new Label("Width: "),
-                new Label("Height: "), new Label("Side1: "), new Label("Side2: "),
-                new Label("Side3: "));
         // radius slider
+        BorderPane radiusBox = new BorderPane();
         Slider radiusSlider = new Slider(0.0, 30.0, 15.0);
-        // input fields
+        Label radiusReadout = new Label(Double.toString(radiusSlider.getValue()));
+        radiusSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldNum, Number newNum) {
+                radiusReadout.setText(String.format("%.1f", newNum.doubleValue()));
+            }
+        });
+        radiusBox.setCenter(radiusReadout);
+        radiusBox.setRight(radiusSlider);
+        // input fields and labels
+        // Width
+        BorderPane inputWidth = new BorderPane();
         TextField widthField = new TextField();
+        inputWidth.setLeft(new Label("Width: "));
+        inputWidth.setRight(widthField);
+        // Height
+        BorderPane inputHeight = new BorderPane();
         TextField heightField = new TextField();
+        inputHeight.setLeft(new Label("Height: "));
+        inputHeight.setRight(heightField);
+        // Side1
+        BorderPane inputSide1 = new BorderPane();
         TextField side1Field = new TextField();
+        inputSide1.setLeft(new Label("Side 1: "));
+        inputSide1.setRight(side1Field);
+        // Side2
+        BorderPane inputSide2 = new BorderPane();
         TextField side2Field = new TextField();
+        inputSide2.setLeft(new Label("Side 2: "));
+        inputSide2.setRight(side2Field);
+        // Side3
+        BorderPane inputSide3 = new BorderPane();
         TextField side3Field = new TextField();
+        inputSide3.setLeft(new Label("Side 3: "));
+        inputSide3.setRight(side3Field);
         // combine left side
-        VBox inputMiddleSide = new VBox();
-        inputMiddleSide.getChildren().addAll(radiusSlider, widthField, heightField, side1Field,
-                side2Field, side3Field);
+        VBox inputLeftSide = new VBox();
+        inputLeftSide.getChildren().addAll(radiusBox,
+                inputWidth, inputHeight, inputSide1,
+                inputSide2, inputSide3);
         // right side of input box
         VBox inputRightSide = new VBox(10);
         CheckBox filledCheckbox = new CheckBox("Filled");
@@ -96,8 +127,6 @@ public class ShapeChooser extends Application {
         // combine checkbox with radio buttons
         inputRightSide.getChildren().addAll(filledCheckbox, radioBox);
         // add input labels, fields, and right side together
-        HBox inputLeftSide = new HBox();
-        inputLeftSide.getChildren().addAll(inputLabels, inputMiddleSide);
         inputPane.setLeft(inputLeftSide);
         inputPane.setRight(inputRightSide);
 
@@ -139,6 +168,7 @@ public class ShapeChooser extends Application {
         stage.setScene(mainScene);
         stage.show();
     }
+
 
     public static void main(String[] args) {
         launch();
