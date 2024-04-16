@@ -3,7 +3,7 @@
 // Description: Driver Application
 // Challenges:
 //
-// Time Spent:  23 min + 1 h 43 min + 1 h 16 min + 2 min
+// Time Spent:  23 min + 1 h 43 min + 1 h 16 min + 1 h 36 min + 
 //
 // Revision history:
 // Date:           By:     Action:
@@ -30,13 +30,15 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
+
+import  javax.swing.JOptionPane;
 
 
 public class ShapeChooser extends Application {
-    String color, strWidth, strHeight, strSide1, strSide2, strSide3;
+    String color = "Black";
+    boolean filled = false;
+    MyBoundedShape shape;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -44,7 +46,8 @@ public class ShapeChooser extends Application {
         VBox root = new VBox();
 
         // add combo box
-        ObservableList<String> shapes = FXCollections.observableArrayList("Circle", "Rectangle", "Square", "Triangle");
+        ObservableList<String> shapes = FXCollections.observableArrayList(
+                "Circle", "Rectangle", "Square", "Triangle");
         ComboBox<String> shapeChooser = new ComboBox<String>();
         shapeChooser.setItems(shapes);
         shapeChooser.setValue("Circle");
@@ -127,6 +130,7 @@ public class ShapeChooser extends Application {
         VBox radioBox = new VBox(15);
         ToggleGroup radioGroup = new ToggleGroup();
         RadioButton radioBlack = new RadioButton("Black");
+        radioBlack.setSelected(true);
         radioBlack.setToggleGroup(radioGroup);
         RadioButton radioRed = new RadioButton("Red");
         radioRed.setToggleGroup(radioGroup);
@@ -135,6 +139,13 @@ public class ShapeChooser extends Application {
         RadioButton radioBlue = new RadioButton("Blue");
         radioBlue.setToggleGroup(radioGroup);
         radioBox.getChildren().addAll(radioBlack, radioRed, radioGreen, radioBlue);
+        // TODO: event handlers
+        radioGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle oldVal, Toggle newVal) {
+                color = newVal.getProperties().toString();
+            }
+        });
         // combine checkbox with radio buttons
         inputRightSide.getChildren().addAll(filledCheckbox, radioBox);
         // add input labels, fields, and right side together
@@ -186,32 +197,49 @@ public class ShapeChooser extends Application {
         fieldList.add(side1Field);
         fieldList.add(side2Field);
         fieldList.add(side3Field);
+        fieldList.add(shapeField);
+        fieldList.add(infoField);
+        fieldList.add(areaField);
+        fieldList.add(perimeterField);
         // event: clear button press
-        clearBtn.setOnAction((ActionEvent e) -> clear(fieldList));
+        clearBtn.setOnAction((ActionEvent e) -> clear(fieldList, radiusSlider));
         // event: shape chosen
         shapeChooser.setOnAction((ActionEvent e) -> {
-            clear(fieldList);
+            clear(fieldList, radiusSlider);
             radiusSlider.setValue(15.0);
-            // TODO: lock inputs not used by selected shape
             if (shapeChooser.getValue().equals("Circle")) {
-                // TODO lock input fields
                 widthField.setEditable(false);
+                widthField.setStyle("-fx-background-color: grey;");
                 heightField.setEditable(false);
+                heightField.setStyle("-fx-background-color: grey;");
                 side1Field.setEditable(false);
+                side1Field.setStyle("-fx-background-color: grey;");
                 side2Field.setEditable(false);
+                side2Field.setStyle("-fx-background-color: grey;");
                 side3Field.setEditable(false);
+                side3Field.setStyle("-fx-background-color: grey;");
             } else if (shapeChooser.getValue().equals("Rectangle")) {
                 widthField.setEditable(true);
+                widthField.setStyle("");
                 heightField.setEditable(true);
+                heightField.setStyle("");
                 side1Field.setEditable(false);
+                side1Field.setStyle("-fx-background-color: grey;");
                 side2Field.setEditable(false);
+                side2Field.setStyle("-fx-background-color: grey;");
                 side3Field.setEditable(false);
+                side3Field.setStyle("-fx-background-color: grey;");
             } else if (shapeChooser.getValue().equals("Square")) {
                 widthField.setEditable(false);
+                widthField.setStyle("-fx-background-color: grey;");
                 heightField.setEditable(false);
+                heightField.setStyle("-fx-background-color: grey;");
                 side1Field.setEditable(true);
+                side1Field.setStyle("");
                 side2Field.setEditable(false);
+                side2Field.setStyle("-fx-background-color: grey;");
                 side3Field.setEditable(false);
+                side3Field.setStyle("-fx-background-color: grey;");
             } else if (shapeChooser.getValue().equals("Triangle")) {
                 widthField.setEditable(false);
                 heightField.setEditable(false);
@@ -227,21 +255,44 @@ public class ShapeChooser extends Application {
         calcBtn.setOnAction((ActionEvent e) -> {
             if (shapeChooser.getValue().equals("Circle")) {
                 // todo: create circle (using try/catch)
+                try {
+
+                    shape = new MyCircle(radiusSlider.getValue(), color, filled);
+                } catch (InvalidRadiusException exception) {
+                    clear(fieldList, radiusSlider);
+                }
             } else if (shapeChooser.getValue().equals("Rectangle")) {
                 // todo: create rectangle
+                try {
+                    shape = new MyRectangle(Double.parseDouble(widthField.getText()),
+                            Double.parseDouble(heightField.getText()), color, filled);
+                } catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(null, "Enter a numeric number");
+                    clear(fieldList, radiusSlider);
+                } catch (IllegalArgumentException exception) {
+                    JOptionPane.showMessageDialog(null, "Enter a positive number");
+                    clear(fieldList, radiusSlider);
+                }
             } else if (shapeChooser.getValue().equals("Square")) {
                 // todo: create square
             } else if (shapeChooser.getValue().equals("Triangle")) {
                 // todo: create triangle
             } // end if/else
+            // TODO: show shape data
+            shapeField.setText(shape.toString());
+            // TODO: infoField.setText(shape.???);
+            areaField.setText(String.format("%.2f", shape.getArea()));
+            perimeterField.setText(String.format("%.2f", shape.getPerimeter()));
         }); // end calcBtn onAction
     } // end start function
 
-    public void clear(ArrayList<TextField> array) {
+    public void clear(ArrayList<TextField> array, Slider slider) {
         // set all fields to ""
         for(TextField item : array) {
             item.setText("");
         }
+        // set slider to 15.0
+        slider.setValue(15.0);
     }
 
     public static void main(String[] args) {
