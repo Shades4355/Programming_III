@@ -30,6 +30,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 public class ShapeChooser extends Application {
@@ -45,7 +48,6 @@ public class ShapeChooser extends Application {
         ComboBox<String> shapeChooser = new ComboBox<String>();
         shapeChooser.setItems(shapes);
         shapeChooser.setValue("Circle");
-        // TODO: add event listener for shape selection
 
         // add HBox for label and combo box
         BorderPane shapeChooserBox = new BorderPane();
@@ -86,26 +88,31 @@ public class ShapeChooser extends Application {
         // Width
         BorderPane inputWidth = new BorderPane();
         TextField widthField = new TextField();
+        widthField.setAlignment(Pos.CENTER_RIGHT);
         inputWidth.setLeft(new Label("Width: "));
         inputWidth.setRight(widthField);
         // Height
         BorderPane inputHeight = new BorderPane();
         TextField heightField = new TextField();
+        heightField.setAlignment(Pos.CENTER_RIGHT);
         inputHeight.setLeft(new Label("Height: "));
         inputHeight.setRight(heightField);
         // Side1
         BorderPane inputSide1 = new BorderPane();
         TextField side1Field = new TextField();
+        side1Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide1.setLeft(new Label("Side 1: "));
         inputSide1.setRight(side1Field);
         // Side2
         BorderPane inputSide2 = new BorderPane();
         TextField side2Field = new TextField();
+        side2Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide2.setLeft(new Label("Side 2: "));
         inputSide2.setRight(side2Field);
         // Side3
         BorderPane inputSide3 = new BorderPane();
         TextField side3Field = new TextField();
+        side3Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide3.setLeft(new Label("Side 3: "));
         inputSide3.setRight(side3Field);
         // combine left side
@@ -171,8 +178,71 @@ public class ShapeChooser extends Application {
         // add mainScene to stage and display
         stage.setScene(mainScene);
         stage.show();
-    }
 
+        // Listeners and Events
+        ArrayList<TextField> fieldList = new ArrayList<TextField>();
+        fieldList.add(widthField);
+        fieldList.add(heightField);
+        fieldList.add(side1Field);
+        fieldList.add(side2Field);
+        fieldList.add(side3Field);
+        // event: clear button press
+        clearBtn.setOnAction((ActionEvent e) -> clear(fieldList));
+        // event: shape chosen
+        shapeChooser.setOnAction((ActionEvent e) -> {
+            clear(fieldList);
+            radiusSlider.setValue(15.0);
+            // TODO: lock inputs not used by selected shape
+            if (shapeChooser.getValue().equals("Circle")) {
+                // TODO lock input fields
+                widthField.setEditable(false);
+                heightField.setEditable(false);
+                side1Field.setEditable(false);
+                side2Field.setEditable(false);
+                side3Field.setEditable(false);
+            } else if (shapeChooser.getValue().equals("Rectangle")) {
+                widthField.setEditable(true);
+                heightField.setEditable(true);
+                side1Field.setEditable(false);
+                side2Field.setEditable(false);
+                side3Field.setEditable(false);
+            } else if (shapeChooser.getValue().equals("Square")) {
+                widthField.setEditable(false);
+                heightField.setEditable(false);
+                side1Field.setEditable(true);
+                side2Field.setEditable(false);
+                side3Field.setEditable(false);
+            } else if (shapeChooser.getValue().equals("Triangle")) {
+                widthField.setEditable(false);
+                heightField.setEditable(false);
+                side1Field.setEditable(true);
+                side2Field.setEditable(true);
+                side3Field.setEditable(true);
+            } else {
+                System.err.println("Combo Box error - invalid selection");
+                System.exit(1);
+            } // end if/else
+        }); // end shapeChooser onAction
+        // event: calculate button pressed
+        calcBtn.setOnAction((ActionEvent e) -> {
+            if (shapeChooser.getValue().equals("Circle")) {
+                // todo: create circle (using try/catch)
+            } else if (shapeChooser.getValue().equals("Rectangle")) {
+                // todo: create rectangle
+            } else if (shapeChooser.getValue().equals("Square")) {
+                // todo: create square
+            } else if (shapeChooser.getValue().equals("Triangle")) {
+                // todo: create triangle
+            } // end if/else
+        }); // end calcBtn onAction
+    } // end start function
+
+    public void clear(ArrayList<TextField> array) {
+        // set all fields to ""
+        for(TextField item : array) {
+            item.setText("");
+        }
+    }
 
     public static void main(String[] args) {
         launch();
