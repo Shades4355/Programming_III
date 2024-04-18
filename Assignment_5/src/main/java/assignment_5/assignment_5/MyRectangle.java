@@ -3,7 +3,7 @@
 // Description: Creates a child of MyBoundedShape, a Rectangle,
 //              which throws an error if its height and/or width is invalid
 // Challenges:  None
-// Time Spent:  1 minutes
+// Time Spent:  2 minutes
 //
 // Revision history:
 // Date:            By:     Action:
