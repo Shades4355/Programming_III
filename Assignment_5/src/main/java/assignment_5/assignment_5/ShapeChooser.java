@@ -55,8 +55,8 @@ public class ShapeChooser extends Application {
 
         // add HBox for label and combo box
         BorderPane shapeChooserBox = new BorderPane();
-        Label shapeLabel = new Label("Select a Geometric Object");
-        shapeChooserBox.setLeft(shapeLabel);
+        Label selectLabel = new Label("Select a Geometric Object");
+        shapeChooserBox.setLeft(selectLabel);
         shapeChooserBox.setRight(shapeChooser);
 
         // create buttons for bottom of main scene
@@ -95,30 +95,36 @@ public class ShapeChooser extends Application {
         widthField.setAlignment(Pos.CENTER_RIGHT);
         inputWidth.setLeft(new Label("Width: "));
         inputWidth.setRight(widthField);
+        widthField.setEditable(false);
+        // TODO: greyout panel
         // Height
         BorderPane inputHeight = new BorderPane();
         TextField heightField = new TextField();
         heightField.setAlignment(Pos.CENTER_RIGHT);
         inputHeight.setLeft(new Label("Height: "));
         inputHeight.setRight(heightField);
+        // TODO: editable = false; greyout panel
         // Side1
         BorderPane inputSide1 = new BorderPane();
         TextField side1Field = new TextField();
         side1Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide1.setLeft(new Label("Side 1: "));
         inputSide1.setRight(side1Field);
+        // TODO: editable = false; greyout panel
         // Side2
         BorderPane inputSide2 = new BorderPane();
         TextField side2Field = new TextField();
         side2Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide2.setLeft(new Label("Side 2: "));
         inputSide2.setRight(side2Field);
+        // TODO: editable = false; greyout panel
         // Side3
         BorderPane inputSide3 = new BorderPane();
         TextField side3Field = new TextField();
         side3Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide3.setLeft(new Label("Side 3: "));
         inputSide3.setRight(side3Field);
+        // TODO: editable = false; greyout panel
         // combine left side
         VBox inputLeftSide = new VBox();
         inputLeftSide.getChildren().addAll(radiusBox,
@@ -140,24 +146,7 @@ public class ShapeChooser extends Application {
         RadioButton radioBlue = new RadioButton("Blue");
         radioBlue.setToggleGroup(radioGroup);
         radioBox.getChildren().addAll(radioBlack, radioRed, radioGreen, radioBlue);
-        // radio group event handler
-        radioGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle oldVal, Toggle newVal) {
-                if (newVal.toString().contains("Black")) {
-                    color = "Black";
-                } else if (newVal.toString().contains("Red")) {
-                    color = "Red";
-                } else if (newVal.toString().contains("Green")) {
-                    color = "Green";
-                } else if (newVal.toString().contains("Blue")) {
-                    color = "Blue";
-                } else {
-                    System.err.println("Select Toggle Property: " + newVal.toString());
-                    System.exit(1);
-                }
-            }
-        });
+
         // combine checkbox with radio buttons
         inputRightSide.getChildren().addAll(filledCheckbox, radioBox);
         // add input labels, fields, and right side together
@@ -165,25 +154,44 @@ public class ShapeChooser extends Application {
         inputPane.setRight(inputRightSide);
 
         // add result boxes
-        VBox outputOrg = new VBox();
-        VBox textPane = new VBox();
-        BorderPane resultPane = new BorderPane();
-        // add Labels
-        outputOrg.getChildren().addAll(new Label("Shape: "), new Label("Information: "),
-                new Label("Area: "), new Label("Perimeter: "));
+        VBox resultPane = new VBox();
         // add fields
+        // Shape
+        BorderPane shapeBox = new BorderPane();
         TextField shapeField = new TextField();
         shapeField.setEditable(false);
+        Label shapeLabel = new Label("Shape: ");
+        shapeBox.setLeft(shapeLabel);
+        shapeBox.setCenter(shapeField);
+        BorderPane.setAlignment(shapeField, Pos.CENTER_RIGHT);
+        // Information
+        BorderPane infoBox = new BorderPane();
         TextField infoField = new TextField();
         infoField.setEditable(false);
+        Label infoLabel = new Label("Label: ");
+        infoBox.setLeft(infoLabel);
+        infoBox.setCenter(infoField);
+        BorderPane.setAlignment(infoField, Pos.CENTER_RIGHT);
+        // Area
+        BorderPane areaBox = new BorderPane();
         TextField areaField = new TextField();
         areaField.setEditable(false);
+        Label areaLabel = new Label("Area: ");
+        areaBox.setLeft(areaLabel);
+        areaBox.setCenter(areaField);
+        BorderPane.setAlignment(areaField, Pos.CENTER_RIGHT);
+        // Perimeter
+        BorderPane perimeterBox = new BorderPane();
         TextField perimeterField = new TextField();
         perimeterField.setEditable(false);
-        // add text and label fields to boxes
-        textPane.getChildren().addAll(shapeField, infoField, areaField, perimeterField);
-        resultPane.setLeft(outputOrg);
-        resultPane.setCenter(textPane);
+        Label perimeterLabel = new Label("Perimeter: ");
+        perimeterBox.setLeft(perimeterLabel);
+        perimeterBox.setCenter(perimeterField);
+        BorderPane.setAlignment(perimeterField, Pos.CENTER_RIGHT);
+
+        // add text and label fields to resultPane
+        resultPane.getChildren().addAll(shapeBox, infoBox, areaBox, perimeterBox);
+
         // create Results box; add resultPane to Results box
         TitledPane output = new TitledPane("Result:", resultPane);
         output.setCollapsible(false);
@@ -266,15 +274,18 @@ public class ShapeChooser extends Application {
         // event: calculate button pressed
         calcBtn.setOnAction((ActionEvent e) -> {
             if (shapeChooser.getValue().equals("Circle")) {
-                // todo: create circle (using try/catch)
+                // create circle
                 try {
 
                     shape = new MyCircle(radiusSlider.getValue(), color, filled);
                 } catch (InvalidRadiusException exception) {
+                    // this catch present to satisfy necessity of try/catch
+                    // cannot be triggered based on current implementation
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
                     clear(fieldList, radiusSlider);
                 }
             } else if (shapeChooser.getValue().equals("Rectangle")) {
-                // todo: create rectangle
+                // create rectangle
                 try {
                     shape = new MyRectangle(Double.parseDouble(widthField.getText()),
                             Double.parseDouble(heightField.getText()), color, filled);
@@ -282,22 +293,65 @@ public class ShapeChooser extends Application {
                     JOptionPane.showMessageDialog(null, "Enter a numeric number");
                     clear(fieldList, radiusSlider);
                 } catch (IllegalArgumentException exception) {
-                    JOptionPane.showMessageDialog(null, "Enter a positive number");
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
                     clear(fieldList, radiusSlider);
                 }
             } else if (shapeChooser.getValue().equals("Square")) {
-                // todo: create square
+                // create square
+                try {
+                    shape = new MySquare(Double.parseDouble(side1Field.getText()), color, filled);
+                } catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(null, "Enter a numeric number");
+                    clear(fieldList, radiusSlider);
+                } catch (IllegalArgumentException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                    clear(fieldList, radiusSlider);
+                }
             } else if (shapeChooser.getValue().equals("Triangle")) {
                 // todo: create triangle
+                try {
+                    shape = new MyTriangle(Double.parseDouble(side1Field.getText()),
+                            Double.parseDouble(side2Field.getText()), Double.parseDouble(side3Field.getText()),
+                            color, filled);
+                } catch (IllegalTriangleException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                    clear(fieldList, radiusSlider);
+                } catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(null, "Enter a numeric number");
+                    clear(fieldList, radiusSlider);
+                } catch (IllegalArgumentException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                    clear(fieldList, radiusSlider);
+                }
             } // end if/else
-            // TODO: show shape data
-            shapeField.setText(shape.toString());
-            // TODO: infoField.setText(shape.???);
-            areaField.setText(String.format("%.2f", shape.getArea()));
-            perimeterField.setText(String.format("%.2f", shape.getPerimeter()));
+
+            // show shape data
+            if (shape != null) {
+                shapeField.setText(shape.getShape());
+                infoField.setText(shape.toString());
+                areaField.setText(String.format("%.2f", shape.getArea()));
+                perimeterField.setText(String.format("%.2f", shape.getPerimeter()));
+            } // end If
         }); // end calcBtn onAction
         // event: checkbox toggled
-        filledCheckbox.setOnAction((ActionEvent e) -> {filled = filledCheckbox.isSelected();});
+        filledCheckbox.setOnAction((ActionEvent e) -> {filled = filledCheckbox.isSelected();}); // end checkbox onAction
+        radioGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle oldVal, Toggle newVal) {
+                if (newVal.toString().contains("Black")) {
+                    color = "Black";
+                } else if (newVal.toString().contains("Red")) {
+                    color = "Red";
+                } else if (newVal.toString().contains("Green")) {
+                    color = "Green";
+                } else if (newVal.toString().contains("Blue")) {
+                    color = "Blue";
+                } else {
+                    System.err.println("Select Toggle Property: " + newVal.toString());
+                    System.exit(1);
+                }
+            }
+        }); // end radioGroup listener
     } // end start function
 
     public void clear(ArrayList<TextField> array, Slider slider) {

@@ -2,12 +2,13 @@
 // Written by:  Shades Meyers
 // Description: an abstract Superclass used for defining Subclasses (shapes)
 // Challenges:  None
-// Time Spent:  1 minutes
+// Time Spent:  4 min
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      Copied file from Assignment 2 and modified
+// 2024-April-18    SM      Added getName() and modified toString()
 
 
 package assignment_5.assignment_5;
@@ -31,6 +32,11 @@ public abstract class MyBoundedShape implements Colorable, Comparable<MyBoundedS
         this.filled = filled;
     }
 
+    // Class Functions
+    public String getName() {
+        return "MyBoundedShape";
+    }
+
     // static methods
     public static MyBoundedShape max(MyBoundedShape o1, MyBoundedShape o2) {
         if (o1.compareTo(o2) >= 0) {
@@ -41,6 +47,7 @@ public abstract class MyBoundedShape implements Colorable, Comparable<MyBoundedS
     }
 
     // abstract methods
+    public abstract String getShape();
     public abstract double getArea();
     public abstract double getPerimeter();
 
@@ -53,7 +60,7 @@ public abstract class MyBoundedShape implements Colorable, Comparable<MyBoundedS
 
     @Override
     public String toString() {
-        return "created on " + dateCreated + "%ncolor: %s and filled %b".formatted(color, filled);
+        return getName() + "'s color: %s and filled: %b".formatted(color, filled);
     }
 
     // new methods

@@ -3,12 +3,14 @@
 // Description: Creates a child of MyBoundedShape, a Rectangle,
 //              which throws an error if its height and/or width is invalid
 // Challenges:  None
-// Time Spent:  0 minutes
+// Time Spent:  1 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      Copied from Assignment 2
+// 2024-April-18    SM      Added getShape(); removed toString override
+//                          Updated Error message
 
 
 package assignment_5.assignment_5;
@@ -45,7 +47,7 @@ public class MyRectangle extends MyBoundedShape {
     }
     public void setWidth(double width) throws IllegalArgumentException {
         if (width <= 0) {
-            throw new IllegalArgumentException("Width must be greater than 0.");
+            throw new IllegalArgumentException("Width and Height must be greater than 0.");
         } else {
             this.width = width;
         }
@@ -57,7 +59,7 @@ public class MyRectangle extends MyBoundedShape {
     }
     public void setHeight(double height) throws IllegalArgumentException {
         if (height <= 0) {
-            throw new IllegalArgumentException("Height must be greater than 0.");
+            throw new IllegalArgumentException("Width and Height must be greater than 0.");
         } else {
             this.height = height;
         }
@@ -87,8 +89,8 @@ public class MyRectangle extends MyBoundedShape {
 
     // Overrides
     @Override
-    public String toString() {
-        return super.toString() + "%nwidth: %.1f and height: %.1f".formatted(width, height);
+    public String getShape() {
+        return String.format("[" + getName() + "] width: %.1f and height: %.1f", width, height);
     }
 
 } // end of program

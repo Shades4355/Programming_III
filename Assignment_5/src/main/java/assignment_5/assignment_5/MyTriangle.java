@@ -3,12 +3,13 @@
 // Description: Creates a child of MyBoundedShape, a Triangle,
 //              which throws an exception if it has an invalid side
 // Challenges:  None
-// Time Spent:  0 minutes
+// Time Spent:  1 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      Copied from Assignment 2
+// 2024-April-18    SM      Added getShape(); removed toString override
 
 
 package assignment_5.assignment_5;
@@ -77,8 +78,8 @@ public class MyTriangle extends MyBoundedShape {
 
     // Overrides
     @Override
-    public String toString() {
-        return super.toString() + "%nside1 = %.1f%nside2 = %.1f%nside3 = %.1f".formatted(side1, side2, side3);
+    public String getShape() {
+        return String.format("[" + getName() + "] Side1 = %.1f, Side2 = %.1f, Side3 = %.1f",side1, side2, side3);
     }
 
 } // end of program

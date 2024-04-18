@@ -3,12 +3,13 @@
 // Description: Creates a child of MyBoundedShape, a Circle,
 //              that throws an error if it's given radius is negative
 // Challenges:  None
-// Time Spent:  0 minutes
+// Time Spent:  1 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      MyCircle copied from Assignment 2
+// 2024-April-18    SM      Added getShape(); removed toString override
 
 
 package assignment_5.assignment_5;
@@ -70,9 +71,9 @@ public class MyCircle extends MyBoundedShape {
     }
 
     // Overrides
-    @Override
-    public String toString() {
-        return super.toString() + "%nradius: %.1f".formatted(radius);
+    //@Override
+    public String getShape() {
+        return String.format("[" + getName() + "]" + " radius: %.1f", radius);
     }
 
 } // end of program

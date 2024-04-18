@@ -3,12 +3,13 @@
 // Description: Creates a child of MyBoundedShape, a Square,
 //              which throws an exception if its side is less than or equal to 0
 // Challenges:  None
-// Time Spent:  5 minutes
+// Time Spent:  1 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      Copied from Assignment 2
+// 2024-April-18    SM      Added getShape(); removed toString override
 
 
 package assignment_5.assignment_5;
@@ -41,7 +42,7 @@ public class MySquare extends MyBoundedShape {
 
     public void setSide(double side) throws IllegalArgumentException {
        if (side <= 0) {
-        throw new IllegalArgumentException("Radius must be greater than 0.00.");
+        throw new IllegalArgumentException("Side must be greater than 0.0.");
        } else {
            this.side = side;
        }
@@ -71,8 +72,8 @@ public class MySquare extends MyBoundedShape {
 
     // Overrides
     @Override
-    public String toString() {
-        return super.toString() + "%nside: %.1f".formatted(side);
+    public String getShape() {
+        return String.format("[" + getName() + "] Side: %.1f", side);
     }
 
 } // end of program
