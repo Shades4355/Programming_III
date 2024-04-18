@@ -13,6 +13,7 @@
 // 2024-April-15    SM      Con't first pass work
 // 2024-April-16    SM      SI help for removing 'package' statement
 //                          Con't first pass work
+// 2024-April-18    SM      Con't first pass work
 
 
 package assignment_5.assignment_5;
@@ -139,11 +140,22 @@ public class ShapeChooser extends Application {
         RadioButton radioBlue = new RadioButton("Blue");
         radioBlue.setToggleGroup(radioGroup);
         radioBox.getChildren().addAll(radioBlack, radioRed, radioGreen, radioBlue);
-        // TODO: event handlers
+        // radio group event handler
         radioGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observableValue, Toggle oldVal, Toggle newVal) {
-                color = newVal.getProperties().toString();
+                if (newVal.toString().contains("Black")) {
+                    color = "Black";
+                } else if (newVal.toString().contains("Red")) {
+                    color = "Red";
+                } else if (newVal.toString().contains("Green")) {
+                    color = "Green";
+                } else if (newVal.toString().contains("Blue")) {
+                    color = "Blue";
+                } else {
+                    System.err.println("Select Toggle Property: " + newVal.toString());
+                    System.exit(1);
+                }
             }
         });
         // combine checkbox with radio buttons
@@ -284,6 +296,8 @@ public class ShapeChooser extends Application {
             areaField.setText(String.format("%.2f", shape.getArea()));
             perimeterField.setText(String.format("%.2f", shape.getPerimeter()));
         }); // end calcBtn onAction
+        // event: checkbox toggled
+        filledCheckbox.setOnAction((ActionEvent e) -> {filled = filledCheckbox.isSelected();});
     } // end start function
 
     public void clear(ArrayList<TextField> array, Slider slider) {
