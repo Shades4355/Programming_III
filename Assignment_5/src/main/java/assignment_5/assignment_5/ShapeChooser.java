@@ -1,9 +1,10 @@
 // File name:   ShapeChooser.java
 // Written by:  Shades Meyers
 // Description: Driver Application
-// Challenges:
+// Challenges:  Couldn't figure out how to change teh color of text
+//                  (not required, but would have been nice)
 //
-// Time Spent:  4 h 58 min + 1 h 04 min
+// Time Spent:  7 h 18 min
 //
 // Revision history:
 // Date:           By:     Action:
@@ -14,6 +15,7 @@
 // 2024-April-16    SM      SI help for removing 'package' statement
 //                          Con't first pass work
 // 2024-April-18    SM      Con't first pass work; MVP
+// 2024-April-19    SM      Visual formatting
 
 
 package assignment_5.assignment_5;
@@ -24,6 +26,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -96,36 +99,40 @@ public class ShapeChooser extends Application {
         inputWidth.setLeft(new Label("Width: "));
         inputWidth.setRight(widthField);
         widthField.setEditable(false);
-        // TODO: greyout panel
+        widthField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
         // Height
         BorderPane inputHeight = new BorderPane();
         TextField heightField = new TextField();
         heightField.setAlignment(Pos.CENTER_RIGHT);
         inputHeight.setLeft(new Label("Height: "));
         inputHeight.setRight(heightField);
-        // TODO: editable = false; greyout panel
+        heightField.setEditable(false);
+        heightField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
         // Side1
         BorderPane inputSide1 = new BorderPane();
         TextField side1Field = new TextField();
         side1Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide1.setLeft(new Label("Side 1: "));
         inputSide1.setRight(side1Field);
-        // TODO: editable = false; greyout panel
+        side1Field.setEditable(false);
+        side1Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
         // Side2
         BorderPane inputSide2 = new BorderPane();
         TextField side2Field = new TextField();
         side2Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide2.setLeft(new Label("Side 2: "));
         inputSide2.setRight(side2Field);
-        // TODO: editable = false; greyout panel
+        side2Field.setEditable(false);
+        side2Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
         // Side3
         BorderPane inputSide3 = new BorderPane();
         TextField side3Field = new TextField();
         side3Field.setAlignment(Pos.CENTER_RIGHT);
         inputSide3.setLeft(new Label("Side 3: "));
         inputSide3.setRight(side3Field);
-        // TODO: editable = false; greyout panel
-        // combine left side
+        side3Field.setEditable(false);
+        side3Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
+        // combine left side of input box
         VBox inputLeftSide = new VBox();
         inputLeftSide.getChildren().addAll(radiusBox,
                 inputWidth, inputHeight, inputSide1,
@@ -146,6 +153,7 @@ public class ShapeChooser extends Application {
         RadioButton radioBlue = new RadioButton("Blue");
         radioBlue.setToggleGroup(radioGroup);
         radioBox.getChildren().addAll(radioBlack, radioRed, radioGreen, radioBlue);
+        radioBox.setStyle("-fx-border-color: Green; -fx-border-width: 3");
 
         // combine checkbox with radio buttons
         inputRightSide.getChildren().addAll(filledCheckbox, radioBox);
@@ -155,6 +163,7 @@ public class ShapeChooser extends Application {
 
         // add result boxes
         VBox resultPane = new VBox();
+        resultPane.setStyle("-fx-background-color: #00cdcd;");
         // add fields
         // Shape
         BorderPane shapeBox = new BorderPane();
@@ -164,14 +173,16 @@ public class ShapeChooser extends Application {
         shapeBox.setLeft(shapeLabel);
         shapeBox.setCenter(shapeField);
         BorderPane.setAlignment(shapeField, Pos.CENTER_RIGHT);
+        BorderPane.setMargin(shapeLabel, new Insets(5, 5, 5, 30));
         // Information
         BorderPane infoBox = new BorderPane();
         TextField infoField = new TextField();
         infoField.setEditable(false);
-        Label infoLabel = new Label("Label: ");
+        Label infoLabel = new Label("Information: ");
         infoBox.setLeft(infoLabel);
         infoBox.setCenter(infoField);
         BorderPane.setAlignment(infoField, Pos.CENTER_RIGHT);
+        BorderPane.setMargin(infoLabel, new Insets(5, 5, 5, 0));
         // Area
         BorderPane areaBox = new BorderPane();
         TextField areaField = new TextField();
@@ -180,6 +191,7 @@ public class ShapeChooser extends Application {
         areaBox.setLeft(areaLabel);
         areaBox.setCenter(areaField);
         BorderPane.setAlignment(areaField, Pos.CENTER_RIGHT);
+        BorderPane.setMargin(areaLabel, new Insets(5, 5, 5, 37));
         // Perimeter
         BorderPane perimeterBox = new BorderPane();
         TextField perimeterField = new TextField();
@@ -188,6 +200,7 @@ public class ShapeChooser extends Application {
         perimeterBox.setLeft(perimeterLabel);
         perimeterBox.setCenter(perimeterField);
         BorderPane.setAlignment(perimeterField, Pos.CENTER_RIGHT);
+        BorderPane.setMargin(perimeterLabel, new Insets(5, 5, 5, 10));
 
         // add text and label fields to resultPane
         resultPane.getChildren().addAll(shapeBox, infoBox, areaBox, perimeterBox);
@@ -196,6 +209,7 @@ public class ShapeChooser extends Application {
         TitledPane output = new TitledPane("Result:", resultPane);
         output.setCollapsible(false);
         output.setAnimated(false);
+        output.setStyle("-fx-border-color: Blue; -fx-border-width: 5;");
 
         // add boxes to main box
         root.getChildren().addAll(shapeChooserBox, inputScene, output, bottomBtns);
@@ -204,7 +218,7 @@ public class ShapeChooser extends Application {
         stage.setTitle("The Shape Chooser");
 
         // add root to mainScene
-        Scene mainScene = new Scene(root, 350, 385);
+        Scene mainScene = new Scene(root, 350, 415);
 
         // add mainScene to stage and display
         stage.setScene(mainScene);
@@ -222,50 +236,55 @@ public class ShapeChooser extends Application {
         fieldList.add(areaField);
         fieldList.add(perimeterField);
         // event: clear button press
-        clearBtn.setOnAction((ActionEvent e) -> clear(fieldList, radiusSlider));
+        clearBtn.setOnAction((ActionEvent e) -> clear(fieldList, radiusSlider, filledCheckbox, radioBlack));
         // event: shape chosen
         shapeChooser.setOnAction((ActionEvent e) -> {
-            clear(fieldList, radiusSlider);
+            clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
             radiusSlider.setValue(15.0);
             if (shapeChooser.getValue().equals("Circle")) {
                 widthField.setEditable(false);
-                widthField.setStyle("-fx-background-color: grey;");
+                widthField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 heightField.setEditable(false);
-                heightField.setStyle("-fx-background-color: grey;");
+                heightField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 side1Field.setEditable(false);
-                side1Field.setStyle("-fx-background-color: grey;");
+                side1Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 side2Field.setEditable(false);
-                side2Field.setStyle("-fx-background-color: grey;");
+                side2Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 side3Field.setEditable(false);
-                side3Field.setStyle("-fx-background-color: grey;");
+                side3Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
             } else if (shapeChooser.getValue().equals("Rectangle")) {
                 widthField.setEditable(true);
                 widthField.setStyle("");
                 heightField.setEditable(true);
                 heightField.setStyle("");
                 side1Field.setEditable(false);
-                side1Field.setStyle("-fx-background-color: grey;");
+                side1Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 side2Field.setEditable(false);
-                side2Field.setStyle("-fx-background-color: grey;");
+                side2Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 side3Field.setEditable(false);
-                side3Field.setStyle("-fx-background-color: grey;");
+                side3Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
             } else if (shapeChooser.getValue().equals("Square")) {
                 widthField.setEditable(false);
-                widthField.setStyle("-fx-background-color: grey;");
+                widthField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 heightField.setEditable(false);
-                heightField.setStyle("-fx-background-color: grey;");
+                heightField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 side1Field.setEditable(true);
                 side1Field.setStyle("");
                 side2Field.setEditable(false);
-                side2Field.setStyle("-fx-background-color: grey;");
+                side2Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 side3Field.setEditable(false);
-                side3Field.setStyle("-fx-background-color: grey;");
+                side3Field.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
             } else if (shapeChooser.getValue().equals("Triangle")) {
                 widthField.setEditable(false);
+                widthField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 heightField.setEditable(false);
+                heightField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black;");
                 side1Field.setEditable(true);
+                side1Field.setStyle("");
                 side2Field.setEditable(true);
+                side2Field.setStyle("");
                 side3Field.setEditable(true);
+                side3Field.setStyle("");
             } else {
                 System.err.println("Combo Box error - invalid selection");
                 System.exit(1);
@@ -281,8 +300,8 @@ public class ShapeChooser extends Application {
                 } catch (InvalidRadiusException exception) {
                     // this catch present to satisfy necessity of try/catch
                     // cannot be triggered based on current implementation
-                    JOptionPane.showMessageDialog(null, exception.getMessage());
-                    clear(fieldList, radiusSlider);
+                    JOptionPane.showMessageDialog(null, exception);
+                    clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
                 }
             } else if (shapeChooser.getValue().equals("Rectangle")) {
                 // create rectangle
@@ -291,10 +310,10 @@ public class ShapeChooser extends Application {
                             Double.parseDouble(heightField.getText()), color, filled);
                 } catch (NumberFormatException exception) {
                     JOptionPane.showMessageDialog(null, "Enter a numeric number");
-                    clear(fieldList, radiusSlider);
+                    clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
                 } catch (IllegalArgumentException exception) {
-                    JOptionPane.showMessageDialog(null, exception.getMessage());
-                    clear(fieldList, radiusSlider);
+                    JOptionPane.showMessageDialog(null, "IllegalArgumentException: " + exception.getMessage());
+                    clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
                 }
             } else if (shapeChooser.getValue().equals("Square")) {
                 // create square
@@ -302,27 +321,27 @@ public class ShapeChooser extends Application {
                     shape = new MySquare(Double.parseDouble(side1Field.getText()), color, filled);
                 } catch (NumberFormatException exception) {
                     JOptionPane.showMessageDialog(null, "Enter a numeric number");
-                    clear(fieldList, radiusSlider);
+                    clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
                 } catch (IllegalArgumentException exception) {
-                    JOptionPane.showMessageDialog(null, exception.getMessage());
-                    clear(fieldList, radiusSlider);
+                    JOptionPane.showMessageDialog(null, "IllegalArgumentException: " + exception.getMessage());
+                    clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
                 }
             } else if (shapeChooser.getValue().equals("Triangle")) {
-                // todo: create triangle
+                // create triangle
                 try {
                     shape = new MyTriangle(Double.parseDouble(side1Field.getText()),
                             Double.parseDouble(side2Field.getText()), Double.parseDouble(side3Field.getText()),
                             color, filled);
                 } catch (IllegalTriangleException exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage());
-                    clear(fieldList, radiusSlider);
+                    clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
                 } catch (NumberFormatException exception) {
                     JOptionPane.showMessageDialog(null, "Enter a numeric number");
-                    clear(fieldList, radiusSlider);
+                    clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
                 } catch (IllegalArgumentException exception) {
-                    JOptionPane.showMessageDialog(null, exception.getMessage());
-                    clear(fieldList, radiusSlider);
-                }
+                    JOptionPane.showMessageDialog(null, "IllegalArgumentException: " + exception.getMessage());
+                    clear(fieldList, radiusSlider, filledCheckbox, radioBlack);
+                } // end try/catch
             } // end if/else
 
             // show shape data
@@ -354,13 +373,21 @@ public class ShapeChooser extends Application {
         }); // end radioGroup listener
     } // end start function
 
-    public void clear(ArrayList<TextField> array, Slider slider) {
+    public void clear(ArrayList<TextField> array, Slider slider, CheckBox checkbox, RadioButton radioButton) {
         // set all fields to ""
         for(TextField item : array) {
             item.setText("");
         }
         // set slider to 15.0
         slider.setValue(15.0);
+
+        // uncheck filled
+        checkbox.setSelected(false);
+        filled = false;
+
+        // reset color to black
+        radioButton.setSelected(true);
+        color = "Black";
     }
 
     public static void main(String[] args) {
