@@ -3,13 +3,14 @@
 // Description: Creates a child of MyBoundedShape, a Circle,
 //              that throws an error if it's given radius is negative
 // Challenges:  None
-// Time Spent:  1 minutes
+// Time Spent:  3 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      MyCircle copied from Assignment 2
 // 2024-April-18    SM      Added getShape(); removed toString override
+// 22024-April-22   SM      Removed getShape(); updated howToDraw()
 
 
 package assignment_5.assignment_5;
@@ -67,12 +68,6 @@ public class MyCircle extends MyBoundedShape {
 
     @Override
     public String howToDraw() {
-        return "Color with radius";
-    }
-
-    // Overrides
-    //@Override
-    public String getShape() {
         return String.format("[" + getName() + "]" + " radius: %.1f", radius);
     }
 

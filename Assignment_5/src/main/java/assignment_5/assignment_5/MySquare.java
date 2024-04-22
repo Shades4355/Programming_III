@@ -10,6 +10,7 @@
 // -------------------------------
 // 2024-April-16    SM      Copied from Assignment 2
 // 2024-April-18    SM      Added getShape(); removed toString override
+// 22024-April-22   SM      Removed getShape(); updated howToDraw()
 
 
 package assignment_5.assignment_5;
@@ -67,12 +68,6 @@ public class MySquare extends MyBoundedShape {
 
     @Override
     public String howToDraw() {
-        return "Color with four sides";
-    }
-
-    // Overrides
-    @Override
-    public String getShape() {
         return String.format("[" + getName() + "] Side: %.1f", side);
     }
 

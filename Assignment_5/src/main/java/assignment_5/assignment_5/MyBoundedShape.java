@@ -8,7 +8,8 @@
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      Copied file from Assignment 2 and modified
-// 2024-April-18    SM      Added getName() and modified toString()
+// 2024-April-18    SM      Added getName() and modified toString() and added getShape()
+// 22024-April-22   SM      Removed getShape(); updated toString()
 
 
 package assignment_5.assignment_5;
@@ -47,7 +48,6 @@ public abstract class MyBoundedShape implements Colorable, Comparable<MyBoundedS
     }
 
     // abstract methods
-    public abstract String getShape();
     public abstract double getArea();
     public abstract double getPerimeter();
 

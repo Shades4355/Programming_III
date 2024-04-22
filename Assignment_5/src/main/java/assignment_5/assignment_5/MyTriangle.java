@@ -3,13 +3,14 @@
 // Description: Creates a child of MyBoundedShape, a Triangle,
 //              which throws an exception if it has an invalid side
 // Challenges:  None
-// Time Spent:  1 minutes
+// Time Spent:  2 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      Copied from Assignment 2
 // 2024-April-18    SM      Added getShape(); removed toString override
+// 22024-April-22   SM      Removed getShape(); updated howToDraw()
 
 
 package assignment_5.assignment_5;
@@ -73,12 +74,6 @@ public class MyTriangle extends MyBoundedShape {
 
     @Override
     public String howToDraw() {
-        return "Color with three sides";
-    }
-
-    // Overrides
-    @Override
-    public String getShape() {
         return String.format("[" + getName() + "] Side1 = %.1f, Side2 = %.1f, Side3 = %.1f",side1, side2, side3);
     }
 
