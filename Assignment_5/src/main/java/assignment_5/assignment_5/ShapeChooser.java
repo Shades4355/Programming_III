@@ -3,7 +3,7 @@
 // Description: Driver Application
 // Challenges:  Struggled to figure out how to change the color of text
 //
-// Time Spent:  8 h 22 min
+// Time Spent:  8 h 23 min
 //
 // Revision history:
 // Date:           By:     Action:
@@ -19,6 +19,7 @@
 //                          Added overlooked functionality to clear()
 //                          DRYed up code
 //                          Figured out text colors
+// 2024-April-23    SM      Switched howToDraw and toString methods
 
 
 package assignment_5.assignment_5;
@@ -326,8 +327,8 @@ public class ShapeChooser extends Application {
 
             // show shape data
             if (shape != null) {
-                shapeField.setText(shape.howToDraw());
-                infoField.setText(shape.toString());
+                shapeField.setText(shape.toString());
+                infoField.setText(shape.howToDraw());
                 infoField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black; -fx-text-fill: %s;".formatted(color));
                 areaField.setText(String.format("%.2f", shape.getArea()));
                 perimeterField.setText(String.format("%.2f", shape.getPerimeter()));

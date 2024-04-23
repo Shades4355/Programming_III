@@ -3,14 +3,15 @@
 // Description: Creates a child of MyBoundedShape, a Triangle,
 //              which throws an exception if it has an invalid side
 // Challenges:  None
-// Time Spent:  2 minutes
+// Time Spent:  3 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      Copied from Assignment 2
 // 2024-April-18    SM      Added getShape(); removed toString override
-// 22024-April-22   SM      Removed getShape(); updated howToDraw()
+// 2024-April-22    SM      Removed getShape(); updated howToDraw()
+// 2024-April-23    SM      updated howToDraw method and toString method
 
 
 package assignment_5.assignment_5;
@@ -73,8 +74,13 @@ public class MyTriangle extends MyBoundedShape {
     }
 
     @Override
-    public String howToDraw() {
+    public String toString() {
         return String.format("[" + getName() + "] Side1 = %.1f, Side2 = %.1f, Side3 = %.1f",side1, side2, side3);
+    }
+
+    @Override
+    public String howToDraw() {
+        return super.toString();
     }
 
 } // end of program

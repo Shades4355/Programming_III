@@ -3,14 +3,16 @@
 // Description: Creates a child of MyBoundedShape, a Square,
 //              which throws an exception if its side is less than or equal to 0
 // Challenges:  None
-// Time Spent:  1 minutes
+// Time Spent:  2 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-16    SM      Copied from Assignment 2
 // 2024-April-18    SM      Added getShape(); removed toString override
-// 22024-April-22   SM      Removed getShape(); updated howToDraw()
+// 2024-April-22    SM      Removed getShape(); updated howToDraw()
+// 2024-April-23    SM      updated howToDraw method and toString method
+
 
 
 package assignment_5.assignment_5;
@@ -66,9 +68,15 @@ public class MySquare extends MyBoundedShape {
         return "Square";
     }
 
+
+    @Override
+    public String toString() {
+        return String.format("[" + getName() + "] side: %.1f", side);
+    }
+
     @Override
     public String howToDraw() {
-        return String.format("[" + getName() + "] Side: %.1f", side);
+        return super.toString();
     }
 
 } // end of program
