@@ -3,7 +3,7 @@
 // Description: Driver Application
 // Challenges:  Struggled to figure out how to change the color of text
 //
-// Time Spent:  8 h 22 min
+// Time Spent:  8 h 26 min
 //
 // Revision history:
 // Date:           By:     Action:
@@ -19,6 +19,9 @@
 //                          Added overlooked functionality to clear()
 //                          DRYed up code
 //                          Figured out text colors
+// 2024-April-23    SM      Switched howToDraw and toString methods
+//                          Visual tweaking
+
 
 
 package assignment_5.assignment_5;
@@ -50,7 +53,7 @@ public class ShapeChooser extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // main box
-        VBox root = new VBox();
+        BorderPane root = new BorderPane();
 
         // add combo box
         ObservableList<String> shapes = FXCollections.observableArrayList(
@@ -59,7 +62,7 @@ public class ShapeChooser extends Application {
         shapeChooser.setItems(shapes);
         shapeChooser.setValue("Circle");
 
-        // add HBox for label and combo box
+        // add box for label and combo box
         BorderPane shapeChooserBox = new BorderPane();
         Label selectLabel = new Label("Select a Geometric Object");
         shapeChooserBox.setLeft(selectLabel);
@@ -200,8 +203,14 @@ public class ShapeChooser extends Application {
         output.setAnimated(false);
         output.setStyle("-fx-border-color: Blue; -fx-border-width: 5;");
 
+        // combine shapeChooserBox and inputScene into one box
+        VBox topBox = new VBox();
+        topBox.getChildren().addAll(shapeChooserBox, inputScene);
+
         // add boxes to main box
-        root.getChildren().addAll(shapeChooserBox, inputScene, output, bottomBtns);
+        root.setTop(topBox);
+        root.setCenter(output);
+        root.setBottom(bottomBtns);
 
         // set title
         stage.setTitle("The Shape Chooser");
@@ -326,8 +335,8 @@ public class ShapeChooser extends Application {
 
             // show shape data
             if (shape != null) {
-                shapeField.setText(shape.howToDraw());
-                infoField.setText(shape.toString());
+                shapeField.setText(shape.toString());
+                infoField.setText(shape.howToDraw());
                 infoField.setStyle("-fx-background-color: #E0E0E0; -fx-border-color: black; -fx-text-fill: %s;".formatted(color));
                 areaField.setText(String.format("%.2f", shape.getArea()));
                 perimeterField.setText(String.format("%.2f", shape.getPerimeter()));

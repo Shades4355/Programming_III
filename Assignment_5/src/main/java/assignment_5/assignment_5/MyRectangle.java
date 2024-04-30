@@ -3,7 +3,7 @@
 // Description: Creates a child of MyBoundedShape, a Rectangle,
 //              which throws an error if its height and/or width is invalid
 // Challenges:  None
-// Time Spent:  3 minutes
+// Time Spent:  4 minutes
 //
 // Revision history:
 // Date:            By:     Action:
@@ -11,7 +11,8 @@
 // 2024-April-16    SM      Copied from Assignment 2
 // 2024-April-18    SM      Added getShape(); removed toString override
 //                          Updated Error message
-// 22024-April-22   SM      Removed getShape(); updated howToDraw()
+// 2024-April-22    SM      Removed getShape(); updated howToDraw()
+// 2024-April-23    SM      updated howToDraw method and toString method
 
 
 package assignment_5.assignment_5;
@@ -84,8 +85,13 @@ public class MyRectangle extends MyBoundedShape {
     }
 
     @Override
-    public String howToDraw() {
+    public String toString() {
         return String.format("[" + getName() + "] width: %.1f and height: %.1f", width, height);
+    }
+
+    @Override
+    public String howToDraw() {
+        return super.toString();
     }
 
 } // end of program
