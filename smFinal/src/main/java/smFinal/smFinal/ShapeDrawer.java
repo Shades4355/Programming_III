@@ -2,7 +2,7 @@
 // Written by:  Shades Meyers
 // Description: A driver class for drawing shapes
 // Challenges:
-// Time Spent:  72 min +
+// Time Spent:  3 h, 09 min +
 //
 // Revision history:
 // Date:            By:     Action:
@@ -18,18 +18,20 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.Scene;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -45,6 +47,7 @@ public class ShapeDrawer extends Application {
         int red = 0;
         int green = 0;
         int blue = 0;
+        boolean filled = false;
 
         // create root scene
         BorderPane root = new BorderPane();
@@ -54,7 +57,11 @@ public class ShapeDrawer extends Application {
         Button clearBtn = new Button("Clear");
         Button undoBtn = new Button("Undo");
         Button exitBtn = new Button("Exit");
-        
+        // Button box
+        HBox btnBox = new HBox(10);
+        btnBox.getChildren().addAll(clearBtn, undoBtn, exitBtn);
+        btnBox.setAlignment(Pos.CENTER);
+
         // add combo box
         ObservableList<String> shapes = FXCollections.observableArrayList(
                 "Circle", "Oval", "Rectangle", "Square", "Line");
@@ -78,7 +85,6 @@ public class ShapeDrawer extends Application {
         Slider redSlider = new Slider(0, 255, 0);
         redSlider.setOrientation(Orientation.VERTICAL);
         redBox.getChildren().addAll(new Label("R"), redValue, redSlider);
-
         // Green slider
         VBox greenBox = new VBox();
         Label greenValue = new Label("0");
@@ -87,7 +93,6 @@ public class ShapeDrawer extends Application {
         Slider greenSlider = new Slider(0, 255, 0);
         greenSlider.setOrientation(Orientation.VERTICAL);
         greenBox.getChildren().addAll(new Label("G"), greenValue, greenSlider);
-
         // Blue slider
         VBox blueBox = new VBox();
         Label blueValue = new Label("0");
@@ -96,10 +101,8 @@ public class ShapeDrawer extends Application {
         Slider blueSlider = new Slider(0, 255, 0);
         blueSlider.setOrientation(Orientation.VERTICAL);
         blueBox.getChildren().addAll(new Label("B"), blueValue, blueSlider);
-
         // Combine Sliders
         colorBox.getChildren().addAll(redBox, greenBox, blueBox);
-
         // Color show box
         Pane colorPane = new Pane();
         colorPane.setMinWidth(50);
@@ -110,18 +113,28 @@ public class ShapeDrawer extends Application {
         colorShow.setWidth(70);
         colorShow.setHeight(35);
         colorShow.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-        
         // Combine sliders and color preview
-        VBox colorOuterBox = new VBox(10);
+        VBox colorOuterBox = new VBox(5);
         colorOuterBox.getChildren().addAll(colorBox, colorPane);
 
-        // TODO: delete; exists for testing only
-        root.setRight(colorOuterBox);
+        // Canvas for drawing
+        Canvas canvas = new Canvas(300, 300);
 
-        // add root scene to Stage
+        // Box for center of screen
+        BorderPane centerBox = new BorderPane();
+        centerBox.setTop(shapeChooserBox);
+        centerBox.setBottom(btnBox);
+        centerBox.setRight(colorOuterBox);
+        centerBox.setCenter(canvas);
+        BorderPane.setMargin(centerBox, new Insets(5, 10, 5, 10));
+
+        // Add centerBox to root
+        root.setCenter(centerBox);
+
+        // Add root scene to Stage
         Scene mainScene = new Scene(root);
 
-        // show Stage
+        // Show Stage
         stage.setScene(mainScene);
         stage.show();
 
@@ -131,30 +144,94 @@ public class ShapeDrawer extends Application {
             System.exit(0);
         });
         undoBtn.setOnAction((ActionEvent e) -> {});
-        clearBtn.setOnAction((ActionEvent e) -> {});
+        clearBtn.setOnAction((ActionEvent e) -> {
+            clear(redSlider, greenSlider, blueSlider, colorShow, shapeChooser);
+        });
             // Sliders
         redSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldNum, Number newNum) {
                 redValue.setText(String.format("%d", newNum.intValue()));
+                colorUpdater(redSlider, greenSlider, blueSlider, colorShow);
             }
         });
         greenSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldNum, Number newNum) {
                 greenValue.setText(String.format("%d", newNum.intValue()));
+                colorUpdater(redSlider, greenSlider, blueSlider, colorShow);
             }
         });
         blueSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldNum, Number newNum) {
                 blueValue.setText(String.format("%d", newNum.intValue()));
+                colorUpdater(redSlider, greenSlider, blueSlider, colorShow);
             }
         });
             // Shape chooser
-        shapeChooser.setOnAction((ActionEvent e) -> {});
+        shapeChooser.setOnAction((ActionEvent e) -> {
+            clear(redSlider, greenSlider, blueSlider, colorShow);
+        });
 
             // Mouse Events
+        // TODO: fix this event handler
+        canvas.setOnMouseDragEntered(eventClick -> {
+            double initX = eventClick.getX();
+            double initY = eventClick.getY();
+
+            System.out.println(Double.toString(initX)); // TODO: delete
+            System.out.println(Double.toString(initY)); // TODO: delete
+
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+            if (shapeChooser.getValue().equals("Circle")) {
+                System.out.println("Circle chosen"); // TODO: delete
+                // Create Circle with radius 0
+                Circle circle = new Circle(initX, initY, 0);
+                circle.setStrokeWidth(5);
+                circle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+
+                if (filled) {
+                    circle.setStyle("-fx-fill: % ;".formatted(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue))));
+                }
+
+                canvas.setOnMouseDragExited(eventUnclick -> {
+                    double dragX = eventUnclick.getX();
+                    double dragY = eventUnclick.getY();
+                    double radius = Math.sqrt(((Math.abs(initX - dragX)) * (Math.abs(initX-dragX))) + ((Math.abs(initY - dragY) * (Math.abs(initY - dragY)))));
+
+                    circle.setRadius(radius);
+
+                    System.out.println("Radius: " + radius); // TODO: delete
+                });
+            }
+        });
 
     } // end start method
+
+    public void colorUpdater(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow) {
+        int red = (int)redSlider.getValue();
+        int green = (int)greenSlider.getValue();
+        int blue = (int)blueSlider.getValue();
+
+        colorShow.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+    } // end colorUpdater
+
+    // Overloaded clear method
+    public void clear(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow, ComboBox<String> shapeChooser) {
+        redSlider.setValue(0);
+        greenSlider.setValue(0);
+        blueSlider.setValue(0);
+
+        colorShow.setFill(Color.web("rgb(0, 0, 0)"));
+
+        shapeChooser.setValue("Circle");
+    } // end clear
+    public void clear(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow) {
+        redSlider.setValue(0);
+        greenSlider.setValue(0);
+        blueSlider.setValue(0);
+
+        colorShow.setFill(Color.web("rgb(0, 0, 0)"));
+    } // end clear
 } // end program
