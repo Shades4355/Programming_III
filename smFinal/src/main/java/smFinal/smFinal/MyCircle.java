@@ -21,7 +21,7 @@ public class MyCircle extends MyBoundedShape {
     // constructors
     public MyCircle() {
         super();
-        radius = 1.0;
+        radius = 0.0;
     }
 
     public MyCircle(double radius) throws InvalidRadiusException {

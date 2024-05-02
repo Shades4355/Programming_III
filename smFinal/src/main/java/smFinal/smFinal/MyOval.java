@@ -21,8 +21,8 @@ public class MyOval extends MyBoundedShape {
     // constructors
     public MyOval() {
         super();
-        width = 1.0;
-        height = 1.0;
+        width = 0.0;
+        height = 0.0;
     }
 
     public MyOval(double width, double height) throws InvalidRadiusException {
