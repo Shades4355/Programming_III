@@ -2,7 +2,7 @@
 // Written by:  Shades Meyers
 // Description: A driver class for drawing shapes
 // Challenges:
-// Time Spent:  3 h, 09 min + 33 min
+// Time Spent:  3 h 42 min + 30 min
 //
 // Revision history:
 // Date:            By:     Action:
@@ -18,6 +18,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -177,57 +178,120 @@ public class ShapeDrawer extends Application {
         });
 
             // Mouse Events
-        // TODO: fix this event handler
-        canvas.setOnMouseClicked(eventClick -> {
-            if (eventClick.getClickCount() > 1) {
-                double initX = eventClick.getX();
-                double initY = eventClick.getY();
+        EventHandler<MouseEvent> drawCircle = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent eventClick) {
+                if (eventClick.getClickCount() > 1) {
+                    double initX = eventClick.getX();
+                    double initY = eventClick.getY();
 
-                System.out.println(Double.toString(initX)); // TODO: delete
-                System.out.println(Double.toString(initY)); // TODO: delete
+                    System.out.println(Double.toString(initX)); // TODO: delete
+                    System.out.println(Double.toString(initY)); // TODO: delete
 
-                GraphicsContext gc = canvas.getGraphicsContext2D();
-                if (shapeChooser.getValue().equals("Circle")) {
-                    System.out.println("Circle chosen"); // TODO: delete
-                    // TODO: clear canvas
-                    gc.setFill(Color.WHITESMOKE);
-                    // Create Circle with radius 0
-                    Circle circle = new Circle(initX, initY, 25);
-                    circle.setStrokeWidth(5);
-                    circle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                    GraphicsContext gc = canvas.getGraphicsContext2D();
+                    if (shapeChooser.getValue().equals("Circle")) {
+                        System.out.println("Circle chosen"); // TODO: delete
+                        // Clear canvas
+                        gc.setFill(Color.WHITESMOKE);
 
-                    gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-                    gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
+                        // Create Circle with radius 0
+                        Circle circle = new Circle(initX, initY, 0);
+                        circle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
 
-                    //                if (filled) {
-                    //                    circle.setStyle("-fx-fill: % ;".formatted(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue))));
-                    //                }
+                        // TODO: 
+                        if (filled) {
+                            gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                            gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
+                        } else {
+                            gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
+                            gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                            gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius() - 5, circle.getRadius() - 5);
+                            gc.setFill(Color.WHITESMOKE);
+                        }
 
-                    canvas.setOnMouseMoved(eventMove -> {
-                        // reset cirlce's radius based on mouse placement
-                        double MoveX = eventMove.getX();
-                        double MoveY = eventMove.getY();
-                        double radius = Math.sqrt(((Math.abs(initX - MoveX)) * (Math.abs(initX - MoveX))) + ((Math.abs(initY - MoveY) * (Math.abs(initY - MoveY)))));
-                        circle.setRadius(radius);
+                        canvas.setOnMouseMoved(eventMove -> {
+                            // Reset cirlce's radius based on mouse placement
+                            double MoveX = eventMove.getX();
+                            double MoveY = eventMove.getY();
+                            double radius = Math.sqrt(((Math.abs(initX - MoveX)) * (Math.abs(initX - MoveX))) + ((Math.abs(initY - MoveY) * (Math.abs(initY - MoveY)))));
+                            circle.setRadius(radius);
 
-                        gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-                        gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
+                            // Clear canvas
+                            gc.setFill(Color.WHITESMOKE);
+                            gc.fillRect(0, 0, 300, 300);
 
-                        System.out.println("Radius: " + radius); // TODO: delete
+                            // Re-draw circle
+                            gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                            gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
 
-                        // TODO: remove event handler
-//                         canvas.setOnMouseClicked(mouseClick -> {
-//                             canvas.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
-//
-//                             System.out.println("Click"); // TODO: delete
-//
-//                             gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
-//                             gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-//                         });
-                    });
+                            System.out.println("Radius: " + radius); // TODO: delete
+
+                            // TODO: remove event handler
+                            canvas.setOnMouseClicked(clickEvent -> {
+                                System.out.println("Click"); // TODO: delete
+                                canvas.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                            });
+
+                        });
+                    }
                 }
             }
-        });
+
+        };
+
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, drawCircle);
+
+        // TODO: fix this event handler
+//        canvas.setOnMouseClicked(eventClick -> {
+//            if (eventClick.getClickCount() > 1) {
+//                double initX = eventClick.getX();
+//                double initY = eventClick.getY();
+//
+//                System.out.println(Double.toString(initX)); // TODO: delete
+//                System.out.println(Double.toString(initY)); // TODO: delete
+//
+//                GraphicsContext gc = canvas.getGraphicsContext2D();
+//                if (shapeChooser.getValue().equals("Circle")) {
+//                    System.out.println("Circle chosen"); // TODO: delete
+//                    // TODO: clear canvas
+//                    gc.setFill(Color.WHITESMOKE);
+//                    // Create Circle with radius 0
+//                    Circle circle = new Circle(initX, initY, 25);
+//                    circle.setStrokeWidth(5);
+//                    circle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+//
+//                    gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+//                    gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
+//
+//                    //                if (filled) {
+//                    //                    circle.setStyle("-fx-fill: % ;".formatted(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue))));
+//                    //                }
+//
+//                    canvas.setOnMouseMoved(eventMove -> {
+//                        // reset cirlce's radius based on mouse placement
+//                        double MoveX = eventMove.getX();
+//                        double MoveY = eventMove.getY();
+//                        double radius = Math.sqrt(((Math.abs(initX - MoveX)) * (Math.abs(initX - MoveX))) + ((Math.abs(initY - MoveY) * (Math.abs(initY - MoveY)))));
+//                        circle.setRadius(radius);
+//
+//                        gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+//                        gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
+//
+//                        System.out.println("Radius: " + radius); // TODO: delete
+//
+//                        // TODO: remove event handler
+////                         canvas.setOnMouseClicked(mouseClick -> {
+////                             canvas.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+////
+////                             System.out.println("Click"); // TODO: delete
+////
+////                             gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
+////                             gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+////                         });
+//                    });
+//                }
+//            }
+//        });
 
     } // end start method
 
