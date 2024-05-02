@@ -1,13 +1,16 @@
 // File name:   ShapeDrawer
 // Written by:  Shades Meyers
 // Description: A driver class for drawing shapes
-// Challenges:
-// Time Spent:  3 h 42 min + 30 min
+// Challenges:  Getting shapes to have teh right color.
+//              Removing an event handler.
+// Time Spent:  5 h 54 min +
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-30    SM      File created
+// 2024-May-01      SM      Worked on rendering a Circle
+// 2024-May-02      SM      continued first pass work
 
 
 package smFinal.smFinal;
@@ -18,18 +21,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.input.MouseButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -37,6 +35,8 @@ import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ShapeDrawer extends Application {
 
@@ -50,7 +50,8 @@ public class ShapeDrawer extends Application {
         int red = 0;
         int green = 0;
         int blue = 0;
-        boolean filled = false;
+        AtomicBoolean filled = new AtomicBoolean(false);
+        // Using AtomicBoolean instead of Boolean to get around a lamda issue
 
         // create root scene
         BorderPane root = new BorderPane();
@@ -116,9 +117,11 @@ public class ShapeDrawer extends Application {
         colorShow.setWidth(70);
         colorShow.setHeight(35);
         colorShow.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-        // Combine sliders and color preview
+        // Filled checkbox
+        CheckBox filledCheckbox = new CheckBox("Filled");
+        // Combine checkbox, sliders, and color preview
         VBox colorOuterBox = new VBox(5);
-        colorOuterBox.getChildren().addAll(colorBox, colorPane);
+        colorOuterBox.getChildren().addAll(filledCheckbox, colorBox, colorPane);
 
         // Canvas for drawing
         Canvas canvas = new Canvas(300, 300);
@@ -142,13 +145,15 @@ public class ShapeDrawer extends Application {
         stage.show();
 
         // Event Handlers
+            // Checkbox
+        filledCheckbox.setOnAction((ActionEvent e) -> {filled.set(filledCheckbox.isSelected());});
             // Buttons
         exitBtn.setOnAction((ActionEvent e) -> {
             System.exit(0);
         });
         undoBtn.setOnAction((ActionEvent e) -> {});
         clearBtn.setOnAction((ActionEvent e) -> {
-            clear(redSlider, greenSlider, blueSlider, colorShow, shapeChooser);
+            clear(redSlider, greenSlider, blueSlider, colorShow, filledCheckbox, filled, shapeChooser);
         });
             // Sliders
         redSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -172,127 +177,157 @@ public class ShapeDrawer extends Application {
                 colorUpdater(redSlider, greenSlider, blueSlider, colorShow);
             }
         });
-            // Shape chooser
-        shapeChooser.setOnAction((ActionEvent e) -> {
-            clear(redSlider, greenSlider, blueSlider, colorShow);
-        });
 
-            // Mouse Events
-        EventHandler<MouseEvent> drawCircle = new EventHandler<MouseEvent>() {
+        // Draw events
+        // Circle
+        EventHandler<MouseEvent> drawShape = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent eventClick) {
                 if (eventClick.getClickCount() > 1) {
+                    GraphicsContext gc = canvas.getGraphicsContext2D();
+
+                    // save initial X, Y values
                     double initX = eventClick.getX();
                     double initY = eventClick.getY();
 
-                    System.out.println(Double.toString(initX)); // TODO: delete
-                    System.out.println(Double.toString(initY)); // TODO: delete
+                    // clear Canvas
+                    gc.clearRect(0,0,300,300);
 
-                    GraphicsContext gc = canvas.getGraphicsContext2D();
                     if (shapeChooser.getValue().equals("Circle")) {
-                        System.out.println("Circle chosen"); // TODO: delete
-                        // Clear canvas
-                        gc.setFill(Color.WHITESMOKE);
+                        // Create a Circle to pull info from
+                        MyCircle circle = new MyCircle();
 
-                        // Create Circle with radius 0
-                        Circle circle = new Circle(initX, initY, 0);
-                        circle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                        canvas.setOnMouseMoved(eventMove -> {
+                            // Reset circle's radius based on mouse placement
+                            double moveX = eventMove.getX();
+                            double moveY = eventMove.getY();
+                            double radius = Math.sqrt(((Math.abs(initX - moveX)) * (Math.abs(initX - moveX))) + ((Math.abs(initY - moveY) * (Math.abs(initY - moveY)))));
 
-                        // TODO: 
-                        if (filled) {
-                            gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-                            gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
-                        } else {
-                            gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
-                            gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-                            gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius() - 5, circle.getRadius() - 5);
-                            gc.setFill(Color.WHITESMOKE);
+                            try {
+                                circle.setRadius(radius);
+                            } catch (InvalidRadiusException radEx) {
+                                System.err.println(radEx.getMessage());
+                                System.exit(1);
+                            }
+
+                            // Clear canvas
+                            gc.clearRect(0, 0, 300, 300);
+
+                            // Re-draw circle
+                            if (filled.get()) { // If filled == true, fill in circle
+                                gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                                gc.fillOval(initX, initY, radius, radius);
+                            } else { // If filled == false, draw outline only
+                                gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                                gc.strokeOval(initX, initY, radius, radius);
+                            }
+
+                            // TODO: remove mouse moved event handler
+                            canvas.setOnMouseClicked(clickEvent -> {
+                                System.out.println("Click"); // TODO: delete
+                                System.out.println("This: " + this.toString());
+                                canvas.removeEventHandler(MouseEvent.MOUSE_MOVED, this);
+                            }); // End mouse cLick Event Handler
+                        }); // End mouse moved Event Handler
+                    } else if (shapeChooser.getValue().equals("Oval")) {
+                        // Create MyOval
+                        try {
+                            MyOval oval = new MyOval(0, 0);
+                        } catch (InvalidRadiusException radEx) {
+                            System.err.println(radEx.getMessage());
+                            System.exit(1);
                         }
 
                         canvas.setOnMouseMoved(eventMove -> {
-                            // Reset cirlce's radius based on mouse placement
-                            double MoveX = eventMove.getX();
-                            double MoveY = eventMove.getY();
-                            double radius = Math.sqrt(((Math.abs(initX - MoveX)) * (Math.abs(initX - MoveX))) + ((Math.abs(initY - MoveY) * (Math.abs(initY - MoveY)))));
-                            circle.setRadius(radius);
+                            // Create an Oval to pull information from
+                            MyOval oval = new MyOval();
+                            // Reset Oval's width and height based on mouse placement
+                            double moveX = eventMove.getX();
+                            double moveY = eventMove.getY();
+
+                            double width = moveX - initX;
+                            double height = moveY - initY;
+
+                            // TODO: if width or height is <0, rotate and take absolute value
+
+
+                            try {
+                                oval.setWidth(width);
+                                oval.setHeight(height);
+                            } catch (InvalidRadiusException radEx) {
+                                System.err.println(radEx.getMessage());
+                                System.exit(1);
+                            }
 
                             // Clear canvas
-                            gc.setFill(Color.WHITESMOKE);
-                            gc.fillRect(0, 0, 300, 300);
+                            gc.clearRect(0, 0, 300, 300);
 
                             // Re-draw circle
-                            gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-                            gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
+                            if (filled.get()) { // If filled == true, fill in circle
+                                gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                                gc.fillOval(initX, initY, width, height);
+                            } else { // If filled == false, draw outline only
+                                gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                                gc.strokeOval(initX, initY, width, height);
+                            }
 
-                            System.out.println("Radius: " + radius); // TODO: delete
-
-                            // TODO: remove event handler
+                            // TODO: remove mouse moved event handler
                             canvas.setOnMouseClicked(clickEvent -> {
                                 System.out.println("Click"); // TODO: delete
-                                canvas.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
-                            });
+                                System.out.println("This: " + this.toString()); // TODO: delete
+                                canvas.removeEventHandler(MouseEvent.MOUSE_MOVED, this);
+                            }); // End mouse cLick Event Handler
+                        }); // End mouse moved Event Handler
+                    } // End If/Else (shape)
+                } // End If (double click)
+            } // End handle Override
+        }; // End drawCircle Event Handler
 
-                        });
-                    }
-                }
-            }
+        // Oval
+        EventHandler<MouseEvent> drawOval = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent eventClick) {
+                if (eventClick.getClickCount() > 1) {
+                    // set center point
+                    double initX = eventClick.getX();
+                    double initY = eventClick.getY();
 
-        };
+                    GraphicsContext gc = canvas.getGraphicsContext2D();
+                    if (shapeChooser.getValue().equals("Circle")) {
+                        // Clear canvas
+                        gc.clearRect(0,0,300,300);
 
-        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, drawCircle);
+                        canvas.setOnMouseMoved(eventMove -> {
+                            // Reset Oval's height and width based on mouse placement
+                            double moveX = eventMove.getX();
+                            double moveY = eventMove.getY();
 
-        // TODO: fix this event handler
-//        canvas.setOnMouseClicked(eventClick -> {
-//            if (eventClick.getClickCount() > 1) {
-//                double initX = eventClick.getX();
-//                double initY = eventClick.getY();
-//
-//                System.out.println(Double.toString(initX)); // TODO: delete
-//                System.out.println(Double.toString(initY)); // TODO: delete
-//
-//                GraphicsContext gc = canvas.getGraphicsContext2D();
-//                if (shapeChooser.getValue().equals("Circle")) {
-//                    System.out.println("Circle chosen"); // TODO: delete
-//                    // TODO: clear canvas
-//                    gc.setFill(Color.WHITESMOKE);
-//                    // Create Circle with radius 0
-//                    Circle circle = new Circle(initX, initY, 25);
-//                    circle.setStrokeWidth(5);
-//                    circle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-//
-//                    gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-//                    gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
-//
-//                    //                if (filled) {
-//                    //                    circle.setStyle("-fx-fill: % ;".formatted(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue))));
-//                    //                }
-//
-//                    canvas.setOnMouseMoved(eventMove -> {
-//                        // reset cirlce's radius based on mouse placement
-//                        double MoveX = eventMove.getX();
-//                        double MoveY = eventMove.getY();
-//                        double radius = Math.sqrt(((Math.abs(initX - MoveX)) * (Math.abs(initX - MoveX))) + ((Math.abs(initY - MoveY) * (Math.abs(initY - MoveY)))));
-//                        circle.setRadius(radius);
-//
-//                        gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-//                        gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
-//
-//                        System.out.println("Radius: " + radius); // TODO: delete
-//
-//                        // TODO: remove event handler
-////                         canvas.setOnMouseClicked(mouseClick -> {
-////                             canvas.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
-////
-////                             System.out.println("Click"); // TODO: delete
-////
-////                             gc.fillOval(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getRadius());
-////                             gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-////                         });
-//                    });
-//                }
-//            }
-//        });
+                            // Clear canvas
+                            gc.clearRect(0, 0, 300, 300);
 
+                            // Re-draw circle
+                            if (filled.get()) { // If filled == true, fill in circle
+                                gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                                gc.fillOval(initX, initY, Math.abs(initX - moveX), Math.abs(initY - moveY));
+                            } else { // If filled == false, draw outline only
+                                gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
+                                gc.strokeOval(initX, initY, Math.abs(initX - moveX), Math.abs(initY - moveY));
+                            }
+
+                            // TODO: remove mouse moved event handler
+                            canvas.setOnMouseClicked(clickEvent -> {
+                                System.out.println("Click"); // TODO: delete
+                                System.out.println("This: " + this.toString()); // TODO: delete
+                                canvas.removeEventHandler(MouseEvent.MOUSE_MOVED, this);
+                            }); // End mouse cLick Event Handler
+                        }); // End mouse moved Event Handler
+                    } // End If/Else (shape)
+                } // End If (double click)
+            } // End handle Override
+        }; // End drawOval Event Handler
+
+        // Initialize drawShape event handler
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, drawShape);
     } // end start method
 
     public void colorUpdater(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow) {
@@ -304,20 +339,34 @@ public class ShapeDrawer extends Application {
     } // end colorUpdater
 
     // Overloaded clear method
-    public void clear(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow, ComboBox<String> shapeChooser) {
+    public void clear(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow, CheckBox filledCheckbox, AtomicBoolean filled, ComboBox<String> shapeChooser) {
+        // Reset color sliders
         redSlider.setValue(0);
         greenSlider.setValue(0);
         blueSlider.setValue(0);
 
+        // Reset colorShow
         colorShow.setFill(Color.web("rgb(0, 0, 0)"));
 
+        // Reset filled checkbox
+        filledCheckbox.setSelected(false);
+        filled.set(false);
+
+        // Reset Shape Chooser
         shapeChooser.setValue("Circle");
     } // end clear
-    public void clear(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow) {
+    public void clear(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow, CheckBox filledCheckbox, AtomicBoolean filled) {
+        // Reset color Sliders
         redSlider.setValue(0);
         greenSlider.setValue(0);
         blueSlider.setValue(0);
 
+        // Reset colorShow
         colorShow.setFill(Color.web("rgb(0, 0, 0)"));
+
+        // Reset filled checkbox
+        filledCheckbox.setSelected(false);
+        filled.set(false);
+
     } // end clear
 } // end program
