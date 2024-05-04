@@ -3,7 +3,7 @@
 // Description: A driver class for drawing shapes
 // Challenges:  Getting shapes to have teh right color.
 //              Removing an event handler.
-// Time Spent:  8 h 53 min +
+// Time Spent:  9 h 03 min +
 //
 // Revision history:
 // Date:            By:     Action:
@@ -253,66 +253,7 @@ public class ShapeDrawer extends Application {
             }
         }));
             // Draw events
-//            // Mouse move events
-//        EventHandler<MouseEvent> drawCircle = new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent eventClick) {
-//                // Create a Circle to pull info from
-//                MyCircle circle = new MyCircle();
-//
-//                //
-//                GraphicsContext gcCircle = canvas.getGraphicsContext2D();
-//
-//                // save initial X, Y values
-//                double initX = eventClick.getX();
-//                double initY = eventClick.getY();
-//
-//                canvas.setOnMouseMoved(eventMove -> {
-//                    // Reset circle's radius based on mouse placement
-//                    double moveX = eventMove.getX();
-//                    double moveY = eventMove.getY();
-//                    double radius = Math.sqrt(((Math.abs(initX - moveX)) * (Math.abs(initX - moveX))) + ((Math.abs(initY - moveY) * (Math.abs(initY - moveY)))));
-//
-//                    // TODO: if moveX - initX < 0, rotate
-//
-//                    try {
-//                        circle.setRadius(radius);
-//                        circle.setFilled(filled.get());
-//                        circle.setColor(red, green, blue);
-//                    } catch (InvalidRadiusException radEx) {
-//                        System.err.println(radEx.getMessage());
-//                        System.exit(1);
-//                    }
-//
-//                    // Clear canvas
-//                    gcCircle.clearRect(0, 0, 300, 300);
-//                    gcCircle.setFill(backgroundColor.get());
-//                    gcCircle.fillRect(0,0,300,300);
-//
-//                    // Re-draw circle
-//                    if (filled.get()) { // If filled == true, fill in circle
-//                        gcCircle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-//                        gcCircle.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-//                        gcCircle.fillOval(initX, initY, radius, radius);
-//                    } else { // If filled == false, draw outline only
-//                        gcCircle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-//                        gcCircle.setLineWidth(lineWidth.get());
-//                        gcCircle.strokeOval(initX, initY, radius, radius);
-//                    }
-//
-//                    // update Textarea
-//                    shapeInfoUpdater(circle, shapeInfo);
-//
-//                    // TODO: remove mouse moved event handler
-//                    canvas.setOnMouseClicked(clickEvent -> {
-//                        System.out.println("Click"); // TODO: delete
-//                        System.out.println("This: " + this.toString());
-//                        canvas.removeEventHandler(MouseEvent.MOUSE_MOVED, drawCircle);
-//                    }); // End mouse cLick Event Handler
-//                }); // End mouse moved Event Handler
-//            }
-//        }; // End drawCircle Event Handler
-            // Mouse click event
+            // Mouse double click event
         EventHandler<MouseEvent> drawShape = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent eventClick) {
@@ -358,46 +299,28 @@ public class ShapeDrawer extends Application {
                             gc.setFill(backgroundColor.get());
                             gc.fillRect(0,0,300,300);
 
+                            double xVal, yVal;
+                            // determine far top point
+                            if (initX < moveX) {
+                                xVal = initX;
+                            } else {
+                                xVal = moveX;
+                            }
+                            // determine far left
+                            if (initY < moveY){
+                                yVal = initY;
+                            } else {
+                                yVal = moveY;
+                            }
+
                             // Re-draw circle
-                            double xVal;
-                            double yVal;
                             if (filled.get()) { // If filled == true, fill in circle
                                 gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                                 gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-
-                                // determine far top point
-                                if (initX < moveX) {
-                                    xVal = initX;
-                                } else {
-                                    xVal = moveX;
-                                }
-                                // determine far left
-                                if (initY < moveY){
-                                    yVal = initY;
-                                } else {
-                                    yVal = moveY;
-                                }
-
-                                // draw Circle
                                 gc.fillOval(xVal, yVal, radius, radius);
                             } else { // If filled == false, draw outline only
                                 gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                                 gc.setLineWidth(lineWidth.get());
-
-                                // determine far top point
-                                if (initX < moveX) {
-                                    xVal = initX;
-                                } else {
-                                    xVal = moveX;
-                                }
-                                // determine far left
-                                if (initY < moveY){
-                                    yVal = initY;
-                                } else {
-                                    yVal = moveY;
-                                }
-
-                                // draw Circle
                                 gc.strokeOval(xVal, yVal, radius, radius);
                             }
 
@@ -423,23 +346,6 @@ public class ShapeDrawer extends Application {
                             double width = Math.abs(moveX - initX);
                             double height = Math.abs(moveY - initY);
 
-//                            if (moveX - initX < 0) {
-//                                width = initX - moveX;
-//                                // TODO: if width or height is <0, rotate
-//                                gc.rotate(180);
-//                            } else {
-//                                width = moveX - initX;
-//                                gc.rotate(-180);
-//                            }
-//                            if (height < 0) {
-//                                height = initY - moveY;
-//                                // TODO: if width or height is <0, rotate
-//                                gc.rotate(180);
-//                            } else {
-//                                height = moveY - initY;
-//                                gc.rotate(-180);
-//                            }
-
                             try {
                                 oval.setWidth(width);
                                 oval.setHeight(height);
@@ -453,46 +359,28 @@ public class ShapeDrawer extends Application {
                             gc.setFill(backgroundColor.get());
                             gc.fillRect(0,0,300,300);
 
+                            double xVal, yVal;
+                            // determine far top point
+                            if (initX < moveX) {
+                                xVal = initX;
+                            } else {
+                                xVal = moveX;
+                            }
+                            // determine far left
+                            if (initY < moveY){
+                                yVal = initY;
+                            } else {
+                                yVal = moveY;
+                            }
+
                             // Re-draw circle
-                            double xVal;
-                            double yVal;
                             if (filled.get()) { // If filled == true, fill in circle
                                 gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                                 gc.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
-
-                                // determine far top point
-                                if (initX < moveX) {
-                                    xVal = initX;
-                                } else {
-                                    xVal = moveX;
-                                }
-                                // determine far left
-                                if (initY < moveY){
-                                    yVal = initY;
-                                } else {
-                                    yVal = moveY;
-                                }
-
-                                // draw Oval
-                                gc.fillOval(initX, initY, width, height);
+                                gc.fillOval(xVal, yVal, width, height);
                             } else { // If filled == false, draw outline only
                                 gc.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                                 gc.setLineWidth(lineWidth.get());
-
-                                // determine far top point
-                                if (initX < moveX) {
-                                    xVal = initX;
-                                } else {
-                                    xVal = moveX;
-                                }
-                                // determine far left
-                                if (initY < moveY){
-                                    yVal = initY;
-                                } else {
-                                    yVal = moveY;
-                                }
-
-                                // draw Oval
                                 gc.strokeOval(xVal, yVal, width, height);
                             }
 
@@ -594,6 +482,7 @@ public class ShapeDrawer extends Application {
         textArea.clear();
     } // end clear
 
+    
     // Shape info updater
     public void shapeInfoUpdater(MyBoundedShape shape, TextArea textArea) {
         // TODO: update textArea with shape info
