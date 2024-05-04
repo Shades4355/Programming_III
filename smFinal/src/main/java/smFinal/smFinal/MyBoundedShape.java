@@ -2,22 +2,24 @@
 // Written by:  Shades Meyers
 // Description: an abstract Superclass used for defining Subclasses (shapes)
 // Challenges:  None
-// Time Spent:  0 min
+// Time Spent:  5 min
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-30    SM      Copied file from Assignment 5
+// 2024-May-03      SM      Added accessors and mutators for Color and Filled
 
 
 package smFinal.smFinal;
 
 import java.util.Date;
+import javafx.scene.paint.Color;
 
 
 public abstract class MyBoundedShape implements Colorable, Comparable<MyBoundedShape> {
      // protected variables
-    protected String color = "white";   // color string
+    protected String color = "255, 255, 255";   // color string
     protected boolean filled = false;   // whether it's filled or not
     protected Date dateCreated;         // date it was created
 
@@ -45,6 +47,25 @@ public abstract class MyBoundedShape implements Colorable, Comparable<MyBoundedS
         }
     }
 
+    // Accessors and Mutators
+    // Color
+    public void setColor(int red, int green, int blue) {
+        color = String.format("%d, %d, %d", red, green, blue);
+    }
+    public String getColor() {
+        return color;
+    }
+
+    // Filled
+
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+    public boolean isFilled() {
+        return filled;
+    }
+
+
     // abstract methods
     public abstract double getArea();
     public abstract double getPerimeter();
@@ -58,7 +79,7 @@ public abstract class MyBoundedShape implements Colorable, Comparable<MyBoundedS
 
     @Override
     public String toString() {
-        return getName() + "'s color: %s and filled: %b".formatted(color, filled);
+        return getName() + "'s color: %s and filled: %b".formatted(Color.web(String.format("rgb(%s)", color)), filled);
     }
 
     // new methods
