@@ -78,7 +78,7 @@ public class MyOval extends MyBoundedShape {
     // Implemented methods from Colorable
     @Override
     public String getName() {
-        return "Circle";
+        return "Oval";
     }
 
     @Override
