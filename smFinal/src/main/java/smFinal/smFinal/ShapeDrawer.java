@@ -1,9 +1,9 @@
 // File name:   ShapeDrawer
 // Written by:  Shades Meyers
 // Description: A driver class for drawing shapes
-// Challenges:  Getting shapes to have teh right color.
+// Challenges:  Getting shapes to have the right color (forgot to update rgb variables).
 //              Removing an event handler.
-// Time Spent:  9 h 03 min +
+// Time Spent:  9 h 03 min + 03 min
 //
 // Revision history:
 // Date:            By:     Action:
@@ -12,6 +12,8 @@
 // 2024-May-01      SM      Continued first pass work
 // 2024-May-02      SM      Continued first pass work
 // 2024-May-03      SM      Continued first pass work
+// 2024-May-05      SM      Fixed color drawing for shapes
+//                          Continued first pass work
 
 
 package smFinal.smFinal;
@@ -417,9 +419,9 @@ public class ShapeDrawer extends Application {
 
     // Color preview updater
     public void colorUpdater(Slider redSlider, Slider greenSlider, Slider blueSlider, Rectangle colorShow) {
-        int red = (int)redSlider.getValue();
-        int green = (int)greenSlider.getValue();
-        int blue = (int)blueSlider.getValue();
+        red = (int)redSlider.getValue();
+        green = (int)greenSlider.getValue();
+        blue = (int)blueSlider.getValue();
 
         colorShow.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
     } // end colorUpdater
