@@ -3,7 +3,7 @@
 // Description: A driver class for drawing shapes
 // Challenges:  Getting shapes to have the right color (forgot to update rgb variables).
 //              Removing an event handler.
-// Time Spent:  9 h 03 min + 03 min
+// Time Spent:  9 h 03 min + 25 min
 //
 // Revision history:
 // Date:            By:     Action:
@@ -271,10 +271,6 @@ public class ShapeDrawer extends Application {
                     gc.setFill(backgroundColor.get());
                     gc.fillRect(0,0,300,300);
 
-//                    if (shapeChooser.getValue().equals("Circle")) {
-//                        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, drawCircle);
-//                    } // TODO: else other shapes
-
                     if (shapeChooser.getValue().equals("Circle")) {
                         // Create a Circle to pull info from
                         MyCircle circle = new MyCircle();
@@ -284,8 +280,6 @@ public class ShapeDrawer extends Application {
                             double moveX = eventMove.getX();
                             double moveY = eventMove.getY();
                             double radius = Math.sqrt(((Math.abs(initX - moveX)) * (Math.abs(initX - moveX))) + ((Math.abs(initY - moveY) * (Math.abs(initY - moveY)))));
-
-                            // TODO: if moveX - initX < 0, rotate
 
                             try {
                                 circle.setRadius(radius);
@@ -301,19 +295,10 @@ public class ShapeDrawer extends Application {
                             gc.setFill(backgroundColor.get());
                             gc.fillRect(0,0,300,300);
 
-                            double xVal, yVal;
                             // determine far top point
-                            if (initX < moveX) {
-                                xVal = initX;
-                            } else {
-                                xVal = moveX;
-                            }
+                            double xVal = Math.min(initX, moveX);
                             // determine far left
-                            if (initY < moveY){
-                                yVal = initY;
-                            } else {
-                                yVal = moveY;
-                            }
+                            double yVal = Math.min(initY, moveY);
 
                             // Re-draw circle
                             if (filled.get()) { // If filled == true, fill in circle
@@ -327,7 +312,7 @@ public class ShapeDrawer extends Application {
                             }
 
                             // update Textarea
-                            shapeInfoUpdater(circle, shapeInfo);
+                            shapeInfoUpdater(circle, shapeInfo, moveX, moveY);
 
                             // TODO: remove mouse moved event handler
                             canvas.setOnMouseClicked(clickEvent -> {
@@ -361,19 +346,10 @@ public class ShapeDrawer extends Application {
                             gc.setFill(backgroundColor.get());
                             gc.fillRect(0,0,300,300);
 
-                            double xVal, yVal;
                             // determine far top point
-                            if (initX < moveX) {
-                                xVal = initX;
-                            } else {
-                                xVal = moveX;
-                            }
+                            double xVal = Math.min(initX, moveX);
                             // determine far left
-                            if (initY < moveY){
-                                yVal = initY;
-                            } else {
-                                yVal = moveY;
-                            }
+                            double yVal = Math.min(initY, moveY);
 
                             // Re-draw circle
                             if (filled.get()) { // If filled == true, fill in circle
@@ -387,7 +363,7 @@ public class ShapeDrawer extends Application {
                             }
 
                             // Update Textarea
-                            shapeInfoUpdater(oval, shapeInfo);
+                            shapeInfoUpdater(oval, shapeInfo, moveX, moveY);
 
                             // TODO: remove mouse moved event handler
                             canvas.setOnMouseClicked(clickEvent -> {
@@ -486,9 +462,11 @@ public class ShapeDrawer extends Application {
 
     
     // Shape info updater
-    public void shapeInfoUpdater(MyBoundedShape shape, TextArea textArea) {
-        // TODO: update textArea with shape info
-        textArea.setText(String.format("Info: %s%nHow to draw: %s%nArea: %.2f%nPerimeter: %.2f",
+    public void shapeInfoUpdater(MyBoundedShape shape, TextArea textArea, double curX, double curY) {
+        // Update textArea with shape info
+        textArea.setText(String.format("Mouse X: %.1f\t\tY: %.1f%nInfo: %s%nHow to draw: %s%nArea: %.2f%nPerimeter: %.2f",
+                curX,
+                curY,
                 shape.toString(),
                 shape.howToDraw(),
                 shape.getArea(),
