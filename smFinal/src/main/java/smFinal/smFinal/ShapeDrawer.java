@@ -47,7 +47,7 @@ public class ShapeDrawer extends Application {
     int red = 255;
     int green = 255;
     int blue = 255;
-    // Using Atomics instead of Boolean to get around a lamda issue
+    // Using Atomics instead of Boolean to get around a lambda issue
     AtomicBoolean filled = new AtomicBoolean(false);
     AtomicInteger lineWidth = new AtomicInteger(1);
     AtomicReference<Color> backgroundColor = new AtomicReference<>(Color.BLACK);
@@ -72,10 +72,10 @@ public class ShapeDrawer extends Application {
         btnBox.setAlignment(Pos.CENTER);
 
         // Textarea for bottom of page
-        VBox bottonBox = new VBox(5);
+        VBox bottomBox = new VBox(5);
         TextArea shapeInfo = new TextArea();
         shapeInfo.setEditable(false);
-        bottonBox.getChildren().addAll(shapeInfo, btnBox);
+        bottomBox.getChildren().addAll(shapeInfo, btnBox);
 
         // Top box
         VBox topBox = new VBox(5);
@@ -167,7 +167,7 @@ public class ShapeDrawer extends Application {
         // Box for center of screen
         BorderPane centerBox = new BorderPane();
         centerBox.setTop(topBox);
-        centerBox.setBottom(bottonBox);
+        centerBox.setBottom(bottomBox);
         centerBox.setRight(colorOuterBox);
         centerBox.setCenter(canvas);
         BorderPane.setMargin(centerBox, new Insets(5, 10, 5, 10));
@@ -319,8 +319,8 @@ public class ShapeDrawer extends Application {
                                 System.out.println("Click"); // TODO: delete
                                 System.out.println("This: " + this.toString());
                                 canvas.removeEventHandler(MouseEvent.MOUSE_MOVED, this);
-                                }); // End mouse cLick Event Handler
-                            }); // End mouse moved Event Handler
+                            }); // End mouse cLick Event Handler
+                        }); // End mouse moved Event Handler
                     } else if (shapeChooser.getValue().equals("Oval")) {
                         // Create an Oval to pull information from
                         MyOval oval = new MyOval();
