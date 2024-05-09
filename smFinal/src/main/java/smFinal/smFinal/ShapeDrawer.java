@@ -3,7 +3,7 @@
 // Description: A driver class for drawing shapes
 // Challenges:  Getting shapes to have the right color (forgot to update rgb variables).
 //              Removing an event handler.
-// Time Spent:  9 h 03 min + 25 min
+// Time Spent:  9 h 28 min +
 //
 // Revision history:
 // Date:            By:     Action:
@@ -14,6 +14,8 @@
 // 2024-May-03      SM      Continued first pass work
 // 2024-May-05      SM      Fixed color drawing for shapes
 //                          Continued first pass work
+// 2024-May-08      SM      Attended SI; could not solve removeEventHandler issue
+// 2024-May-09      SM      Met with Pro. Yeung to discuss removeEventHandler
 
 
 package smFinal.smFinal;
@@ -191,7 +193,6 @@ public class ShapeDrawer extends Application {
         });
         undoBtn.setOnAction((ActionEvent e) -> {
             GraphicsContext gcBtn = canvas.getGraphicsContext2D();
-            gcBtn.clearRect(0,0,300,300);
             gcBtn.setFill(backgroundColor.get());
             gcBtn.fillRect(0, 0, 300, 300);
         });
@@ -242,7 +243,6 @@ public class ShapeDrawer extends Application {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 // update canvas background
                 GraphicsContext gc = canvas.getGraphicsContext2D();
-                gc.clearRect(0,0,300,300);
                 if (newValue.toString().contains("Black")) {
                     backgroundColor.set(Color.BLACK);
                 } else if (newValue.toString().contains("Red")) {
@@ -267,7 +267,6 @@ public class ShapeDrawer extends Application {
                     double initY = eventClick.getY();
 
                     // Clear Canvas and reset background
-                    gc.clearRect(0,0,300,300);
                     gc.setFill(backgroundColor.get());
                     gc.fillRect(0,0,300,300);
 
@@ -292,7 +291,6 @@ public class ShapeDrawer extends Application {
                             }
 
                             // Clear canvas
-                            gc.clearRect(0, 0, 300, 300);
                             gc.setFill(backgroundColor.get());
                             gc.fillRect(0,0,300,300);
 
@@ -343,7 +341,6 @@ public class ShapeDrawer extends Application {
                             }
 
                             // Clear canvas
-                            gc.clearRect(0, 0, 300, 300);
                             gc.setFill(backgroundColor.get());
                             gc.fillRect(0,0,300,300);
 
