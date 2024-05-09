@@ -279,7 +279,8 @@ public class ShapeDrawer extends Application {
                             // Reset circle's radius based on mouse placement
                             double moveX = eventMove.getX();
                             double moveY = eventMove.getY();
-                            double radius = Math.sqrt(((Math.abs(initX - moveX)) * (Math.abs(initX - moveX))) + ((Math.abs(initY - moveY) * (Math.abs(initY - moveY)))));
+                            double radius = Math.sqrt(((Math.abs(initX - moveX)) * (Math.abs(initX - moveX)))
+                                    + ((Math.abs(initY - moveY) * (Math.abs(initY - moveY)))));
 
                             try {
                                 circle.setRadius(radius);
