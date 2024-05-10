@@ -10,7 +10,6 @@
 // -------------------------------
 // 2024-April-30    SM      Copied file from Assignment 5
 // 2024-May-10      SM      Adjusted error values to allow for Height or Width of 0
-//                          Made height and width protected (instead of private)
 
 
 package smFinal.smFinal;
@@ -18,8 +17,8 @@ package smFinal.smFinal;
 
 public class MyRectangle extends MyBoundedShape {
     // private variables
-    protected double width;
-    protected double height;
+    private double width;
+    private double height;
 
     // constructors
     public MyRectangle() {

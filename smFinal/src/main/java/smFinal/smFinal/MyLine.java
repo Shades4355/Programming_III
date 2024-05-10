@@ -16,21 +16,50 @@
 
 import javafx.scene.paint.Color;
 
-public class MyLine extends MyRectangle {
+public class MyLine extends MyBoundedShape {
+    double length;
     public MyLine() {
-        height = 0;
-        width = 10;
+        length = 1;
     }
+    public MyLine(double len){
+        super();
+        length = len;
+    }
+
+    public MyLine(double len, String color, boolean filled) {
+        super(color, filled);
+        length = len;
+    }
+
+    // Accessors and Mutators
+    // Length
+    public double getLength() {
+        return length;
+    }
+    public void setLength(double len) throws IllegalArgumentException {
+        if (len >= 0) {
+            length = len;
+        } else {
+            throw new IllegalArgumentException("Length must be greater than or equal to 0.0");
+        }
+    }
+
     @Override
     public String getName() { return "Line"; }
 
     @Override
     public String toString() {
-        return String.format("[" + getName() + "] length: %.1f", width);
+        return String.format("[" + getName() + "] length: %.1f", length);
     }
 
     @Override
     public String howToDraw() {
         return getName() + "'s color: %s".formatted(Color.web(String.format("rgb(%s)", color)));
     }
+
+    @Override
+    public double getPerimeter() { return 0; }
+
+    @Override
+    public double getArea() { return 0; }
 }

@@ -3,7 +3,7 @@
 // Description: A driver class for drawing shapes
 // Challenges:  Getting shapes to have the right color (forgot to update rgb variables).
 //              Removing an event handler (unsolved).
-// Time Spent:  11 h 17 min +
+// Time Spent:  12 h 10 min
 //
 // Revision history:
 // Date:            By:     Action:
@@ -190,7 +190,7 @@ public class ShapeDrawer extends Application {
 
         // Show Stage
         stage.setScene(mainScene);
-        stage.setTitle("Double Click To Draw");
+        stage.setTitle("Shape Drawer");
         stage.show();
 
         // Event Handlers
@@ -205,10 +205,9 @@ public class ShapeDrawer extends Application {
                 canvas.getChildren().remove(canvas.getChildren().getLast());
                 shapeList.removeLast();
                 if (!shapeList.isEmpty()) {
-                    // TODO: re-write shape's values to shapeInfo textarea
                     shapeInfoUpdater(shapeList.getLast(), shapeInfo);
                 } else {
-                    shapeInfo.setText("");
+                    shapeInfo.clear();
                 }
             } else {
                 clear(redSlider, greenSlider, blueSlider, colorShow, filledCheckbox, filled, blackBackground,
@@ -302,21 +301,30 @@ public class ShapeDrawer extends Application {
                 }
             }
         }));
-            // Mouse click event
+            // Mouse click/release event
         canvas.setOnMousePressed((MouseEvent mousePress) -> {
-            // save initial X, Y values
+            // Save initial X, Y values
             double initX = mousePress.getX();
             double initY = mousePress.getY();
 
             canvas.setOnMouseClicked((MouseEvent mouseClick) -> {
+                // Current X/Y positions
                 double curX = mouseClick.getX();
                 double curY = mouseClick.getY();
+
+                // Find start points
+                double xVal = Math.min(initX, curX);
+                double yVal = Math.min(initY, curY);
+
+                // Draw shapes
                 if (shapeChooser.getValue().equals("Circle")) {
-                    double radius = Math.sqrt();
+                    double radius = Math.sqrt(((Math.abs(initX - curX)) * (Math.abs(initX - curX)))
+                            + ((Math.abs(initY - curY) * (Math.abs(initY - curY)))));
+
                     // Create a Circle to pull info from
                     MyCircle myCircle = new MyCircle();
                     try {
-                        myCircle.setRadius(20);
+                        myCircle.setRadius(radius);
                         myCircle.setColor(red, green, blue);
                         myCircle.setFilled(filled.get());
                     } catch (InvalidRadiusException e) {
@@ -328,7 +336,7 @@ public class ShapeDrawer extends Application {
                     shapeList.add(myCircle);
 
                     // Draw Circle onscreen
-                    Circle circle = new Circle(initX, initY, 20);
+                    Circle circle = new Circle(xVal, yVal, radius);
                     if (filled.get()) { // If filled == true, fill in shape
                         circle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                         circle.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
@@ -341,11 +349,15 @@ public class ShapeDrawer extends Application {
                     canvas.getChildren().add(circle);
                     shapeInfoUpdater(myCircle, shapeInfo);
                 } else if (shapeChooser.getValue().equals("Oval")) {
+                    // Find width and height
+                    double xRad = Math.abs(initX - curX);
+                    double yRad = Math.abs(initY - curY);
+
                     // Create an Oval to pull info from
                     MyOval myOval = new MyOval();
                     try {
-                        myOval.setWidth(40);
-                        myOval.setHeight(20);
+                        myOval.setWidth(xRad * 2);
+                        myOval.setHeight(yRad * 2);
                         myOval.setColor(red, green, blue);
                         myOval.setFilled(filled.get());
                     } catch (IllegalArgumentException e) {
@@ -357,7 +369,7 @@ public class ShapeDrawer extends Application {
                     shapeList.add(myOval);
 
                     // Draw Oval onscreen
-                    Ellipse oval = new Ellipse(initX, initY, 20, 10);
+                    Ellipse oval = new Ellipse(xVal, yVal, xRad, yRad);
                     if (filled.get()) { // If filled == true, fill in shape
                         oval.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                         oval.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
@@ -371,10 +383,12 @@ public class ShapeDrawer extends Application {
                     shapeInfoUpdater(myOval, shapeInfo);
 
                 } else if (shapeChooser.getValue().equals("Square")) {
+                    // Find side length
+                    double side = Math.max(Math.abs(initX - curX), Math.abs(initY - curY));
                     // Create a Square to pull info from
                     MySquare mySquare = new MySquare();
                     try {
-                        mySquare.setSide(20);
+                        mySquare.setSide(side);
                         mySquare.setColor(red, green, blue);
                         mySquare.setFilled(filled.get());
                     } catch (IllegalArgumentException e) {
@@ -386,7 +400,7 @@ public class ShapeDrawer extends Application {
                     shapeList.add(mySquare);
 
                     // Draw Square onscreen
-                    Rectangle square = new Rectangle(initX, initY, 20, 20);
+                    Rectangle square = new Rectangle(xVal, yVal, side, side);
                     if (filled.get()) { // If filled == true, fill in shape
                         square.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                         square.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
@@ -399,11 +413,15 @@ public class ShapeDrawer extends Application {
                     canvas.getChildren().add(square);
                     shapeInfoUpdater(mySquare, shapeInfo);
                 } else if (shapeChooser.getValue().equals("Rectangle")) {
+                    // Find width and Height
+                    double width = Math.abs(initX - curX);
+                    double height = Math.abs(initY - curY);
+
                     // Create a Rectangle to pull info from
                     MyRectangle myRectangle = new MyRectangle();
                     try {
-                        myRectangle.setWidth(40);
-                        myRectangle.setHeight(20);
+                        myRectangle.setWidth(width);
+                        myRectangle.setHeight(height);
                         myRectangle.setColor(red, green, blue);
                         myRectangle.setFilled(filled.get());
                     } catch (IllegalArgumentException e) {
@@ -415,7 +433,7 @@ public class ShapeDrawer extends Application {
                     shapeList.add(myRectangle);
 
                     // Draw Rectangle onscreen
-                    Rectangle rectangle = new Rectangle(initX, initY, 40, 20);
+                    Rectangle rectangle = new Rectangle(xVal, yVal, width, height);
                     if (filled.get()) { // If filled == true, fill in shape
                         rectangle.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                         rectangle.setFill(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
@@ -428,10 +446,15 @@ public class ShapeDrawer extends Application {
                     canvas.getChildren().add(rectangle);
                     shapeInfoUpdater(myRectangle, shapeInfo);
                 } else if (shapeChooser.getValue().equals("Line")) {
+                    // Find length
+                    double absX = Math.abs(initX - curX);
+                    double absY = Math.abs(initY - curY);
+                    double len = Math.sqrt((absX * absX) + (absY * absY));
+
                     // Create a Line to pull info from
                     MyLine myLine = new MyLine();
                     try {
-                        myLine.setWidth(40);
+                        myLine.setLength(len);
                         myLine.setColor(red, green, blue);
                         myLine.setFilled(filled.get());
                     } catch (IllegalArgumentException e) {
@@ -443,7 +466,7 @@ public class ShapeDrawer extends Application {
                     shapeList.add(myLine);
 
                     // Draw Line onscreen
-                    Line line = new Line(initX, initY, initX + 40, initY);
+                    Line line = new Line(initX, initY, curX, curY);
                     line.setStroke(Color.web("rgb(%d, %d, %d)".formatted(red, green, blue)));
                     line.setStrokeWidth(lineWidth.get());
 
@@ -461,12 +484,10 @@ public class ShapeDrawer extends Application {
             curY = mouseMoved.getY();
             mouseCoords.setText(String.format("Mouse: %.1f, %.1f", curX, curY));
         });
+
         // initialize background
         canvas.setStyle("-fx-background-color: Black");
 
-        // Initialize drawShape event handler
-        // TODO: reevaluate
-//        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, drawShape);
     } // end start method
 
 
