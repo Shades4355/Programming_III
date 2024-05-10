@@ -1,6 +1,7 @@
 module smFinal.smFinal{
         requires javafx.controls;
         requires javafx.fxml;
+        requires java.desktop;
         
 
 

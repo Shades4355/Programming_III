@@ -3,12 +3,13 @@
 // Description: Creates a child of MyBoundedShape, an Oval,
 //              that throws an error if it's given radius is negative
 // Challenges:  Had to look up the Area and Perimeter formulas for an oval
-// Time Spent:  13 min
+// Time Spent:  15 min
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-May-02      SM      File copied from MyCircle and modified
+// 2024-May-10      SM      Fixed errors to be IllegalArgumentException instead of InvalidRadiusException
 
 
 package smFinal.smFinal;
@@ -25,13 +26,13 @@ public class MyOval extends MyBoundedShape {
         height = 0.0;
     }
 
-    public MyOval(double width, double height) throws InvalidRadiusException {
+    public MyOval(double width, double height) throws IllegalArgumentException {
         super();
         setWidth(width);
         setHeight(height);
     }
 
-    public MyOval(double radius, String color, boolean filled) throws InvalidRadiusException {
+    public MyOval(double radius, String color, boolean filled) throws IllegalArgumentException {
         super(color, filled); // Call the MyBoundedShape constructor
         setWidth(width);
         setHeight(height);
@@ -43,9 +44,9 @@ public class MyOval extends MyBoundedShape {
         return width;
     }
 
-    public void setWidth(double width) throws InvalidRadiusException {
+    public void setWidth(double width) throws IllegalArgumentException {
         if (width < 0) { // if radius is less than 0, throw exception
-            throw new InvalidRadiusException();
+            throw new IllegalArgumentException("Width and Height must each be greater than 0.");
         } else {
             this.width = width;
         }
@@ -56,9 +57,9 @@ public class MyOval extends MyBoundedShape {
         return height;
     }
 
-    public void setHeight(double height) throws InvalidRadiusException {
+    public void setHeight(double height) throws IllegalArgumentException {
         if (height < 0) { // if radius is less than 0, throw exception
-            throw new InvalidRadiusException();
+            throw new IllegalArgumentException("Width and Height must each be greater than 0.");
         } else {
             this.height = height;
         }

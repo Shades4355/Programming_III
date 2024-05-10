@@ -3,12 +3,14 @@
 // Description: Creates a child of MyBoundedShape, a Rectangle,
 //              which throws an error if its height and/or width is invalid
 // Challenges:  None
-// Time Spent:  0 minutes
+// Time Spent:  2 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-30    SM      Copied file from Assignment 5
+// 2024-May-10      SM      Adjusted error values to allow for Height or Width of 0
+//                          Made height and width protected (instead of private)
 
 
 package smFinal.smFinal;
@@ -16,8 +18,8 @@ package smFinal.smFinal;
 
 public class MyRectangle extends MyBoundedShape {
     // private variables
-    private double width;
-    private double height;
+    protected double width;
+    protected double height;
 
     // constructors
     public MyRectangle() {
@@ -44,7 +46,7 @@ public class MyRectangle extends MyBoundedShape {
         return width;
     }
     public void setWidth(double width) throws IllegalArgumentException {
-        if (width <= 0) {
+        if (width < 0) {
             throw new IllegalArgumentException("Width and Height must be greater than 0.");
         } else {
             this.width = width;
@@ -56,7 +58,7 @@ public class MyRectangle extends MyBoundedShape {
         return height;
     }
     public void setHeight(double height) throws IllegalArgumentException {
-        if (height <= 0) {
+        if (height < 0) {
             throw new IllegalArgumentException("Width and Height must be greater than 0.");
         } else {
             this.height = height;

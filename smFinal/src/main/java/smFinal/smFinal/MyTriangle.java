@@ -3,12 +3,13 @@
 // Description: Creates a child of MyBoundedShape, a Triangle,
 //              which throws an exception if it has an invalid side
 // Challenges:  None
-// Time Spent:  0 minutes
+// Time Spent:  1 minutes
 //
 // Revision history:
 // Date:            By:     Action:
 // -------------------------------
 // 2024-April-30    SM      Copied file from Assignment 5
+// 2024-May-10      SM      Removed thrown error from default constructor
 
 
 package smFinal.smFinal;
@@ -21,8 +22,10 @@ public class MyTriangle extends MyBoundedShape {
     private double side3;
 
     // Constructors
-    public MyTriangle() throws IllegalTriangleException, IllegalArgumentException {
-        this(1.0, 1.0, 1.0);
+    public MyTriangle() {
+        side1 = 1;
+        side2 = 1;
+        side3 = 1;
     }
 
     public MyTriangle(double side1, double side2, double side3) throws IllegalTriangleException, 
