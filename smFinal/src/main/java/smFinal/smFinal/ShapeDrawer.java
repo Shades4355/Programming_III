@@ -3,7 +3,7 @@
 // Description: A driver class for drawing shapes
 // Challenges:  Getting shapes to have the right color (forgot to update rgb variables).
 //              Removing an event handler (unsolved).
-// Time Spent:  11 h 17 min
+// Time Spent:  11 h 17 min +
 //
 // Revision history:
 // Date:            By:     Action:
@@ -30,15 +30,13 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.Scene;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -305,13 +303,16 @@ public class ShapeDrawer extends Application {
             }
         }));
             // Mouse click event
-        canvas.setOnMouseClicked((MouseEvent mouseClick) -> {
-            if (mouseClick.getClickCount() > 1) {
-                // save initial X, Y values
-                double initX = mouseClick.getX();
-                double initY = mouseClick.getY();
+        canvas.setOnMousePressed((MouseEvent mousePress) -> {
+            // save initial X, Y values
+            double initX = mousePress.getX();
+            double initY = mousePress.getY();
 
+            canvas.setOnMouseClicked((MouseEvent mouseClick) -> {
+                double curX = mouseClick.getX();
+                double curY = mouseClick.getY();
                 if (shapeChooser.getValue().equals("Circle")) {
+                    double radius = Math.sqrt();
                     // Create a Circle to pull info from
                     MyCircle myCircle = new MyCircle();
                     try {
@@ -452,8 +453,8 @@ public class ShapeDrawer extends Application {
                 } else {
                     System.err.println("Error: shapeChooser error");
                 } // End If/Else (Shapes)
-            } // End If (mouse double click)
-        }); // End DragEntered event
+            }); // End mose release event
+        }); // End mouse press event
             // Mouse move event
         canvas.setOnMouseMoved(mouseMoved -> {
             curX = mouseMoved.getX();
